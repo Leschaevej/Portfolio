@@ -1,0 +1,100 @@
+@use '@/app/Mixins.scss' as *;
+
+header {
+    background-color: var(--mainColor);
+    color: var(--mainTextColor);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+    @include height(8vh, 5vh, 5vh);
+    @include padding(0 6.51vw, 0 3.472vw, 0 50px);
+    .logo {
+        @include fontSize(6.51vw, 2.083vw, 30px);
+        @include padding(0 1.302vw, 0 0.694vw, 0 10px);
+    }
+    .menuLogo {
+        display: none;
+        background: none;
+        border: none;
+        color: var(--mainTextColor);
+        font-size: 4.557vw;
+        cursor: pointer;
+    }
+    .menuModal {
+        position: fixed;
+        top: 0; left: 0; right: 0; bottom: 0;
+        color: var(--mainTextColor);
+        z-index: 9999;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-start;
+        padding: 8vh 2.604vw;
+        .mobilContent {
+            background-color: var(--menuColor);
+            color: var(--mainTextColor);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3.906vw;
+            padding: 1.302vw;
+            box-shadow: 0 0.521vw 1.042vw rgba(0, 0, 0, 0.2);
+            border-radius: 1.042vw;
+            nav {
+                display: flex;
+                flex-direction: column;
+                align-items: flex-end;
+                gap: 2.604vw;
+                font-size: 4.427vw;
+            }
+            .linksOption {
+                display: flex;
+                gap: 3.906vw;
+                font-size: 4.427vw;
+            }
+        }
+    }
+    .content {
+        display: flex;
+        align-items: center;
+        @include fontSize(2.604vw, 1.389vw, 20px);
+        @include gap(1.302vw, 0.694vw,  10px);
+        nav {
+            display: flex;
+            @include gap(1.302vw, 0.694vw, 10px);
+        }
+        .options {
+            display: flex;
+            @include height(2.604vw, 1.389vw, 20px);
+        }
+        .links {
+            display: flex;
+            @include gap(1.302vw, 0.694vw, 10px);
+            @include height(2.604vw, 1.389vw, 20px);
+        .icon {
+            @include fontSize(2.604vw, 1.389vw, 20px);
+            @include width(2.604vw, 1.389vw, 20px);
+            @include height(2.604vw, 1.389vw, 20px);
+        }
+        }
+        .separator {
+            background-color: var(--separatorColor);
+            width: 2px;
+            @include height(2.604vw, 1.389vw, 20px);
+            @include margin(0 1.302vw, 0 0.694vw, 0 10px);
+        }
+    }
+}
+@media (max-width: 768px) {
+  header .menuLogo {
+    display: block;
+  }
+
+  header .content {
+    display: none;
+  }
+}

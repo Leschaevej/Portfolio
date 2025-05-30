@@ -1,0 +1,75 @@
+@use '@/app/Mixins.scss' as *;
+
+form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+  @include gap(20px, 2.083vw, 20px);
+
+  label {
+    display: flex;
+    flex-direction: column;
+    font-weight: bold;
+    @include fontSize(24px, 1.667vw, 24px);
+  }
+
+  label:nth-child(1),
+  label:nth-child(2) {
+    flex: 0 0 100px;
+  }
+
+  label:nth-child(3) {
+    flex: 1;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    border: 2px solid var(--separatorColor);
+    background-color: var(--backgroundColor);
+    color: var(--primaryTextColor);
+    box-sizing: border-box;
+    border-radius: 10px;
+    margin-top: 0.694vw;
+    height: 100%;
+    @include padding(1.302vw, 0.694vw, 10px);
+    @include fontSize(30px, 2.361vw, 34px);
+    
+  }
+
+  textarea {
+    resize: none;
+  }
+
+  button {
+    background-color: var(--buttonsColor);
+    color: var(--secondaryTextColor);
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+    border-radius: 50px;
+    @include margin(3.906vw auto, 2.083vw auto, 30px auto);
+    @include width(50%, 13.889vw, 200px);
+    @include fontSize(7.813vw, 2.222vw, 32px);
+    @include padding(1.302vw, 0.694vw, 10px);
+  }
+
+  button:hover {
+    background-color: var(--buttonsHoverColor);
+  }
+
+  button:disabled {
+    opacity: 0.7;
+    cursor: default;
+  }
+
+  button.success {
+    background-color: #4caf50;
+  }
+
+  button.error {
+    background-color: #f44336;
+  }
+}

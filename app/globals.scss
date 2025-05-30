@@ -1,0 +1,202 @@
+@use '@/app/Mixins.scss' as *;
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --mainColor: #000000;
+        --secondaryColor: #ffffff;
+        --menuColor: #555;
+        --mainTextColor: #ffffff;
+        --secondaryTextColor: black;
+        --cardBackgroundColor: #ffffff;
+        --buttonsColor: #ffffff;
+        --buttonsHoverColor: #8a8a8a;
+        --separatorColor: #ffffff;
+        --scroolBarThumb: #6b6b6b;
+        --scroolBarHover: #555;
+        --scroolBarBorder: #ffffff;
+    }
+}
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+::-webkit-scrollbar-track {
+    @include margin(8vh 0 8vh 0, 5vh 0 5vh 0, 5vh 0 5vh 0);
+}
+::-webkit-scrollbar-thumb {
+    background-color: var(--scroolBarThumb);
+    border-radius: 6px;
+    border: 3px solid var(--scroolBarBorder);
+}
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--scroolBarHover);
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+h2 {
+    font-weight: bold;
+    @include fontSize(36px, 2.5vw, 36px);
+    @include margin(0 0 1.302vw 0, 0 0 2.083vw 0, 0 0 30px 0);
+}
+h3 {
+    font-weight: bold;
+    @include fontSize(26px, 2.361vw, 34px);
+    @include margin(0, 0 0 1.389vw 0, 0 0 20px 0);
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+p {
+    @include fontSize(20px, 2.083vw, 30px);
+}
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y: auto;
+    overflow-x: hidden;
+    background-color: var(--mainColor);
+    background-image: url('/carbon.png');
+    color: var(--mainTextColor);
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+}
+main {
+    position: relative;
+    height: 100vh;
+    min-height: calc(100vh - 10vh);
+    max-width: 1440px;
+    margin-left: auto;
+    margin-right: auto;
+    color: var(--mainTextColor);
+    z-index: 1;
+}
+.section {
+    height: 100vh;
+    scroll-snap-align: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+#section1 {
+    display: flex;
+    flex-direction: column;
+    @include justifyContent(space-between, center, center);
+    @include padding(15vh 3.906vw, 16.7vh 10.417vw, 16.7vh 150px);
+    @include gap(2vh, 3.125vw, 45px);
+    .textBlock{
+        display: flex;
+        flex-direction: column;
+        @include gap(3.906vw, 0.694vw, 10px);
+        h1 {
+            font-weight: bold;
+            @include fontSize(10.677vw, 4.444vw, 64px);
+        }
+        .hello p {
+            font-weight: bold;
+            @include fontSize(5.99vw, 2.778vw, 40px);
+        }
+    }
+    .buttons {
+        display: flex;
+        @include flexDirection(column, row, row);
+        @include alignItems(stretch, flex-start, flex-start);
+        @include gap(5vh, 2.083vw, 30px);
+        button {
+            background-color: var(--buttonsColor);
+            color: var(--secondaryTextColor);
+            border: none;
+            cursor: pointer;
+            border-radius: 50px;
+            @include fontSize(24px, 1.667vw, 24px);
+            @include padding(3.906vw 2.604vw, 1.389vw 2.778vw, 20px 40px);
+            @include height(10vh, 4.722vw, 68px);
+            &:hover {
+                background-color: var(--buttonsHoverColor);
+            }
+        }
+    }
+}
+#section2 {
+    display: flex;
+    flex-direction: column;
+    @include justifyContent(space-between, center, center);
+    @include padding(15vh 3.906vw, 11.1vh 10.417vw, 11.1vh 150px);
+    @include gap(0, 1.389vw, 20px);
+}
+#section3 {
+    display: flex;
+    flex-direction: column;
+    @include justifyContent(flex-start, center, center);
+    @include padding(15vh 3.906vw, 11.1vh 3.472vw, 11.1vh 50px);
+    @include gap(2.604vw, 2.083vw, 30px);
+    h2 {
+        @include margin(0 , 0 0 0 6.944vw, 0 0 0 100px);
+    }
+    .skills {
+        display: flex;
+        justify-content: space-between;
+        @include flexGrow(1, 0, 0);
+        @include flexDirection(column, row, row);
+        @include gap(2.604vw, 2.083vw, 30px);
+        .skill {
+            display: flex;
+            flex-direction: column;
+            @include alignItems(flex-start, center, center);
+            @include gap(1.302vw, 1.389vw, 20px);
+            @include width(100%, 30%, 30%);
+            img {
+                width: auto;
+                @include height(10.417vw, 10.417vw, 150px);
+            }
+            .skillDescription {
+                display: flex;
+                @include flexDirection(row, column, column);
+                h3 {
+                align-self: flex-start;
+                }
+                p {
+                    @include fontSize(17px, 2.083vw, 30px);
+                }
+            }
+        }
+    }
+}
+#section4, #section5 {
+    display: flex;
+    flex-direction: column;
+    @include justifyContent(flex-start, center, center);
+    @include padding(15vh 3.906vw, 11.1vh 3.472vw, 11.1vh 50px);
+    @include gap(2.604vw, 1.389vw, 20px);
+    h2 {
+        @include margin(0, 0 0 0 6.944vw, 0 0 0 100px);
+    }
+}
+#section6 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  @include justifyContent(flex-start, center, center);
+  @include padding(15vh 3.906vw, 11.1vh 10.417vw, 11.1vh 150px);
+  @include gap(2.604vw, 1.389vw, 20px);
+  h2 {
+    margin-bottom: 0;
+  }
+  .top {
+    color: var(--secondaryTextColor);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    flex-shrink: 0;
+    @include borderRadius(50%, 50%, 50%);
+    @include width(50px, 5.556vw, 80px);
+    @include height(50px, 5.556vw, 80px);
+    @include fontSize(40px, 5.556vw, 80px);
+  }
+}

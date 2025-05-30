@@ -1,0 +1,131 @@
+@mixin padding($mobile, $desktop, $large) {
+    & {
+        padding: $desktop;
+    }
+    @media (max-width: 768px) {
+        padding: $mobile;
+    }
+    @media (min-width: 1440px) {
+        padding: $large;
+    }
+}
+
+@mixin margin($mobile, $desktop, $large) {
+    & {
+        margin: $desktop;
+    }
+    @media (max-width: 768px) {
+        margin: $mobile;
+    }
+    @media (min-width: 1440px) {
+        margin: $large;
+    }
+}
+
+@mixin gap($mobile, $desktop, $large) {
+    & {
+        gap: $desktop;
+    }
+    @media (max-width: 768px) {
+        gap: $mobile;
+    }
+    @media (min-width: 1440px) {
+        gap: $large;
+    }
+}
+
+@mixin height($mobile, $desktop, $large) {
+    & {
+        height: $desktop;
+    }
+    @media (max-width: 768px) {
+        height: $mobile;
+    }
+    @media (min-width: 1440px) {
+        height: $large;
+    }
+}
+
+@mixin width($mobile, $desktop, $large) {
+    & {
+        width: $desktop;
+    }
+    @media (max-width: 768px) {
+        width: $mobile;
+    }
+    @media (min-width: 1440px) {
+        width: $large;
+    }
+}
+
+@mixin fontSize($mobile, $desktop, $large) {
+    & {
+        font-size: $desktop;
+    }
+    @media (max-width: 768px) {
+        font-size: $mobile;
+    }
+    @media (min-width: 1440px) {
+        font-size: $large;
+    }
+}
+
+@mixin borderRadius($mobile, $desktop, $large) {
+    & {
+        border-radius: $desktop;
+    }
+    @media (max-width: 768px) {
+        border-radius: $mobile;
+    }
+    @media (min-width: 1440px) {
+        border-radius: $large;
+    }
+}
+
+@mixin flexDirection($mobile, $desktop, $large) {
+    & {
+        flex-direction: $desktop;
+    }
+    @media (max-width: 768px) {
+        flex-direction: $mobile;
+    }
+    @media (min-width: 1440px) {
+        flex-direction: $large;
+    }
+}
+
+@mixin alignItems($mobile, $desktop, $large) {
+    & {
+        align-items: $desktop;
+    }
+    @media (max-width: 768px) {
+        align-items: $mobile;
+    }
+    @media (min-width: 1440px) {
+        align-items: $large;
+    }
+}
+
+@mixin justifyContent($mobile, $desktop, $large) {
+    & {
+        justify-content: $desktop;
+    }
+    @media (max-width: 768px) {
+        justify-content: $mobile;
+    }
+    @media (min-width: 1440px) {
+        justify-content: $large;
+    }
+}
+
+@mixin flexGrow($mobile, $desktop, $large) {
+    & {
+        flex-grow: $desktop;
+    }
+    @media (max-width: 768px) {
+        flex-grow: $mobile;
+    }
+    @media (min-width: 1440px) {
+        flex-grow: $large;
+    }
+}
