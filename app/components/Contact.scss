@@ -6,7 +6,7 @@ form {
   width: 100%;
   height: 100vh;
   box-sizing: border-box;
-  @include gap(20px, 2.083vw, 20px);
+  @include gap(10px, 2.083vw, 20px);
 
   label {
     display: flex;
@@ -17,7 +17,7 @@ form {
 
   label:nth-child(1),
   label:nth-child(2) {
-    flex: 0 0 100px;
+    flex: 0 0 80px;
   }
 
   label:nth-child(3) {
@@ -35,7 +35,7 @@ form {
     margin-top: 0.694vw;
     height: 100%;
     @include padding(1.302vw, 0.694vw, 10px);
-    @include fontSize(30px, 2.361vw, 34px);
+    @include fontSize(20px, 2.361vw, 34px);
     
   }
 

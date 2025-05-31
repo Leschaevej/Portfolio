@@ -38,12 +38,12 @@
     }
 h2 {
     font-weight: bold;
-    @include fontSize(36px, 2.5vw, 36px);
+    @include fontSize(30px, 2.5vw, 36px);
     @include margin(0 0 1.302vw 0, 0 0 2.083vw 0, 0 0 30px 0);
 }
 h3 {
     font-weight: bold;
-    @include fontSize(26px, 2.361vw, 34px);
+    @include fontSize(22px, 2.361vw, 34px);
     @include margin(0, 0 0 1.389vw 0, 0 0 20px 0);
 }
 a {
@@ -51,7 +51,7 @@ a {
     color: inherit;
 }
 p {
-    @include fontSize(20px, 2.083vw, 30px);
+    @include fontSize(18px, 2.083vw, 30px);
 }
 html, body {
     height: 100%;
@@ -91,14 +91,14 @@ main {
     .textBlock{
         display: flex;
         flex-direction: column;
-        @include gap(3.906vw, 0.694vw, 10px);
+        @include gap(5px, 0.694vw, 10px);
         h1 {
             font-weight: bold;
-            @include fontSize(10.677vw, 4.444vw, 64px);
+            @include fontSize(48px, 4.444vw, 64px);
         }
         .hello p {
             font-weight: bold;
-            @include fontSize(5.99vw, 2.778vw, 40px);
+            @include fontSize(28px, 2.778vw, 40px);
         }
     }
     .buttons {
@@ -151,7 +151,7 @@ main {
             @include width(100%, 30%, 30%);
             img {
                 width: auto;
-                @include height(10.417vw, 10.417vw, 150px);
+                @include height(30px, 10.417vw, 150px);
             }
             .skillDescription {
                 display: flex;
@@ -160,7 +160,7 @@ main {
                 align-self: flex-start;
                 }
                 p {
-                    @include fontSize(17px, 2.083vw, 30px);
+                    @include fontSize(15px, 2.083vw, 30px);
                 }
             }
         }
