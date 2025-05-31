@@ -97,7 +97,7 @@ export default function Home() {
                     <>
                     <h3>Projet React / Node.js / MongoDB</h3>
                     <p>Interface utilisateur claire et API rapide, conçues pour une expérience optimale.</p>
-                    <p>Code source ouvert sur GitHub pour approfondir.</p>
+                    <p>Le problème était de sécuriser l’authentification des utilisateurs, la solution a été d’utiliser bcrypt pour hasher les mots de passe et jsonwebtoken pour gérer les connexions.</p>
                     </>
                 }
                 />
@@ -112,7 +112,7 @@ export default function Home() {
                     <>
                     <h3>Kasa : application de location immobilière</h3>
                     <p>Front dynamique développé avec React et styles modernes en Sass.</p>
-                    <p>Projet open source disponible sur GitHub.</p>
+                    <p>Le problème était de comprendre comment gérer les routes dynamiques avec React Router, la solution a été de m’appuyer sur la documentation et de faire des tests pour bien structurer mes routes.</p>
                     </>
                 }
                 />
@@ -132,7 +132,7 @@ export default function Home() {
                     <>
                     <h3>Nina Carducci : projet web de contenus interactifs</h3>
                     <p>HTML, CSS, JavaScript pour une expérience fluide et immersive.</p>
-                    <p>Code et ressources disponibles sur GitHub.</p>
+                    <p>Le problème, était que le site chargeait lentement à cause des images, la solution a été de les compresser, de les passer en format WebP et d’activer le chargement différé.</p>
                     </>
                 }
                 />
@@ -147,7 +147,7 @@ export default function Home() {
                     <>
                     <h3>Sophie Bluel : application backend axée API et gestion des données</h3>
                     <p>Node.js et JavaScript garantissent robustesse et scalabilité.</p>
-                    <p>Le code est disponible publiquement sur GitHub.</p>
+                    <p>Le problème, était d’afficher les projets depuis une API, la solution a été d’utiliser fetch() pour récupérer les données et les afficher dynamiquement avec JavaScript.</p>
                     </>
                 }
                 />
