@@ -1,74 +1,199 @@
 "use client";
 
-import { useState } from 'react';
-import { FaLinkedin, FaGithub, FaMoon, FaBars, FaTimes } from 'react-icons/fa';
-import { pacifico } from '@/app/fonts';
-import './Header.scss';
+import React, { useState } from "react";
+import Logo from "../assets/logo.svg";
+import "./Header.scss";
 
 export default function Header() {
-    const [isModalOpen, setIsModalOpen] = useState(false);
+  const [menuState, setMenuState] = useState<
+    "visible" | "pushingUp" | "hidden" | "pushingInFromTop"
+  >("visible");
+  const [closeState, setCloseState] = useState<
+    "hidden" | "pushingDown" | "visible" | "pushingInFromBottom"
+  >("hidden");
 
-    return (
-        <header className="header">
-            <div className={`logo ${pacifico.className}`}>Jim.</div>
-            
-            <button className="menuLogo" onClick={() => setIsModalOpen(true)} aria-label="Ouvrir le menu">
-                <FaBars />
-            </button>
+  const [isMenuHovered, setIsMenuHovered] = useState(false);
+  const [isMenuLeaving, setIsMenuLeaving] = useState(false);
 
-            <div className="content">
-                <nav>
-                    <a href="#section2">À propos</a>
-                    <a href="#section4">Projets</a>
-                    <a href="#section6">Contact</a>
-                </nav>
-                <div className="separator"></div>
-                <div className="options">
-                    <FaMoon className="icon" />
-                </div>
-                <div className="separator"></div>
-                <div className="links">
-                    <a
-                        href="https://github.com/Leschaevej"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="GitHub"
-                        className="icon-link"
-                    >
-                        <FaGithub className="icon" />
-                    </a>
-                    <a
-                        href="https://www.linkedin.com/in/jimmy-leschaeve-11728a168"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        aria-label="LinkedIn"
-                        className="icon-link"
-                    >
-                        <FaLinkedin className="icon" />
-                    </a>
-                </div>
-            </div>
+  const [isCloseHovered, setIsCloseHovered] = useState(false);
+  const [isCloseLeaving, setIsCloseLeaving] = useState(false);
 
-            {isModalOpen && (
-                <div className="menuModal" onClick={() => setIsModalOpen(false)}>
-                    <div className="mobilContent" onClick={(e) => e.stopPropagation()}>
-                        <nav>
-                            <a href="#section2" onClick={() => setIsModalOpen(false)}>À propos</a>
-                            <a href="#section4" onClick={() => setIsModalOpen(false)}>Projets</a>
-                            <a href="#section6" onClick={() => setIsModalOpen(false)}>Contact</a>
-                        </nav>
-                        <div className="linksOption">
-                            <FaMoon className="icon" />
-                            <a href="https://github.com/Leschaevej" target="_blank" rel="noopener noreferrer">
-                            <FaGithub className="icon" />
-                            </a>
-                            <a href="https://www.linkedin.com/in/jimmy-leschaeve-11728a168" target="_blank" rel="noopener noreferrer">
-                            <FaLinkedin className="icon" />
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            )}
-        </header>
-    );
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [showLinks, setShowLinks] = useState(false);
+
+  const minSize = { width: 150, height: 50 };
+  const maxSize = { width: 600, height: 500 };
+  const minPos = { top: 50, right: 50 };
+  const maxPos = { top: 40, right: 40 };
+
+  const [modalSize, setModalSize] = useState(minSize);
+  const [modalPos, setModalPos] = useState(minPos);
+
+  function animateModal(
+    opening: boolean,
+    duration = 500,
+    callback?: () => void
+  ) {
+    setIsAnimating(true);
+    const startTime = performance.now();
+
+    function step(time: number) {
+      const elapsed = time - startTime;
+      let progress = Math.min(elapsed / duration, 1);
+
+      // easing easeInOutQuad
+      progress =
+        progress < 0.5
+          ? 2 * progress * progress
+          : -1 + (4 - 2 * progress) * progress;
+
+      if (!opening) progress = 1 - progress;
+
+      const width = minSize.width + (maxSize.width - minSize.width) * progress;
+      const height =
+        minSize.height + (maxSize.height - minSize.height) * progress;
+
+      const top = minPos.top + (maxPos.top - minPos.top) * progress;
+      const right = minPos.right + (maxPos.right - minPos.right) * progress;
+
+      setModalSize({ width, height });
+      setModalPos({ top, right });
+
+      if (elapsed < duration) {
+        requestAnimationFrame(step);
+      } else {
+        setIsAnimating(false);
+        if (!opening) {
+          setIsModalOpen(false);
+          setModalSize(minSize);
+          setModalPos(minPos);
+        }
+        if (callback) callback();
+      }
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  const toggleModal = () => {
+    if (!isModalOpen) {
+      setIsModalOpen(true);
+      setMenuState("pushingUp");
+      setCloseState("pushingInFromBottom");
+      setShowLinks(false);
+
+      animateModal(true, 500, () => {
+        setMenuState("hidden");
+        setCloseState("visible");
+        setShowLinks(true);
+      });
+    } else {
+      setShowLinks(false);
+
+      setTimeout(() => {
+        setCloseState("pushingDown");
+        setMenuState("pushingInFromTop");
+
+        animateModal(false, 500, () => {
+          setCloseState("hidden");
+          setMenuState("visible");
+        });
+      }, 400);
+    }
+  };
+
+  const handleMenuMouseEnter = () => {
+    setIsMenuLeaving(false);
+    setIsMenuHovered(true);
+  };
+  const handleMenuMouseLeave = () => {
+    setIsMenuHovered(false);
+    setIsMenuLeaving(true);
+    setTimeout(() => setIsMenuLeaving(false), 700);
+  };
+
+  const handleCloseMouseEnter = () => {
+    setIsCloseLeaving(false);
+    setIsCloseHovered(true);
+  };
+  const handleCloseMouseLeave = () => {
+    setIsCloseHovered(false);
+    setIsCloseLeaving(true);
+    setTimeout(() => setIsCloseLeaving(false), 700);
+  };
+
+  return (
+    <header className="header">
+      <Logo className="logo" />
+      <div className="button-container">
+        {menuState !== "hidden" && (
+          <button
+            className={`
+              menu
+              ${menuState === "pushingUp" ? "pushing-up" : ""}
+              ${menuState === "pushingInFromTop" ? "push-in-from-top" : ""}
+              ${isMenuHovered ? "hovered" : ""}
+              ${isMenuLeaving ? "leaving" : ""}
+            `}
+            onClick={toggleModal}
+            onMouseEnter={handleMenuMouseEnter}
+            onMouseLeave={handleMenuMouseLeave}
+            type="button"
+          >
+            <span>MENU</span>
+          </button>
+        )}
+        {closeState !== "hidden" && (
+          <button
+            className={`
+              close
+              ${closeState === "pushingDown" ? "pushing-down" : ""}
+              ${closeState === "pushingInFromBottom" ? "push-in-from-bottom" : ""}
+              ${isCloseHovered ? "hovered" : ""}
+              ${isCloseLeaving ? "leaving" : ""}
+            `}
+            onClick={toggleModal}
+            onMouseEnter={handleCloseMouseEnter}
+            onMouseLeave={handleCloseMouseLeave}
+            type="button"
+          >
+            <span>CLOSE</span>
+          </button>
+        )}
+      </div>
+
+      {(isModalOpen || isAnimating) && (
+        <div className="overlay" onClick={toggleModal}>
+          <div
+            className="modal"
+            style={{
+              width: modalSize.width + "px",
+              height: modalSize.height + "px",
+              top: modalPos.top + "px",
+              right: modalPos.right + "px",
+              position: "absolute",
+              borderRadius: "30px",
+              transformOrigin: "top right",
+              overflow: "hidden",
+              transition: isAnimating ? "none" : "all 0.3s ease",
+            }}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <nav className={showLinks ? "show-links" : "hide-links"}>
+              <a href="#section2" onClick={toggleModal}>
+                Projets
+              </a>
+              <a href="#section4" onClick={toggleModal}>
+                À propos
+              </a>
+              <a href="#section6" onClick={toggleModal}>
+                Contact
+              </a>
+            </nav>
+          </div>
+        </div>
+      )}
+    </header>
+  );
 }

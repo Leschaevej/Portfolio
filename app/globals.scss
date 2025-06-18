@@ -2,15 +2,12 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --mainColor: #000000;
-        --secondaryColor: #ffffff;
-        --menuColor: #555;
+        --mainColor: #55C903;
+        --mainBackgroundColor: #101010;
+        --secondBackgroundColor : #1E1E1E;
         --mainTextColor: #ffffff;
-        --secondaryTextColor: black;
-        --cardBackgroundColor: #ffffff;
-        --buttonsColor: #ffffff;
-        --buttonsHoverColor: #8a8a8a;
-        --separatorColor: #ffffff;
+        --secondTextColor: #101010;
+        --thirdTextColor: #DBDBDB;
         --scroolBarThumb: #6b6b6b;
         --scroolBarHover: #555;
         --scroolBarBorder: #ffffff;
@@ -35,168 +32,139 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+h1{
+    font-size: 64px;
+    span{
+        color: var(--mainColor);
     }
+}
 h2 {
     font-weight: bold;
-    @include fontSize(30px, 2.5vw, 36px);
-    @include margin(0 0 1.302vw 0, 0 0 2.083vw 0, 0 0 30px 0);
+    font-size: 36px;
 }
 h3 {
     font-weight: bold;
-    @include fontSize(22px, 2.361vw, 34px);
-    @include margin(0, 0 0 1.389vw 0, 0 0 20px 0);
+    font-size: 34px;
 }
 a {
-    text-decoration: none;
     color: inherit;
+    text-decoration: none;
 }
 p {
-    @include fontSize(18px, 2.083vw, 30px);
+    font-size: 30px;
 }
 html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-y: auto;
-    overflow-x: hidden;
-    background-color: var(--mainColor);
-    background-image: url('/carbon.png');
+    position: relative;
+    background-color: var(--mainBackgroundColor);
     color: var(--mainTextColor);
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
+}
+body::before {
+    content: "";
+    position: absolute;
+    top: 35px;
+    left: -2px;
+    height: 100vh;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+    background-image: 
+        linear-gradient(90deg, var(--mainColor) 2px, transparent 0),
+        linear-gradient(180deg, var(--mainColor) 2px, transparent 0);
+    background-size: 80px 80px;
+    opacity: 0.2;
+    filter: blur(1px);
+    mask-image: linear-gradient(to bottom, var(--mainBackgroundColor) 0%, transparent 80%);
+}
+body::after {
+    content: "";
+    position: absolute;
+    top: 150px;
+    left: 1200px;
+    width: 1000px;
+    height: 100px;
+    background-color: var(--mainColor);
+    opacity: 0.8;
+    pointer-events: none;
+    transform: rotate(140deg);
+    transform-origin: top left;
+    z-index: 0;
+    filter: blur(200px);
 }
 main {
-    position: relative;
-    height: 100vh;
-    min-height: calc(100vh - 10vh);
-    max-width: 1440px;
-    margin-left: auto;
-    margin-right: auto;
     color: var(--mainTextColor);
-    z-index: 1;
 }
 .section {
-    height: 100vh;
-    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    scroll-margin-top: 150px;
 }
-#section1 {
+#home {
     display: flex;
     flex-direction: column;
-    @include justifyContent(space-between, center, center);
-    @include padding(15vh 3.906vw, 16.7vh 10.417vw, 16.7vh 150px);
-    @include gap(2vh, 3.125vw, 45px);
-    .textBlock{
-        display: flex;
-        flex-direction: column;
-        @include gap(5px, 0.694vw, 10px);
-        h1 {
-            font-weight: bold;
-            @include fontSize(48px, 4.444vw, 64px);
-        }
-        .hello p {
-            font-weight: bold;
-            @include fontSize(28px, 2.778vw, 40px);
-        }
+    justify-content: center;
+    padding: 150px;
+    gap: 50px;
+    position: relative;
+    z-index: 1;
+    p {
+        font-size: 36px;
+        color: var(--thirdTextColor);
     }
-    .buttons {
+    .shortcuts {
         display: flex;
-        @include flexDirection(column, row, row);
-        @include alignItems(stretch, flex-start, flex-start);
-        @include gap(5vh, 2.083vw, 30px);
+        gap: 70px;
         button {
-            background-color: var(--buttonsColor);
-            color: var(--secondaryTextColor);
-            border: none;
-            cursor: pointer;
-            border-radius: 50px;
-            @include fontSize(24px, 1.667vw, 24px);
-            @include padding(3.906vw 2.604vw, 1.389vw 2.778vw, 20px 40px);
-            @include height(10vh, 4.722vw, 68px);
-            &:hover {
-                background-color: var(--buttonsHoverColor);
-            }
+            width: 300px;
+            height: 70px;
+            background-color: var(--mainBackgroundColor);
+            color: var(--mainTextColor);
+            border: 1px solid var(--mainColor);
+            font-size: 32px;
+            font-weight: bold;
+            z-index: 1;
+            transform: skew(-45deg);
+        }
+        .primary {
+            background-color: var(--mainColor);
+            color: var(--secondTextColor);
+        }
+        span {
+            display: inline-block;
+            transform: skew(45deg);
         }
     }
-}
-#section2 {
-    display: flex;
-    flex-direction: column;
-    @include justifyContent(space-between, center, center);
-    @include padding(15vh 3.906vw, 11.1vh 10.417vw, 11.1vh 150px);
-    @include gap(0, 1.389vw, 20px);
-}
-#section3 {
-    display: flex;
-    flex-direction: column;
-    @include justifyContent(flex-start, center, center);
-    @include padding(15vh 3.906vw, 11.1vh 3.472vw, 11.1vh 50px);
-    @include gap(2.604vw, 2.083vw, 30px);
-    h2 {
-        @include margin(0 , 0 0 0 6.944vw, 0 0 0 100px);
-    }
-    .skills {
+    .socials {
         display: flex;
-        justify-content: space-between;
-        @include flexGrow(1, 0, 0);
-        @include flexDirection(column, row, row);
-        @include gap(2.604vw, 2.083vw, 30px);
-        .skill {
+        gap: 30px;
+        z-index: 1;
+        a {
             display: flex;
-            flex-direction: column;
-            @include alignItems(flex-start, center, center);
-            @include gap(1.302vw, 1.389vw, 20px);
-            @include width(100%, 30%, 30%);
-            img {
-                width: auto;
-                @include height(30px, 10.417vw, 150px);
-            }
-            .skillDescription {
-                display: flex;
-                @include flexDirection(row, column, column);
-                h3 {
-                align-self: flex-start;
-                }
-                p {
-                    @include fontSize(15px, 2.083vw, 30px);
-                }
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+            width: 70px;
+            background-color: var(--secondBackgroundColor);
+            svg {
+                height: 35px;
+                width: 35px;
             }
         }
     }
 }
-#section4, #section5 {
+
+#aPropos {
     display: flex;
     flex-direction: column;
-    @include justifyContent(flex-start, center, center);
-    @include padding(15vh 3.906vw, 11.1vh 3.472vw, 11.1vh 50px);
-    @include gap(2.604vw, 1.389vw, 20px);
-    h2 {
-        @include margin(0, 0 0 0 6.944vw, 0 0 0 100px);
-    }
 }
-#section6 {
+
+#projet {
+    display: flex;
+    flex-direction: column;
+}
+#contact {
   position: relative;
   display: flex;
   flex-direction: column;
-  @include justifyContent(flex-start, center, center);
-  @include padding(15vh 3.906vw, 11.1vh 10.417vw, 11.1vh 150px);
-  @include gap(2.604vw, 1.389vw, 20px);
-  h2 {
-    margin-bottom: 0;
-  }
-  .top {
-    color: var(--secondaryTextColor);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    cursor: pointer;
-    flex-shrink: 0;
-    @include borderRadius(50%, 50%, 50%);
-    @include width(50px, 5.556vw, 80px);
-    @include height(50px, 5.556vw, 80px);
-    @include fontSize(40px, 5.556vw, 80px);
-  }
 }

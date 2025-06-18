@@ -9,7 +9,6 @@ export default function Contact() {
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const validate = () => {
     const newErrors: { [key: string]: string } = {};
-    if (!form.name.trim()) newErrors.name = 'Le nom est requis.';
     if (!form.email.trim()) {
         newErrors.email = "L'email est requis.";
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
@@ -30,10 +29,7 @@ export default function Contact() {
     if (!validate()) return;
     setStatus('sending');
     const templateParams = {
-        from_name: form.name,
         from_email: form.email,
-        reply_to: form.email,
-        content: form.message,
     };
     try {
         await emailjs.send(
@@ -58,18 +54,6 @@ export default function Contact() {
     return (
         <form onSubmit={handleSubmit} noValidate>
         <label>
-            Nom
-            <input
-            type="text"
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            aria-invalid={errors.name ? 'true' : 'false'}
-            autoComplete="name"
-            required/>
-            {errors.name && <span className="error">{errors.name}</span>}
-        </label>
-        <label>
             Email
             <input
             type="email"
@@ -80,16 +64,6 @@ export default function Contact() {
             autoComplete="email"
             required/>
             {errors.email && <span className="error">{errors.email}</span>}
-        </label>
-        <label>
-            Message
-            <textarea
-            name="message"
-            value={form.message}
-            onChange={handleChange}
-            aria-invalid={errors.message ? 'true' : 'false'}
-            required/>
-            {errors.message && <span className="error">{errors.message}</span>}
         </label>
         <button
             type="submit"
