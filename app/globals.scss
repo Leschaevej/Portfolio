@@ -1,18 +1,7 @@
 @use '@/app/Mixins.scss' as *;
+@use '@/app/Variables.scss' as *;
 
-@media (prefers-color-scheme: dark) {
-    :root {
-        --mainColor: #55C903;
-        --mainBackgroundColor: #101010;
-        --secondBackgroundColor : #1E1E1E;
-        --mainTextColor: #ffffff;
-        --secondTextColor: #101010;
-        --thirdTextColor: #DBDBDB;
-        --scroolBarThumb: #6b6b6b;
-        --scroolBarHover: #555;
-        --scroolBarBorder: #ffffff;
-    }
-}
+
 ::-webkit-scrollbar {
     width: 12px;
     height: 12px;
@@ -42,6 +31,14 @@ h1{
 h2 {
     font-weight: bold;
     font-size: 36px;
+    background: linear-gradient(to bottom, #6d7173, #fcfcfc);
+    text-align: center;
+    padding: 50px;
+    position: relative;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
 }
 h3 {
     font-weight: bold;
@@ -97,8 +94,8 @@ main {
 .section {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     scroll-margin-top: 150px;
+    height: 100vh;
 }
 #home {
     display: flex;
@@ -115,7 +112,9 @@ main {
     .shortcuts {
         display: flex;
         gap: 70px;
+        padding-left: 38px;
         button {
+            position: relative;
             width: 300px;
             height: 70px;
             background-color: var(--mainBackgroundColor);
@@ -125,10 +124,41 @@ main {
             font-weight: bold;
             z-index: 1;
             transform: skew(-45deg);
+            overflow: hidden;
+            transition: color 0.3s ease;
+            span {
+                display: inline-block;
+                transform: skew(45deg);
+                position: relative;
+                z-index: 2;
+            }
+            &::before {
+            content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 0%;
+                background-color: var(--mainColor);
+                z-index: 1;
+                transition: width 0.2s ease;
+            }
+            &:hover::before {
+                width: 100%;
+            }
+            &:hover {
+                color: var(--secondTextColor);
+            }
         }
         .primary {
             background-color: var(--mainColor);
             color: var(--secondTextColor);
+            &:hover {
+                background-color: var(--buttonhovercolor);
+            }
+            &::before {
+                display: none;
+            }
         }
         span {
             display: inline-block;
@@ -146,22 +176,129 @@ main {
             height: 70px;
             width: 70px;
             background-color: var(--secondBackgroundColor);
+            transition: border-radius 0.2s ease, background-color 0.2s ease;
             svg {
                 height: 35px;
                 width: 35px;
+                transition: fill 0.2s ease, color 0.2s ease;
             }
+            &:hover {
+                border-radius: 20px;
+            }
+        }
+        a.github:hover svg {
+            color: var(--githubcolor);
+        }
+        a.linkedin:hover svg {
+            color: var(--linkedincolor);
+        }
+        a.portfolio:hover svg {
+            color: var(--portfoliocolor);
+        }
+        a.skybound:hover svg {
+            color: var(--skyboundcolor);
         }
     }
 }
-
-#aPropos {
-    display: flex;
-    flex-direction: column;
-}
-
 #projet {
     display: flex;
     flex-direction: column;
+    position: relative;
+    z-index: 1;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 80%;
+        height: 5px;
+        pointer-events: none;
+        background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(var(--mainColorRgb), 0.4) 50%,
+        transparent 100%
+        );
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+    .haloWrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+        .halo {
+        position: absolute;
+        top: -75%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 300px;
+        background: radial-gradient(
+            circle at top,
+            rgba(var(--mainColorRgb), 0.6) 0%,
+            rgba(var(--mainColorRgb), 0.3) 20%,
+            rgba(var(--mainColorRgb), 0.1) 40%,
+            transparent 80%
+        );
+        filter: blur(20px);
+        border-radius: 50%;
+        }
+    }
+}
+#aPropos {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 1;
+    &::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 80%;
+        height: 5px;
+        pointer-events: none;
+        background: linear-gradient(
+        to right,
+        transparent 0%,
+        rgba(var(--mainColorRgb), 0.4) 50%,
+        transparent 100%
+        );
+        transform: translateX(-50%);
+        z-index: 1;
+    }
+    .haloWrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+        overflow: hidden;
+        pointer-events: none;
+        z-index: 0;
+        .halo {
+        position: absolute;
+        top: -75%;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80%;
+        height: 300px;
+        background: radial-gradient(
+            circle at top,
+            rgba(var(--mainColorRgb), 0.6) 0%,
+            rgba(var(--mainColorRgb), 0.3) 20%,
+            rgba(var(--mainColorRgb), 0.1) 40%,
+            transparent 80%
+        );
+        filter: blur(20px);
+        border-radius: 50%;
+        }
+    }
 }
 #contact {
   position: relative;

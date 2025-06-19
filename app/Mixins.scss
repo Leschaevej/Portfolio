@@ -9,7 +9,6 @@
         padding: $large;
     }
 }
-
 @mixin margin($mobile, $desktop, $large) {
     & {
         margin: $desktop;
@@ -21,7 +20,6 @@
         margin: $large;
     }
 }
-
 @mixin gap($mobile, $desktop, $large) {
     & {
         gap: $desktop;
@@ -33,7 +31,6 @@
         gap: $large;
     }
 }
-
 @mixin height($mobile, $desktop, $large) {
     & {
         height: $desktop;
@@ -45,7 +42,6 @@
         height: $large;
     }
 }
-
 @mixin width($mobile, $desktop, $large) {
     & {
         width: $desktop;
@@ -57,7 +53,6 @@
         width: $large;
     }
 }
-
 @mixin fontSize($mobile, $desktop, $large) {
     & {
         font-size: $desktop;
@@ -69,7 +64,6 @@
         font-size: $large;
     }
 }
-
 @mixin borderRadius($mobile, $desktop, $large) {
     & {
         border-radius: $desktop;
@@ -81,7 +75,6 @@
         border-radius: $large;
     }
 }
-
 @mixin flexDirection($mobile, $desktop, $large) {
     & {
         flex-direction: $desktop;
@@ -93,7 +86,6 @@
         flex-direction: $large;
     }
 }
-
 @mixin alignItems($mobile, $desktop, $large) {
     & {
         align-items: $desktop;
@@ -105,7 +97,6 @@
         align-items: $large;
     }
 }
-
 @mixin justifyContent($mobile, $desktop, $large) {
     & {
         justify-content: $desktop;
@@ -117,7 +108,6 @@
         justify-content: $large;
     }
 }
-
 @mixin flexGrow($mobile, $desktop, $large) {
     & {
         flex-grow: $desktop;

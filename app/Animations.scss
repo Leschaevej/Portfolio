@@ -1,0 +1,88 @@
+@keyframes frontFlip {
+    0% {
+        transform: rotateX(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: rotateX(360deg);
+        opacity: 1;
+    }
+}
+@keyframes leaveFlip {
+    0% {
+        transform: translateY(0) rotateX(0deg);
+        opacity: 1;
+    }
+    40% {
+        transform: translateY(30px) rotateX(-45deg);
+        opacity: 0.5;
+    }
+    60% {
+        transform: translateY(60px) rotateX(-90deg);
+        opacity: 0;
+    }
+    61% {
+        transform: translateY(-60px) rotateX(90deg);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) rotateX(0deg);
+        opacity: 1;
+    }
+}
+@keyframes pushUp {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+@keyframes pushDown {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+@keyframes pushInFromTop {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes pushInFromBottom {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+@keyframes slideUpReveal {
+    0% {
+        transform: translateY(120px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+@keyframes slideDownHide {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(120px);
+    }
+}

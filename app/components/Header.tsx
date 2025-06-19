@@ -180,18 +180,18 @@ export default function Header() {
             }}
             onClick={(e) => e.stopPropagation()}
           >
-            <nav className={showLinks ? "show-links" : "hide-links"}>
-              <a href="#section2" onClick={toggleModal}>
-                Projets
-              </a>
-              <a href="#section4" onClick={toggleModal}>
-                À propos
-              </a>
-              <a href="#section6" onClick={toggleModal}>
-                Contact
-              </a>
-            </nav>
-          </div>
+                <nav className={showLinks ? "show-links" : "hide-links"}>
+                    <div className="link-wrapper">
+                        <a href="#projet" onClick={toggleModal}>Projets</a>
+                    </div>
+                    <div className="link-wrapper">
+                        <a href="#aPropos" onClick={toggleModal}>À propos</a>
+                    </div>
+                    <div className="link-wrapper">
+                        <a href="#contact" onClick={toggleModal}>Contact</a>
+                    </div>
+                </nav>
+            </div>
         </div>
       )}
     </header>

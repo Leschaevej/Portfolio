@@ -1,251 +1,129 @@
 @use '@/app/Mixins.scss' as *;
+@use '@/app/Animations.scss' as *;
+
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  padding: 50px;
-
-  .logo {
-    fill: currentColor;
-    color: var(--mainColor);
-    height: 50px;
-    width: 50px;
-  }
-
-  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: fixed;
-    top: 50px;
-    right: 50px;
-    width: 150px;
-    height: 50px;
-    border-radius: 30px;
-    overflow: hidden;
-    z-index: 30;
-  }
-
-  .menu,
-  .close {
-    position: absolute;
     top: 0;
     left: 0;
-    height: 50px;
-    width: 150px;
-    font-size: 24px;
-    font-weight: bold;
-    background-color: var(--mainColor);
-    border: none;
-    cursor: pointer;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-
-    span {
-      display: inline-block;
-      backface-visibility: hidden;
-      transition: none;
-    }
-
-    &.hovered span {
-      animation: frontFlip 0.5s forwards;
-      opacity: 1;
-    }
-
-    &.leaving span {
-      animation: leaveFlip 0.7s forwards;
-      opacity: 1;
-    }
-
-    &.push-in-from-top {
-      animation: pushInFromTop 0.5s forwards;
-    }
-
-    &.pushing-up {
-      animation: pushUp 0.5s forwards;
-    }
-
-    &.pushing-down {
-      animation: pushDown 0.5s forwards;
-    }
-
-    &.push-in-from-bottom {
-      animation: pushInFromBottom 0.5s forwards;
-    }
-  }
-
-  .close {
-    color: var(--mainColor);
-    background-color: var(--mainBackgroundColor);
-  }
-
-  .overlay {
-    position: fixed;
-    top: 0;
     right: 0;
-    bottom: 0;
-    left: 0;
+    z-index: 10;
+    padding: 50px;
 
-    .modal {
-      position: absolute;
-      top: 40px;
-      right: 40px;
-      width: 600px;
-      height: 500px;
-      background-color: var(--mainColor);
-      border-radius: 30px;
-      transform-origin: top right;
-      overflow: hidden;
+    .logo {
+        fill: currentColor;
+        color: var(--mainColor);
+        height: 50px;
+        width: 50px;
+    }
 
-      nav {
-        display: flex;
-        flex-direction: column;
-        color: var(--secondaryTextColor);
-        font-size: 64px;
+    .button-container {
+        position: fixed;
+        top: 50px;
+        right: 50px;
+        width: 150px;
+        height: 50px;
+        border-radius: 30px;
+        overflow: hidden;
+        z-index: 30;
+    }
+
+    .menu,
+    .close {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 50px;
+        width: 150px;
+        font-size: 24px;
         font-weight: bold;
-        padding: 50px;
-        gap: 30px;
-
-        a {
-          height: 70px;
-          opacity: 0;
-          pointer-events: none;
-          transition: opacity 0.3s ease;
+        background-color: var(--mainColor);
+        border: none;
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        span {
+            display: inline-block;
+            backface-visibility: hidden;
+            transition: none;
         }
-
-        &.hide-links a {
-          animation: slideDownHide 0.6s ease forwards;
-          pointer-events: none;
-          opacity: 0;
+        &.hovered span {
+            animation: frontFlip 0.5s forwards;
+            opacity: 1;
         }
-
-        &.show-links a {
-          animation: slideUpReveal 0.6s ease forwards;
-          pointer-events: auto;
-          opacity: 1;
+        &.leaving span {
+            animation: leaveFlip 0.7s forwards;
+            opacity: 1;
         }
-      }
+        &.push-in-from-top {
+            animation: pushInFromTop 0.5s forwards;
+        }
+        &.pushing-up {
+            animation: pushUp 0.5s forwards;
+        }
+        &.pushing-down {
+            animation: pushDown 0.5s forwards;
+        }
+        &.push-in-from-bottom {
+            animation: pushInFromBottom 0.5s forwards;
+        }
     }
-
-    .modal-open {
-      animation: modalOpen 0.5s ease forwards;
-      z-index: 5;
+    .close {
+        color: var(--mainColor);
+        background-color: var(--mainBackgroundColor);
     }
-
-    .modal-close {
-      animation: modalClose 0.5s ease forwards;
-      z-index: 5;
+    .overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        .modal {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            width: 600px;
+            height: 500px;
+            background-color: var(--mainColor);
+            border-radius: 30px;
+            transform-origin: top right;
+            overflow: hidden;
+            nav {
+                display: flex;
+                flex-direction: column;
+                color: var(--secondTextColor);
+                font-size: 64px;
+                font-weight: bold;
+                padding: 50px;
+                gap: 30px;
+                .link-wrapper {
+                    height: 88px;
+                    overflow: hidden;
+                    a {
+                        display: block;
+                        height: 78px;
+                    }
+                }
+                &.hide-links .link-wrapper a {
+                    animation: slideDownHide 0.5s ease forwards;
+                    pointer-events: none;
+                }
+                &.show-links .link-wrapper a {
+                    animation: slideUpReveal 0.5s ease forwards;
+                    pointer-events: auto;
+                }
+            }
+        }
+        .modal-open {
+            animation: modalOpen 0.5s ease forwards;
+            z-index: 5;
+        }
+        .modal-close {
+            animation: modalClose 0.5s ease forwards;
+            z-index: 5;
+        }
     }
-  }
-}
-
-/* Animations */
-
-@keyframes frontFlip {
-  0% {
-    transform: rotateX(0deg);
-    opacity: 1;
-  }
-  100% {
-    transform: rotateX(360deg);
-    opacity: 1;
-  }
-}
-
-@keyframes leaveFlip {
-  0% {
-    transform: translateY(0) rotateX(0deg);
-    opacity: 1;
-  }
-  40% {
-    transform: translateY(30px) rotateX(-45deg);
-    opacity: 0.5;
-  }
-  60% {
-    transform: translateY(60px) rotateX(-90deg);
-    opacity: 0;
-  }
-  61% {
-    transform: translateY(-60px) rotateX(90deg);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0) rotateX(0deg);
-    opacity: 1;
-  }
-}
-
-@keyframes pushUp {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-}
-
-@keyframes pushDown {
-  0% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-}
-
-@keyframes pushInFromTop {
-  0% {
-    transform: translateY(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes pushInFromBottom {
-  0% {
-    transform: translateY(100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideUpReveal {
-  0% {
-    transform: translateY(70px);
-    visibility: hidden;
-  }
-  1% {
-    visibility: hidden;
-
-  }
-  100% {
-    transform: translateY(0);
-    visibility: visible;
-  }
-}
-
-@keyframes slideDownHide {
-  0% {
-    transform: translateY(0);
-  }
-  99% {
-    visibility: visible;
-  }
-  100% {
-    transform: translateY(70px);
-    visibility: hidden;
-  }
 }

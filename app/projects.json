@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Mon Vieux Grimoire",
+    "imageSrc": "/grimoire.png",
+    "modalImageSrc": "/grimoire.png",
+    "description": "Interface fluide et sécurisée, avec une API protégée grâce à bcrypt pour le hash des mots de passe et JWT pour l’authentification.",
+    "githubLink": "https://github.com/Leschaevej/Mon-Vieux-Grimoire",
+    "pdfLink": "/grimoireFull.pdf"
+  },
+  {
+    "title": "Kasa",
+    "imageSrc": "/kasa.png",
+    "modalImageSrc": "/kasa.png",
+    "description": "Front dynamique en React avec styles Sass. J’ai résolu la gestion des routes dynamiques grâce à React Router en m’appuyant sur la documentation et des tests.",
+    "githubLink": "https://github.com/Leschaevej/Kasa",
+    "pdfLink": "/kasaFull.pdf"
+  },
+  {
+    "title": "Nina Carducci",
+    "imageSrc": "/carducci.png",
+    "modalImageSrc": "/carducci.png",
+    "description": "Site optimisé grâce à l’utilisation d’images WebP compressées et au chargement différé pour améliorer la performance et l’expérience utilisateur.",
+    "githubLink": "https://github.com/Leschaevej/Nina-Carducci",
+    "pdfLink": "/carducciFull.pdf"
+  },
+  {
+    "title": "Sophie Bluel",
+    "imageSrc": "/bluel.png",
+    "modalImageSrc": "/bluel.png",
+    "description": "Plateforme dynamique développée avec Node.js et JavaScript. Les projets sont récupérés via une API et affichés automatiquement pour garantir flexibilité.",
+    "githubLink": "https://github.com/Leschaevej/Sophie-Bluel",
+    "pdfLink": "/bluelFull.pdf"
+  }
+]
