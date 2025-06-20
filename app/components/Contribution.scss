@@ -1,0 +1,16 @@
+.contributionGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  .row {
+    display: flex;
+    gap: 3px;
+  }
+
+  .cell {
+    width: 15px;
+    height: 15px;
+    border-radius: 3px;
+  }
+}

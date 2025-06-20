@@ -1,75 +1,58 @@
-@use '@/app/Mixins.scss' as *;
-
-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  box-sizing: border-box;
-  @include gap(10px, 2.083vw, 20px);
-
-  label {
-    display: flex;
-    flex-direction: column;
-    font-weight: bold;
-    @include fontSize(24px, 1.667vw, 24px);
-  }
-
-  label:nth-child(1),
-  label:nth-child(2) {
-    flex: 0 0 80px;
-  }
-
-  label:nth-child(3) {
-    flex: 1;
-  }
-
-  input,
-  textarea {
+.contact-form {
     width: 100%;
-    border: 2px solid var(--separatorColor);
-    background-color: var(--backgroundColor);
-    color: var(--primaryTextColor);
-    box-sizing: border-box;
-    border-radius: 10px;
-    margin-top: 0.694vw;
+    max-width: 600px;
+    margin: 0 auto;
+}
+.email-container {
+    position: relative;
+    width: 90%;
+    height: 40px;
+    margin: 0 auto;
+}
+.email-input {
+    width: 100%;
     height: 100%;
-    @include padding(1.302vw, 0.694vw, 10px);
-    @include fontSize(20px, 2.361vw, 34px);
-    
-  }
+    padding: 0 50px 0 15px;
+    border-radius: 25px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    outline: none;
+    box-sizing: border-box;
+    color: #333;
 
-  textarea {
-    resize: none;
-  }
+    &::placeholder {
+        color: #999;
+        font-style: italic;
+    }
 
-  button {
-    background-color: var(--buttonsColor);
-    color: var(--secondaryTextColor);
-    font-weight: bold;
+    &.input-error {
+        border-color: red;
+    }
+}
+.submit-button {
+    position: absolute;
+    top: 50%;
+    right: 10px;
     border: none;
     cursor: pointer;
-    border-radius: 50px;
-    @include margin(3.906vw auto, 2.083vw auto, 30px auto);
-    @include width(50%, 13.889vw, 200px);
-    @include fontSize(7.813vw, 2.222vw, 32px);
-    @include padding(1.302vw, 0.694vw, 10px);
-  }
-
-  button:hover {
-    background-color: var(--buttonsHoverColor);
-  }
-
-  button:disabled {
-    opacity: 0.7;
-    cursor: default;
-  }
-
-  button.success {
-    background-color: #4caf50;
-  }
-
-  button.error {
-    background-color: #f44336;
-  }
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    svg {
+        width: 100%;
+        height: 100%;
+    }
+    &.sending,
+    &.success,
+    &.error {
+        cursor: default;
+        opacity: 0.7;
+    }
+}
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
+  display: block;
+  text-align: center;
 }

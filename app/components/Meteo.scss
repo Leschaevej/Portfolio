@@ -1,0 +1,60 @@
+.weatherContainer{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    padding: 30px;
+    .location {
+        display: flex;
+        align-items: center;
+        color: var(--fourthTextColor);
+        font-size: 16px;
+        gap: 5px;
+        .logo{
+            font-size: 16px;
+        }
+    }
+    .weatherCondition {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        height: 100%;
+        .weather{
+            display: flex;
+            align-items: center;
+            .temperature {
+                font-size: 32px;
+                font-weight: 700;
+            }
+            .weatherCode{
+                height: 50px;
+            }
+        }
+        .condition{
+            display: flex;
+            justify-content: space-between;
+            background-color: var(--secondBackgroundColor);
+            padding: 10px;
+            border-radius: 30px;
+            .wind{
+                display: flex;
+                align-items: center;
+                color: var(--windColor);
+                font-size: 12px;
+                gap: 5px;
+                .logo{
+                    font-size: 20px;
+                }
+            }
+            .humidity {
+                display: flex;
+                align-items: center;
+                color: var(--humidityColor);
+                font-size: 12px;
+                gap: 5px;
+                .logo{
+                    font-size: 20px;
+                }
+            }
+        }
+    }
+}

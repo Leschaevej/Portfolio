@@ -42,7 +42,6 @@ export default function Header() {
       const elapsed = time - startTime;
       let progress = Math.min(elapsed / duration, 1);
 
-      // easing easeInOutQuad
       progress =
         progress < 0.5
           ? 2 * progress * progress

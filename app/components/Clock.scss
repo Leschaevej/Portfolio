@@ -1,0 +1,16 @@
+.container {
+    font-family: 'Space Mono', monospace;
+    font-weight: bold;
+    color: var(--secondTextColor);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    line-height: 1;
+    .hours {
+        font-size: 64px;
+    }
+    .minutes {
+        font-size: 64px;
+    }
+}
