@@ -7,6 +7,7 @@ import Contact from './components/Contact';
 import Clock from './components/Clock';
 import Meteo from './components/Meteo';
 import Contribution from './components/Contribution';
+import Technology from './components/Technology';
 import GitHub from '../app/assets/github.svg';
 import LinkedIn from '../app/assets/linkedin.svg';
 import Portfolio from '../app/assets/logo.svg';
@@ -44,7 +45,7 @@ export default function Home() {
                 </a>
             </div>
         </div>
-        <div id="projet" className="section">
+        <div id="project" className="section">
             <div className="haloWrapper">
                 <div className="halo"></div>
             </div>
@@ -63,7 +64,7 @@ export default function Home() {
                 ))}
             </div>
         </div>
-        <div id="aPropos" className="section">
+        <div id="about" className="section">
             <div className="haloWrapper">
                 <div className="halo"></div>
             </div>
@@ -127,11 +128,14 @@ export default function Home() {
                 </div>
             </div>
         </div>
+        <div id="technology" className="section">
+            <Technology />
+        </div>
         <div id="contact" className="section">
             <div className="box">
                 <h2>Besoin d'un partenaire pour votre projet web ?</h2>
-                <p className="pub">Explorez l'étendue de nos services et transformez votre vision digitale avec Skybound Studio.</p>
-                <p className="direct">Vous préférez un contact direct ? Laissez-nous votre e-mail, nous reviendrons vers vous !</p>
+                <p className="pub">Explorez l'étendue de nos services et transformez votre vision digitale avec <span>Skybound Studio</span>.</p>
+                <p className="direct">Vous préférez un contact direct ?<br/>Laissez-nous votre e-mail, nous reviendrons vers vous !</p>
                 <Contact />
             </div>
         </div>

@@ -73,7 +73,7 @@ export default function Contact() {
           <NavetteSVG />
         </button>
       </div>
-      {error && <span className="error">{error}</span>}
+      <span className="error">{error}</span>
     </form>
   );
 }
