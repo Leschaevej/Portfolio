@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo from "../assets/logo.svg";
 import "./Header.scss";
 
@@ -22,10 +22,38 @@ export default function Header() {
   const [isAnimating, setIsAnimating] = useState(false);
   const [showLinks, setShowLinks] = useState(false);
 
-  const minSize = { width: 150, height: 50 };
-  const maxSize = { width: 600, height: 500 };
-  const minPos = { top: 50, right: 50 };
-  const maxPos = { top: 40, right: 40 };
+  const [minSize, setMinSize] = useState({ width: 150, height: 50 });
+  const [maxSize, setMaxSize] = useState({ width: 600, height: 500 });
+  const [minPos, setMinPos] = useState({ top: 50, right: 50 });
+  const [maxPos, setMaxPos] = useState({ top: 40, right: 40 });
+
+  useEffect(() => {
+    function updateSizes() {
+      const width = window.innerWidth;
+
+      if (width < 480) {
+        setMinSize({ width: 150, height: 50 });
+        setMaxSize({ width: 280, height: 300 });
+        setMinPos({ top: 30, right: 30 });
+        setMaxPos({ top: 20, right: 20 });
+      } else if (width < 1025) {
+        setMinSize({ width: 150, height: 50 });
+        setMaxSize({ width: 400, height: 300 });
+        setMinPos({ top: 50, right: 50 });
+        setMaxPos({ top: 40, right: 40 });
+      } else {
+        setMinSize({ width: 150, height: 50 });
+        setMaxSize({ width: 600, height: 500 });
+        setMinPos({ top: 50, right: 50 });
+        setMaxPos({ top: 40, right: 40 });
+      }
+    }
+
+    updateSizes();
+
+    window.addEventListener("resize", updateSizes);
+    return () => window.removeEventListener("resize", updateSizes);
+  }, []);
 
   const [modalSize, setModalSize] = useState(minSize);
   const [modalPos, setModalPos] = useState(minPos);
@@ -161,36 +189,37 @@ export default function Header() {
           </button>
         )}
       </div>
-
       {(isModalOpen || isAnimating) && (
         <div className="overlay" onClick={toggleModal}>
           <div
-            className="modal"
+            className={`modal ${isModalOpen ? "modal-open" : ""}`}
             style={{
-              width: modalSize.width + "px",
-              height: modalSize.height + "px",
-              top: modalPos.top + "px",
-              right: modalPos.right + "px",
-              position: "absolute",
-              borderRadius: "30px",
-              transformOrigin: "top right",
-              overflow: "hidden",
-              transition: isAnimating ? "none" : "all 0.3s ease",
+              width: modalSize.width,
+              height: modalSize.height,
+              top: modalPos.top,
+              right: modalPos.right,
+              zIndex: 5,
             }}
             onClick={(e) => e.stopPropagation()}
           >
-                <nav className={showLinks ? "show-links" : "hide-links"}>
-                    <div className="link-wrapper">
-                        <a href="#projet" onClick={toggleModal}>Projets</a>
-                    </div>
-                    <div className="link-wrapper">
-                        <a href="#aPropos" onClick={toggleModal}>À propos</a>
-                    </div>
-                    <div className="link-wrapper">
-                        <a href="#contact" onClick={toggleModal}>Contact</a>
-                    </div>
-                </nav>
-            </div>
+            <nav className={showLinks ? "show-links" : "hide-links"}>
+              <div className="link-wrapper">
+                <a href="#project" onClick={toggleModal}>
+                  Projets
+                </a>
+              </div>
+              <div className="link-wrapper">
+                <a href="#about" onClick={toggleModal}>
+                  À propos
+                </a>
+              </div>
+              <div className="link-wrapper">
+                <a href="#contact" onClick={toggleModal}>
+                  Contact
+                </a>
+              </div>
+            </nav>
+          </div>
         </div>
       )}
     </header>

@@ -1,7 +1,6 @@
 @use '@/app/Mixins.scss' as *;
 @use '@/app/Animations.scss' as *;
 
-
 header {
     display: flex;
     justify-content: space-between;
@@ -11,15 +10,13 @@ header {
     left: 0;
     right: 0;
     z-index: 10;
-    padding: 50px;
-
+    @include padding(30px, 50px, 50px, 50px);
     .logo {
         fill: currentColor;
         color: var(--mainColor);
         height: 50px;
         width: 50px;
     }
-
     .button-container {
         position: fixed;
         top: 50px;
@@ -29,8 +26,9 @@ header {
         border-radius: 30px;
         overflow: hidden;
         z-index: 30;
+        @include top(30px, 50px, 50px, 50px);
+        @include right(30px, 50px, 50px, 50px);
     }
-
     .menu,
     .close {
         position: absolute;
@@ -85,28 +83,40 @@ header {
         left: 0;
         .modal {
             position: absolute;
-            top: 40px;
-            right: 40px;
-            width: 600px;
-            height: 500px;
             background-color: var(--mainColor);
             border-radius: 30px;
             transform-origin: top right;
             overflow: hidden;
+            border: 2px solid var(--mainBackgroundColor);
+            box-shadow: inset 0 0 10px rgba(var(--mainBackgroundColorRgb), 0.8);
+            @include top(20px, 40px, 40px, 40px);
+            @include right(20px, 40px, 40px, 40px);
+            @include width(150px, 150px, 150px, 150px);
+            @include height(50px, 50px, 50px, 50px);
+            &.modal-open {
+                animation: modalOpen 0.5s ease forwards;
+                z-index: 5;
+                @include width(280px, 400px, 600px, 600px);
+                @include height(300px, 300px, 500px, 500px);
+            }
+            &.modal-close {
+                animation: modalClose 0.5s ease forwards;
+                z-index: 5;
+            }
             nav {
                 display: flex;
                 flex-direction: column;
                 color: var(--secondTextColor);
-                font-size: 64px;
                 font-weight: bold;
-                padding: 50px;
                 gap: 30px;
+                @include padding(70px 30px, 70px 50px, 70px 50px, 70px 50px);
+                @include fontSize(32px, 40px, 64px, 64px);
                 .link-wrapper {
-                    height: 88px;
                     overflow: hidden;
+                    @include height(42px, 50px, 88px, 88px);
                     a {
                         display: block;
-                        height: 78px;
+                        @include height(32px, 40px, 78px, 78px);
                     }
                 }
                 &.hide-links .link-wrapper a {
@@ -118,14 +128,6 @@ header {
                     pointer-events: auto;
                 }
             }
-        }
-        .modal-open {
-            animation: modalOpen 0.5s ease forwards;
-            z-index: 5;
-        }
-        .modal-close {
-            animation: modalClose 0.5s ease forwards;
-            z-index: 5;
         }
     }
 }
