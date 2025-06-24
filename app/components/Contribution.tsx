@@ -1,13 +1,33 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-import '../components/Contribution.scss';
+import { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import './Contribution.scss';
 
 type ContributionData = number[][];
+
+const CELL_SIZE = 15;
+const GAP_SIZE = 3;
 
 export default function Contribution() {
   const [data, setData] = useState<ContributionData>([]);
   const [maxValue, setMaxValue] = useState(0);
+
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [containerHeight, setContainerHeight] = useState(0);
+
+  useLayoutEffect(() => {
+    function updateSize() {
+      if (containerRef.current) {
+        const rect = containerRef.current.getBoundingClientRect();
+        setContainerWidth(rect.width);
+        setContainerHeight(rect.height);
+      }
+    }
+    updateSize();
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -38,26 +58,38 @@ export default function Contribution() {
     return '#53d166';
   }
 
-  function transpose(matrix: number[][]): number[][] {
-    if (matrix.length === 0) return [];
-    return matrix[0].map((_, colIndex) => matrix.map(row => row[colIndex]));
+  const colCount = Math.floor((containerWidth + GAP_SIZE) / (CELL_SIZE + GAP_SIZE)) || 1;
+  const rowCount = Math.floor((containerHeight + GAP_SIZE) / (CELL_SIZE + GAP_SIZE)) || 1;
+  const maxCells = colCount * rowCount;
+  const flatData = data.flat();
+  const reversedData = [...flatData].reverse();
+  const cellsGrid = new Array(maxCells).fill(0);
+
+  for (let i = 0; i < reversedData.length; i++) {
+    const col = colCount - 1 - Math.floor(i / rowCount);
+    if (col < 0) break;
+
+    const row = rowCount - 1 - (i % rowCount);
+    const indexGrid = row * colCount + col;
+    cellsGrid[indexGrid] = reversedData[i];
   }
 
-  const transposed = transpose(data.slice(-29));
-
   return (
-    <div className="contributionGrid">
-      {transposed.length > 0 ? (
-        transposed.map((row, rowIndex) => (
-          <div key={rowIndex} className="row">
-            {row.map((value, colIndex) => (
-              <div
-                key={colIndex}
-                className="cell"
-                style={{ backgroundColor: getColorFromValue(value, maxValue) }}
-              />
-            ))}
-          </div>
+    <div
+      ref={containerRef}
+      className="contributionGrid"
+      style={{
+        gridTemplateColumns: `repeat(${colCount}, ${CELL_SIZE}px)`,
+        gap: `${GAP_SIZE}px`,
+      }}
+    >
+      {cellsGrid.length > 0 ? (
+        cellsGrid.map((value, index) => (
+          <div
+            key={index}
+            className="cell"
+            style={{ backgroundColor: getColorFromValue(value, maxValue) }}
+          />
         ))
       ) : (
         <p>Chargement...</p>

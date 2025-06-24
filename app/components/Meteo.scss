@@ -1,13 +1,14 @@
+@use '@/app/Mixins.scss' as *;
+
 .weatherContainer{
     display: flex;
     flex-direction: column;
-    height: 100%;
-    padding: 30px;
+    @include padding(10px, 10px, 30px, 30px);
     .location {
         display: flex;
         align-items: center;
         color: var(--fourthTextColor);
-        font-size: 16px;
+        font-size: clamp(12px, calc(1vw + 1vh), 16px);
         gap: 5px;
         .logo{
             font-size: 16px;
@@ -22,18 +23,18 @@
             display: flex;
             align-items: center;
             .temperature {
-                font-size: 32px;
+                font-size: clamp(15px, calc(1vw + 1vh), 40px);
                 font-weight: 700;
             }
             .weatherCode{
-                height: 50px;
+                @include height(40px, 40px, 50px, 50px);
             }
         }
         .condition{
             display: flex;
             justify-content: space-between;
             background-color: var(--secondBackgroundColor);
-            padding: 10px;
+            padding: 5px;
             border-radius: 30px;
             .wind{
                 display: flex;

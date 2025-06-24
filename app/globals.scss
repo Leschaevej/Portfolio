@@ -25,6 +25,9 @@ a {
     color: inherit;
     text-decoration: none;
 }
+.scroll-spacer {
+  height: 150px;
+}
 html, body {
     position: relative;
     background-color: var(--mainBackgroundColor);
@@ -122,9 +125,9 @@ main {
                 transform: skew(-45deg);
                 overflow: hidden;
                 transition: color 0.3s ease;
+                font-size: clamp(18px, 2.5vw, 36px);
                 @include width(100%, 100%, 30%, 30%);
                 @include height(50px, 50px, 70px, 70px);
-                font-size: clamp(18px, 2.5vw, 36px);
                 span {
                     display: inline-block;
                     transform: skew(45deg);
@@ -270,7 +273,7 @@ main {
     flex-direction: column;
     position: relative;
     z-index: 1;
-    &::after {
+    &::before {
         content: "";
         position: absolute;
         top: 0;
@@ -286,33 +289,29 @@ main {
             rgba(var(--mainColorRgb), 0.4) 50%,
             transparent 100%
         );
-        
     }
     .haloWrapper {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 200px;
+        top: 0; left: 0; width: 100%; height: 200px;
         overflow: hidden;
         pointer-events: none;
         z-index: 0;
         .halo {
-        position: absolute;
-        top: -75%;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 80%;
-        height: 300px;
-        background: radial-gradient(
-            circle at top,
-            rgba(var(--mainColorRgb), 0.6) 0%,
-            rgba(var(--mainColorRgb), 0.3) 20%,
-            rgba(var(--mainColorRgb), 0.1) 40%,
-            transparent 80%
-        );
-        filter: blur(20px);
-        border-radius: 50%;
+            position: absolute;
+            top: -75%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 300px;
+            background: radial-gradient(
+                circle at top,
+                rgba(var(--mainColorRgb), 0.6) 0%,
+                rgba(var(--mainColorRgb), 0.3) 20%,
+                rgba(var(--mainColorRgb), 0.1) 40%,
+                transparent 80%
+            );
+            filter: blur(20px);
+            border-radius: 50%;
         }
     }
     h2 {
@@ -329,123 +328,131 @@ main {
         @include padding(90px 0 0 0, 50px, 50px, 50px);
     }
     .content {
-        height: 100%;
         display: flex;
+        flex-grow: 1;
+        min-height: 0;
+        overflow-y: auto;
         @include flexDirection(column, column, row, row);
-        @include gap(30px, 30px, 50px, 50px);
+        @include gap(10px, 30px, 50px, 50px);
         @include padding(0 30px 30px 30px, 0 100px 100px 100px, 0 150px 150px 150px, 0 150px 150px 150px);
-        .left {
-            height: 100%;
+        .left,
+        .right {
             display: flex;
             flex-direction: column;
+            min-height: 0;
+        }
+        .left {
             justify-content: space-between;
             @include gap(10px, 20px, 30px, 30px);
-            @include width(100%, 100%, 50%, 50%);
-            .introduction{
+            @include flex(1, 1, 1, 1);
+            .introduction {
                 display: flex;
                 flex-direction: column;
-                @include gap(10px, 20px, 30px, 30px);
+                justify-content: space-around;
+                height: 100%;
                 p {
-                    font-size: clamp(12px, calc(1vw + 2vh), 24px);
-                    color: var(--thirdTextColor);
+                font-size: clamp(12px, 1vw + 1.3vh, 60px);
+                color: var(--thirdTextColor);
                 }
             }
-            .shortcuts {
+            .link {
                 display: flex;
-                flex-direction: column;
-                @include padding(0 24px 0 24px, 0 38px 0 38px, 0 38px 0 38px, 0 38px 0 38px);
-                button {
-                    position: relative;
-                    background-color: var(--mainBackgroundColor);
-                    color: var(--mainTextColor);
-                    border: 1px solid var(--mainColor);
-                    font-weight: bold;
-                    z-index: 1;
-                    transform: skew(-45deg);
-                    overflow: hidden;
-                    transition: color 0.3s ease;
-                    width: 100%;
-                    font-size: clamp(18px, 2.5vw, 36px);
-                    @include height(50px, 50px, 70px, 70px);
+                justify-content: space-between;
+                @include flexDirection(column, row, column, column);
+                @include gap(10px, 30px, 30px, 30px);
+                .shortcuts {
+                    display: flex;
+                    @include width(100%, 50%, 100%, 100%);
+                    @include padding(0 24px, 0 38px, 0 38px, 0 38px);
+                    button {
+                        position: relative;
+                        background-color: var(--mainBackgroundColor);
+                        color: var(--mainTextColor);
+                        border: 1px solid var(--mainColor);
+                        font-weight: bold;
+                        z-index: 1;
+                        transform: skew(-45deg);
+                        overflow: hidden;
+                        transition: color 0.3s ease;
+                        width: 100%;
+                        font-size: clamp(18px, 2.5vw, 36px);
+                        @include height(50px, 50px, 70px, 70px);
+                        span {
+                            display: inline-block;
+                            transform: skew(45deg);
+                            position: relative;
+                            z-index: 2;
+                        }
+                        &::before {
+                            content: "";
+                            position: absolute;
+                            top: 0;
+                            left: 0;
+                            height: 100%;
+                            width: 0%;
+                            background-color: var(--mainColor);
+                            z-index: 1;
+                            transition: width 0.2s ease;
+                        }
+                        &:hover::before {
+                            width: 100%;
+                        }
+                        &:hover {
+                            color: var(--secondTextColor);
+                        }
+                    }
                     span {
                         display: inline-block;
                         transform: skew(45deg);
-                        position: relative;
-                        z-index: 2;
-                    }
-                    &::before {
-                    content: "";
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        height: 100%;
-                        width: 0%;
-                        background-color: var(--mainColor);
-                        z-index: 1;
-                        transition: width 0.2s ease;
-                    }
-                    &:hover::before {
-                        width: 100%;
-                    }
-                    &:hover {
-                        color: var(--secondTextColor);
                     }
                 }
-                span {
-                    display: inline-block;
-                    transform: skew(45deg);
-                }
-            }
-            .socials {
-                display: flex;
-                gap: 30px;
-                z-index: 1;
-                @include justifyContent(center, flex-start, flex-start, flex-start);
-                a {
+                .socials {
                     display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    background-color: var(--secondBackgroundColor);
-                    transition: border-radius 0.2s ease, background-color 0.2s ease;
-                    @include width(40px, 40px, 70px, 70px);
-                    @include height(40px, 40px, 70px, 70px);
-                    svg {
-                        transition: fill 0.2s ease, color 0.2s ease;
-                        @include width(20px, 20px, 35px, 35px);
-                        @include height(20px, 20px, 35px, 35px);
+                    z-index: 1;
+                    @include gap(28px, 30px, 30px, 30px);
+                    @include justifyContent(center, flex-start, flex-start, flex-start);
+                    a {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: var(--secondBackgroundColor);
+                        transition: border-radius 0.2s ease, background-color 0.2s ease;
+                        @include width(40px, 50px, 70px, 70px);
+                        @include height(40px, 50px, 70px, 70px);
+                        svg {
+                            transition: fill 0.2s ease, color 0.2s ease;
+                            @include width(20px, 25px, 35px, 35px);
+                            @include height(20px, 25px, 35px, 35px);
+                        }
+                        &:hover {
+                            border-radius: 20px;
+                        }
                     }
-                    &:hover {
-                        border-radius: 20px;
+                    a.github:hover svg {
+                        color: var(--githubcolor);
                     }
-                }
-                a.github:hover svg {
-                    color: var(--githubcolor);
-                }
-                a.linkedin:hover svg {
-                    color: var(--linkedincolor);
-                }
-                a.portfolio:hover svg {
-                    color: var(--portfoliocolor);
-                }
-                a.skybound:hover svg {
-                    color: var(--skyboundcolor);
+                    a.linkedin:hover svg {
+                        color: var(--linkedincolor);
+                    }
+                    a.portfolio:hover svg {
+                        color: var(--portfoliocolor);
+                    }
+                    a.skybound:hover svg {
+                        color: var(--skyboundcolor);
+                    }
                 }
             }
         }
         .right {
-            display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            height: 100%;
-            gap: 30px;
-            @include width(100%, 100%, 50%, 50%);
+            @include gap(10px, 20px, 30px, 30px);
+            @include flex(1, 1, 1, 1);
             .gadget {
+                flex: 4;
                 display: flex;
-                justify-content: space-between;
-                height: 100%;
-                gap: 30px;
+                @include gap(10px, 20px, 30px, 30px);        
                 .rocket {
-                    width: 50%;
+                    flex: 1;
                     border-radius: 15px;
                     box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.4);
                     display: flex;
@@ -453,6 +460,7 @@ main {
                     justify-content: center;
                     position: relative;
                     overflow: hidden;
+                    @include display(none, flex, flex, flex);        
                     .rocketWrapper {
                         position: relative;
                         display: flex;
@@ -473,10 +481,11 @@ main {
                     }
                     .moon {
                         position: absolute;
-                        top: 40px;
-                        right: 30px;
                         z-index: 1;
-                        rotate:(180deg);
+                        rotate: 180deg;
+                        @include top(40px, 40px, 40px, 40px);
+                        @include right(30px, 30px, 30px, 30px);
+                        
                     }
                     .cloud {
                         position: absolute;
@@ -493,50 +502,59 @@ main {
                         right: 0;
                         animation-delay: 5s;
                     }
-                }
+                }   
                 .meteoClock {
+                    flex: 1;
                     display: flex;
-                    flex-direction: column;
                     justify-content: space-between;
-                    width: 50%;
-                    height: 100%;
-                    gap: 30px;
+                    @include flexDirection(row, row, column, column);
+                    @include gap(10px, 20px, 30px, 30px);
+                    .clock,
+                    .meteo {
+                        flex: 1;
+                        border-radius: 15px;
+                        box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.4);
+                        display: flex;
+                        justify-content: flex-start;
+                        align-items: flex-start;
+                        overflow: hidden;
+                        position: relative;
+                        &:before {
+                            content: "";
+                            display: block;
+                            pointer-events: none;
+                        }
+                        > * {
+                            position: absolute;
+                            top: 0; left: 0; right: 0; bottom: 0;
+                            display: flex;
+                            flex-direction: column;
+                        }
+                    }
                     .clock {
                         background-color: var(--mainColor);
-                        border-radius: 15px;
-                        display: flex;
-                        position: relative;
-                        overflow: hidden;
-                        transition: all 0.6s ease;
-                        height: 50%;
                         .logo {
                             color: var(--secondTextColor);
-                            position: absolute;
-                            top: 20px;
-                            right: 100px;
-                            height: 150px;
-                            transition: opacity 1s ease;
+                            margin-top: 10px;
+                            height: 40px;
+                            transition: opacity 0.5s ease;
+                            @include height(40px, 50px, 70px, 70px);
                         }
                         .modul {
                             display: flex;
                             justify-content: center;
-                            align-items: flex-end; 
-                            transition: transform 0.6s ease;
-                            transform: translatex(0);
+                            align-items: flex-end;
+                            transition: transform 0.8s ease;
+                            transform: translateX(0);
                         }
                         &:hover {
                             .logo {
-                            opacity: 0;
+                                opacity: 0;
                             }
                             .modul {
-                            transform: translatex(-70px);
+                                transform: translateX(calc(-100% + 80px));
                             }
                         }
-                    }
-                    .meteo {
-                        height: 50%;
-                        border-radius: 15px;
-                        box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.4);
                     }
                 }
             }
@@ -544,6 +562,8 @@ main {
                 padding: 20px;
                 border-radius: 15px;
                 box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.4);
+                min-height: 0;
+                @include flex(2, 1, 1, 1);
             }
         }
     }
@@ -552,35 +572,36 @@ main {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 150px;
+    @include padding(110px 30px 30px 30px, 150px 100px 100px 100px, 150px, 150px);
 }
 #contact {
     display: flex;
     justify-content: center;
     align-items: center;
+    @include padding(110px 30px 30px 30px, 150px 100px 100px 100px, 150px, 150px);
     .box {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
         background-color: var(--mainColor);
         border-radius: 50px;
-        padding: 80px 80px 46px 80px ;
-        width: 70%;
-        height: 70%;
+        width: 100%;
+        height: 100%;
         color: var(--secondTextColor);
+        @include padding(30px 30px 30px 30px, 40px 40px 6px 40px, 80px 80px 46px 80px, 80px 80px 46px 80px);
     }
     h2{
-        font-size: 60px;
+        font-size: clamp(32px, calc(4vw + 2vh), 60px);
         font-weight: bold;
     }
     .pub {
-        font-size: 36px;
+        font-size: clamp(20px, calc(3vw + 1.5vh), 36px);
         span{
             font-weight: bold;
         }
     }
     .direct {
-        font-size: 32px;
+        font-size: clamp(18px, calc(2.5vw + 1vh), 32px);
     }
 }
 

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import "./Technology.scss";
 import Frontend from "../assets/frontend.svg";
 import Backend from "../assets/backend.svg";
@@ -7,7 +7,9 @@ import Design from "../assets/design.svg";
 import Tools from "../assets/tools.svg";
 import Ai from "../assets/ai.svg";
 
-const techItems = [
+type TechId = "Frontend" | "Backend" | "Deployment" | "Design" | "Tools" | "Ai";
+
+const techItems: { title: TechId; Icon: React.FC<React.SVGProps<SVGSVGElement>> }[] = [
   { title: "Frontend", Icon: Frontend },
   { title: "Backend", Icon: Backend },
   { title: "Deployment", Icon: Deployment },
@@ -16,62 +18,73 @@ const techItems = [
   { title: "Ai", Icon: Ai },
 ];
 
-type TechId = 'Frontend' | 'Backend' | 'Deployment' | 'Design' | 'Tools' | 'Ai';
-
 const pngLists: Record<TechId, string[]> = {
   Frontend: [
-    '/technology/frontend/html.png',
-    '/technology/frontend/css.png',
-    '/technology/frontend/javascript.png',
-    '/technology/frontend/typescript.png',
-    '/technology/frontend/tailwind.png',
-    '/technology/frontend/sass.png',
-    '/technology/frontend/reactrouter.png',
-    '/technology/frontend/react.png',
-    '/technology/frontend/next.png',
+    "/technology/frontend/html.png",
+    "/technology/frontend/css.png",
+    "/technology/frontend/javascript.png",
+    "/technology/frontend/typescript.png",
+    "/technology/frontend/tailwind.png",
+    "/technology/frontend/sass.png",
+    "/technology/frontend/reactrouter.png",
+    "/technology/frontend/react.png",
+    "/technology/frontend/next.png",
   ],
   Backend: [
-    '/technology/backend/mongoose.png',
-    '/technology/backend/mongodb.png',
-    '/technology/backend/node.png',
-    '/technology/backend/express.png',
+    "/technology/backend/mongodb.png",
+    "/technology/backend/node.png",
+    "/technology/backend/mongoose.png",
+    "/technology/backend/express.png",
   ],
   Deployment: [
-    '/technology/deployment/docker.png',
-    '/technology/deployment/aws.png',
-    '/technology/deployment/vercel.png',
-    '/technology/deployment/cloudinary.png',
-    '/technology/deployment/githubaction.png',
-    '/technology/deployment/netifly.png',
+    "/technology/deployment/docker.png",
+    "/technology/deployment/aws.png",
+    "/technology/deployment/vercel.png",
+    "/technology/deployment/cloudinary.png",
+    "/technology/deployment/githubaction.png",
+    "/technology/deployment/netifly.png",
   ],
   Design: [
-    '/technology/design/figma.png',
-    '/technology/design/photoshop.png',
-    '/technology/design/lightroom.png',
-    '/technology/design/canva.png',
+    "/technology/design/figma.png",
+    "/technology/design/photoshop.png",
+    "/technology/design/lightroom.png",
+    "/technology/design/canva.png",
   ],
   Tools: [
-    '/technology/tools/git.png',
-    '/technology/tools/github.png',
-    '/technology/tools/postman.png',
-    '/technology/tools/vscode.png',
+    "/technology/tools/git.png",
+    "/technology/tools/github.png",
+    "/technology/tools/postman.png",
+    "/technology/tools/vscode.png",
   ],
   Ai: [
-    '/technology/ai/gemini.png',
-    '/technology/ai/huggingface.png',
-    '/technology/ai/tensorflow.png',
-    '/technology/ai/openai.png',
+    "/technology/ai/gemini.png",
+    "/technology/ai/huggingface.png",
+    "/technology/ai/tensorflow.png",
+    "/technology/ai/openai.png",
   ],
 };
 
 export default function Technology() {
   const [hovered, setHovered] = useState<TechId | null>(null);
   const [gridHeight, setGridHeight] = useState<number | null>(null);
+  const [isMobile, setIsMobile] = useState<boolean>(false);
 
-  const cardRefs = useRef<Record<TechId, HTMLDivElement | null>>({} as Record<TechId, HTMLDivElement | null>);
+  const cardRefs = useRef<Record<TechId, HTMLDivElement | null>>({} as Record<
+    TechId,
+    HTMLDivElement | null
+  >);
   const gridRef = useRef<HTMLDivElement | null>(null);
 
-  const bottomRow: TechId[] = ['Frontend', 'Backend', 'Deployment'];
+  const bottomRow: TechId[] = ["Frontend", "Backend", "Deployment"];
+
+  useEffect(() => {
+    function onResize() {
+      setIsMobile(window.innerWidth < 1024);
+    }
+    onResize();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
 
   function handleMouseEnter(title: TechId) {
     if (gridRef.current) {
@@ -85,11 +98,14 @@ export default function Technology() {
     setGridHeight(null);
   }
 
-  function handleCardMouseLeave(e: React.MouseEvent<HTMLDivElement>, title: TechId) {
+  function handleCardMouseLeave(
+    e: React.MouseEvent<HTMLDivElement>,
+    title: TechId
+  ) {
     const toElement = e.relatedTarget as HTMLElement | null;
 
-    if (toElement && typeof toElement.classList !== 'undefined' && toElement.classList.contains('card')) {
-        return;
+    if (toElement && toElement.classList?.contains("card")) {
+      return;
     }
     setHovered(null);
     setGridHeight(null);
@@ -102,8 +118,14 @@ export default function Technology() {
   }
 
   function getPngListPositionClass(): string {
-    if (!hovered) return '';
-    return bottomRow.includes(hovered) ? 'pngBottom' : 'pngTop';
+    if (!hovered) return "";
+
+    if (isMobile) {
+      if (["Backend", "Design", "Ai"].includes(hovered)) return "pngLeft";
+      return "pngRight";
+    } else {
+      return bottomRow.includes(hovered) ? "pngBottom" : "pngTop";
+    }
   }
 
   return (
@@ -116,10 +138,12 @@ export default function Technology() {
       {techItems.map(({ title, Icon }) => (
         <div
           key={title}
-          className={`card ${hovered && hovered !== title ? "hidden" : ""} ${hovered === title ? "active" : ""}`}
-          onMouseEnter={() => handleMouseEnter(title as TechId)}
-          onMouseLeave={(e) => handleCardMouseLeave(e, title as TechId)}
-          ref={setRef(title as TechId)}
+          className={`card ${hovered && hovered !== title ? "hidden" : ""} ${
+            hovered === title ? "active" : ""
+          }`}
+          onMouseEnter={() => handleMouseEnter(title)}
+          onMouseLeave={(e) => handleCardMouseLeave(e, title)}
+          ref={setRef(title)}
         >
           <h3>{title}</h3>
           <div className="wrapper">
@@ -131,7 +155,7 @@ export default function Technology() {
       {hovered && (
         <div className={`png ${getPngListPositionClass()}`}>
           {pngLists[hovered].map((src, i) => (
-            <img src={src} alt="" key={i} />
+            <img src={src} alt={`${hovered} logo ${i}`} key={i} />
           ))}
         </div>
       )}

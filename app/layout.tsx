@@ -26,7 +26,10 @@ export default function RootLayout({
     <html lang="fr">
       <body className={instrumentSans.className}>
         <Header />
-          {children}
+          <main>
+            {children}
+            <div className="scroll-spacer" />
+          </main>
         <Footer />
       </body>
     </html>

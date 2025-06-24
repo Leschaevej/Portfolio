@@ -76,22 +76,14 @@ export default function Home() {
                 <div className="left">
                     <div className="introduction">
                         <p>
-                            Loin des sentiers battus.
-                        </p>
-                        <p>
-                            Mon terrain de jeu, c'est le développement full-stack allié à la créativité du design.
-                        </p>
-                        <p>
-                            Plus qu'un simple codeur, je suis un véritable passionné de tech qui aime transformer les idées en interfaces élégantes et des systèmes ultra-fluides.
-                        </p>
-                        <p>
-                            Ma soif d'apprendre ne s'arrête jamais, et c'est elle qui nourrit  mon approche de l'innovation.
+                            Loin des sentiers battus.<br/>Mon terrain de jeu, c'est le développement full-stack allié à la créativité du design.<br/>Plus qu'un simple codeur, je suis un véritable passionné de tech qui aime transformer les idées en interfaces élégantes et des systèmes ultra-fluides.<br/>Ma soif d'apprendre ne s'arrête jamais, et c'est elle qui nourrit  mon approche de l'innovation.
                         </p>
                     </div>
-                    <div className="shortcuts">
-                        <button type="button" onClick={() => window.open("/CV.pdf", "_blank")}><span>Télécharger mon CV</span></button>
-                    </div>
-                    <div className="socials">
+                    <div className="link">
+                        <div className="shortcuts">
+                            <button type="button" onClick={() => window.open("/CV.pdf", "_blank")}><span>Télécharger mon CV</span></button>
+                        </div>
+                        <div className="socials">
                             <a href="https://github.com/Leschaevej?tab=repositories" className="github" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
                                 <GitHub />
                             </a>
@@ -105,6 +97,7 @@ export default function Home() {
                                 <Skybound />
                             </a>
                         </div>
+                    </div>
                 </div>
                 <div className="right">
                     <div className="gadget">
