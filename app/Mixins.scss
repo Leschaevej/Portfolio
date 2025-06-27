@@ -185,7 +185,6 @@
     & {
         grid-template-columns: $mobile;
     }
-
     @media (min-width: 769px) {
         grid-template-columns: $tablet;
     }
@@ -200,7 +199,6 @@
     & {
         grid-template-rows: $mobile;
     }
-
     @media (min-width: 769px) {
         grid-template-rows: $tablet;
     }
@@ -215,7 +213,6 @@
     & {
         gap: $mobile;
     }
-
     @media (min-width: 769px) {
         gap: $tablet;
     }

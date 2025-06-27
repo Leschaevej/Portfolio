@@ -191,3 +191,8 @@
         filter: drop-shadow(0 0 0px currentColor);
     }
 }
+@keyframes shake {
+  0%, 100% { transform: rotate(0deg); }
+  20%, 60% { transform: rotate(10deg); }
+  40%, 80% { transform: rotate(-10deg); }
+}

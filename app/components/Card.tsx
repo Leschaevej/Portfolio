@@ -11,7 +11,6 @@ type CardProps = {
     githubLink?: string;
     pdfLink?: string;
 };
-
 const Card: React.FC<CardProps> = ({
     title,
     imageSrc,
@@ -21,7 +20,6 @@ const Card: React.FC<CardProps> = ({
     pdfLink,
 }) => {
     const [flipped, setFlipped] = useState(false);
-
     return (
         <div
             className={`cardContainer ${flipped ? "flipped" : ""}`}
@@ -35,7 +33,6 @@ const Card: React.FC<CardProps> = ({
                 <CardSVG className="svgBorder" />
                 <img src={imageSrc} alt={title} className="cardImage" />
             </div>
-
             <div className="card back">
                 <CardSVG className="svgBorder" />
                 <div className="content">
@@ -60,5 +57,4 @@ const Card: React.FC<CardProps> = ({
         </div>
     );
 };
-
 export default Card;

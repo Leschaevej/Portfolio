@@ -28,8 +28,8 @@ export default function Home() {
             </div>
             <div className="link">
                 <div className="shortcuts">
-                    <button type="button" className="primary" onClick={() => window.location.hash = '#projet'}><span>Projet</span></button>
-                    <button type="button" onClick={() => window.location.hash = '#aPropos'}><span>A Propos</span></button>
+                    <button type="button" className="primary" onClick={() => window.location.hash = '#project'}><span>Projet</span></button>
+                    <button type="button" onClick={() => window.location.hash = '#about'}><span>A Propos</span></button>
                     <button type="button" onClick={() => window.location.hash = '#contact'}><span>Contact</span></button>
                 </div>
                 <div className="socials">

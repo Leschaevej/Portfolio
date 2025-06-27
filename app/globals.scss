@@ -590,7 +590,7 @@ main {
         width: 100%;
         height: 100%;
         color: var(--secondTextColor);
-        @include padding(30px 30px 30px 30px, 40px 40px 6px 40px, 80px 80px 46px 80px, 80px 80px 46px 80px);
+        @include padding(30px 30px 30px 30px, 40px 40px 40px 40px, 80px 80px 80px 80px, 80px 80px 80px 80px);
     }
     h2{
         font-size: clamp(32px, calc(4vw + 2vh), 60px);

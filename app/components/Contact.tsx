@@ -1,6 +1,6 @@
 'use client';
+
 import { useState, FormEvent } from 'react';
-import emailjs from '@emailjs/browser';
 import './Contact.scss';
 import NavetteSVG from '../assets/navette.svg';
 
@@ -8,10 +8,11 @@ export default function Contact() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const [shakeError, setShakeError] = useState(false);
 
   const validate = () => {
     if (!email.trim()) {
-      setError("L'email est requis.");
+      setError("Veuillez renseigner votre e-mail.");
       return false;
     }
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
@@ -24,56 +25,89 @@ export default function Contact() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
-    if (error) setError('');
+    if (error) {
+      setError('');
+    }
   };
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    if (!validate()) return;
+    if (!validate()) {
+      setShakeError(true);
+      setTimeout(() => setShakeError(false), 600);
+      return;
+    }
 
     setStatus('sending');
-
     try {
-      await emailjs.send(
-        process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-        process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-        { from_email: email },
-        process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!
-      );
-      setStatus('success');
-      setEmail('');
-      setTimeout(() => setStatus('idle'), 2000);
+      const res = await fetch('/api/email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: 'Utilisateur',
+          email,
+          message: 'Formulaire rapide',
+        }),
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        setStatus('success');
+        setEmail('');
+      } else {
+        throw new Error('Échec envoi');
+      }
     } catch (error) {
       console.error('Erreur envoi email :', error);
       setStatus('error');
+    } finally {
       setTimeout(() => setStatus('idle'), 2000);
     }
   };
 
+  const placeholder = error || "Un petit pas pour vous...";
+
   return (
     <form onSubmit={handleSubmit} noValidate className="contact-form">
-      <div className="email-container">
+      <div
+        className={`email-container ${
+          (error || status === 'error') ? 'error-active' : ''
+        } ${status === 'sending' ? 'sending' : ''} ${
+          status === 'success' ? 'success' : ''
+        }`}
+      >
         <input
           type="email"
           name="email"
-          value={email}
+          value={
+            status === 'sending'
+              ? 'Vers l’infini...'
+              : status === 'success'
+              ? 'Communication établie'
+              : status === 'error'
+              ? 'Echec de la communication'
+              : email
+          }
           onChange={handleChange}
-          placeholder="Un petit pas pour vous..."
+          placeholder={placeholder}
           aria-invalid={error ? 'true' : 'false'}
           autoComplete="email"
           required
-          className={`email-input ${error ? 'input-error' : ''}`}
+          disabled={status === 'sending' || status === 'success'}
+          className={`email-input ${error ? 'input-error' : ''} ${status}`}
         />
         <button
           type="submit"
           disabled={status === 'sending' || status === 'success'}
-          className={`submit-button ${status}`}
+          className={`submit-button ${status} ${shakeError ? 'error-shake' : ''} ${(error || status === 'error') ? 'error-active' : ''}`}
           aria-label="Envoyer"
         >
           <NavetteSVG />
         </button>
       </div>
-      <span className="error">{error}</span>
     </form>
   );
 }
