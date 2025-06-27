@@ -14,13 +14,13 @@ interface WeatherData {
 }
 
 function getWeatherIcon(code: number) {
-  if (code === 0) return <WiDaySunny size={48} color="#f39c12" />;
-  if ([1, 2, 3].includes(code)) return <WiCloudy size={48} color="#95a5a6" />;
-  if ([45, 48].includes(code)) return <WiFog size={48} color="#7f8c8d" />;
-  if ([51, 53, 55, 61, 63, 65].includes(code)) return <WiRain size={48} color="#3498db" />;
-  if ([71, 73, 75].includes(code)) return <WiSnow size={48} color="#ecf0f1" />;
-  if ([95, 96, 99].includes(code)) return <WiThunderstorm size={48} color="#9b59b6" />;
-  return <WiDaySunny size={48} color="#f39c12" />;
+  if (code === 0) return <WiDaySunny className="weatherIcon" color="#f39c12" />;
+  if ([1, 2, 3].includes(code)) return <WiCloudy className="weatherIcon" color="#95a5a6" />;
+  if ([45, 48].includes(code)) return <WiFog className="weatherIcon" color="#7f8c8d" />;
+  if ([51, 53, 55, 61, 63, 65].includes(code)) return <WiRain className="weatherIcon" color="#3498db" />;
+  if ([71, 73, 75].includes(code)) return <WiSnow className="weatherIcon" color="#ecf0f1" />;
+  if ([95, 96, 99].includes(code)) return <WiThunderstorm className="weatherIcon" color="#9b59b6" />;
+  return <WiDaySunny className="weatherIcon" color="#f39c12" />;
 }
 
 export default function Meteo() {

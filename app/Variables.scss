@@ -1,27 +1,42 @@
-@media (prefers-color-scheme: dark) {
-    :root {
-        --mainColor: #55C903;
-        --mainColorRgb: 85, 201, 3;
-        --mainBackgroundColor: #101010;
-        --mainBackgroundColorRgb: 16, 16, 16;
-        --secondBackgroundColor: #1E1E1E;
-        --footerBackgroundColor: #141615;
-        --mainTextColor: #ffffff;
-        --secondTextColor: #101010;
-        --thirdTextColor: #DBDBDB;
-        --fourthTextColor:#6e6e6e;
-        --buttonhovercolor: #46a500;
-        --inputColor: #DBDBDB;
-        --errorColor: #c52724;
-        --scroolBarThumb: #6b6b6b;
-        --scroolBarHover: #555;
-        --scroolBarBorder: #ffffff;
-        --githubcolor:#6e5494;
-        --linkedincolor:#0a66c2;
-        --portfoliocolor:#ff5722;
-        --skyboundcolor:#1DB954;
-        --fireColor:#c52724;
-        --windColor: #E4906D;
-        --humidityColor: #5F8ECA;
-    }
+:root {
+    --mainColor: #55C903;
+    --mainColorRgb: 85, 201, 3;
+
+    --mainBackgroundColor: #101010;
+    --mainBackgroundColorRgb: 16, 16, 16;
+
+    --secondBackgroundColor: #1E1E1E;
+    --footerBackgroundColor: #141615;
+
+    --mainTextColor: #ffffff;
+    --secondTextColor: #101010;
+    --thirdTextColor: #DBDBDB;
+    --fourthTextColor:#6e6e6e;
+
+    --buttonhovercolor: #46a500;
+    --inputColor: #DBDBDB;
+    --errorColor: #c52724;
+
+    --scroolBarThumb: #6b6b6b;
+    --scroolBarHover: #555;
+    --scroolBarBorder: #ffffff;
+
+    --githubcolor:#3D2C8D;
+    --linkedincolor:#0077B5;
+    --portfoliocolor:#55C903;
+    --skyboundcolor:#145DA0;
+
+    --fireColor:#c52724;
+
+    --windColor: #FF8C42;
+    --humidityColor: #1F6FEB;
+
+    --frontendColor: #61dafb;
+    --backendColor: #68a063;
+    --deploymentColor: #ff9900;
+    --designColor: #f24e1e;
+    --toolsColor: #f1502f;
+    --aiColor: #a259ff;
+
+
 }

@@ -19,9 +19,8 @@
     );
     .card {
         background-color: var(--secondBackgroundColor);
-        border: 1px solid var(--mainColor);
         border-radius: 30px;
-        box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.3);
+        box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.5);
         padding: 40px;
         display: flex;
         flex-direction: column;
@@ -29,7 +28,8 @@
         box-sizing: border-box;
         width: 100%;
         height: 100%;
-        transition: opacity 0.3s ease;
+        transition: opacity 0.3s ease, box-shadow 0.4s ease;
+        cursor: pointer;
         @include padding(20px, 20px, 40px, 40px);
         &.active {
             grid-auto-rows: 1fr;
@@ -38,25 +38,64 @@
             visibility: hidden;
             pointer-events: none;
         }
+        &.glowIn {
+            animation: glowIn 1s forwards;
+        }
+        &.glowOut {
+            animation: glowOut 1s forwards;
+        }
+        &.fadeIn {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        &.fadeOut {
+            opacity: 0;
+            transform: scale(0);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+            pointer-events: none;
+        }
         h3 {
             font-size: clamp(16px, 2.5vw, 40px);
             color: var(--mainTextColor);
-            @include margin(0 0 10px 0, 0 0 10px 0, 0 0 20px 0, 0 0 20px 0);  
+            @include margin(0 0 10px 0, 0 0 10px 0, 0 0 20px 0, 0 0 20px 0);
         }
         .wrapper {
-        flex-grow: 1;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        height: 100%;
+            flex-grow: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
             svg {
                 height: 100%;
                 width: auto;
                 max-width: 100%;
                 object-fit: contain;
                 display: block;
-                color: var(--mainColor);
+            }
+            .techIn {
+                animation: techIn 1s forwards;
+            }
+            .techOut {
+                animation: techOut 1s forwards;
+            }
+            .frontend {
+                color: var(--frontendColor);
+            }
+            .backend {
+                color: var(--backendColor);
+            }
+            .deployment {
+                color: var(--deploymentColor);
+            }
+            .design {
+                color: var(--designColor);
+            }
+            .tools {
+                color: var(--toolsColor);
+            }
+            .ai {
+                color: var(--aiColor);
             }
         }
     }
@@ -70,7 +109,15 @@
         z-index: 1000;
         img {
             width: 100px;
-            @include width(50px, 100px, 100px, 100px);
+            opacity: 0;
+            @include width(15.625vw, 100px, 100px, 100px);
+            animation: pngFlyIn 0.6s ease-out forwards;
+            animation-delay: calc(var(--i) * 0.1s);
+        }
+        &.falling img {
+            opacity: 1;
+            animation: pngFlyOut 0.6s ease-in forwards;
+            animation-delay: calc(var(--i) * 0.1s);
         }
     }
     .pngTop {
