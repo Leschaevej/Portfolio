@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.scss";
 import Header from './components/Header';
 import Footer from './components/Footer';
+import Intro from './components/Intro';
 import { instrumentSans } from './fonts';
 
 export const metadata: Metadata = {
@@ -25,10 +26,10 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body className={instrumentSans.className}>
+        <Intro />
         <Header />
           <main>
             {children}
-            <div className="scroll-spacer" />
           </main>
         <Footer />
       </body>

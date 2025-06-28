@@ -97,13 +97,13 @@
     &.success svg {
         transform: rotate(-90deg);
         color: var(--successColor);
-        transition: transform 0.5s ease, color 0.5s ease;
+        transition: transform 0.5s ease, color 0.1s ease;
     }
 
     &.error-active svg {
         color: var(--errorColor);
         transform: rotate(-90deg);
-        transition: color 0.3s ease, transform 0.3s ease;
+        transition: color 0.1s ease, transform 0.5s ease;
     }
 
     &.sending,

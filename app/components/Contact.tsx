@@ -31,42 +31,40 @@ export default function Contact() {
   };
 
   const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!validate()) {
-      setShakeError(true);
-      setTimeout(() => setShakeError(false), 600);
-      return;
+  e.preventDefault();
+  if (!validate()) {
+    return;
+  }
+
+  setStatus('sending');
+  try {
+    const res = await fetch('/api/email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        name: 'Utilisateur',
+        email,
+        message: 'Formulaire rapide',
+      }),
+    });
+
+    const data = await res.json();
+
+    if (data.success) {
+      setStatus('success');
+      setEmail('');
+    } else {
+      throw new Error('Échec envoi');
     }
-
-    setStatus('sending');
-    try {
-      const res = await fetch('/api/email', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: 'Utilisateur',
-          email,
-          message: 'Formulaire rapide',
-        }),
-      });
-
-      const data = await res.json();
-
-      if (data.success) {
-        setStatus('success');
-        setEmail('');
-      } else {
-        throw new Error('Échec envoi');
-      }
-    } catch (error) {
-      console.error('Erreur envoi email :', error);
-      setStatus('error');
-    } finally {
-      setTimeout(() => setStatus('idle'), 2000);
-    }
-  };
+  } catch (error) {
+    console.error('Erreur envoi email :', error);
+    setStatus('error');
+  } finally {
+    setTimeout(() => setStatus('idle'), 2000);
+  }
+};
 
   const placeholder = error || "Un petit pas pour vous...";
 
@@ -86,9 +84,9 @@ export default function Contact() {
             status === 'sending'
               ? 'Vers l’infini...'
               : status === 'success'
-              ? 'Communication établie'
+              ? 'Communication établi !!'
               : status === 'error'
-              ? 'Echec de la communication'
+              ? 'Echec de la communication !!'
               : email
           }
           onChange={handleChange}
@@ -100,12 +98,12 @@ export default function Contact() {
           className={`email-input ${error ? 'input-error' : ''} ${status}`}
         />
         <button
-          type="submit"
-          disabled={status === 'sending' || status === 'success'}
-          className={`submit-button ${status} ${shakeError ? 'error-shake' : ''} ${(error || status === 'error') ? 'error-active' : ''}`}
-          aria-label="Envoyer"
-        >
-          <NavetteSVG />
+            type="submit"
+            disabled={status === 'sending' || status === 'success'}
+            className={`submit-button ${status} ${error ? 'error-active' : ''}`}
+            aria-label="Envoyer"
+            >
+            <NavetteSVG />
         </button>
       </div>
     </form>

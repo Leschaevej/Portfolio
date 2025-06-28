@@ -16,6 +16,11 @@ header {
         color: var(--mainColor);
         height: 50px;
         width: 50px;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        &:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 5px var(--mainColor));
+        }
     }
     .button-container {
         position: fixed;
