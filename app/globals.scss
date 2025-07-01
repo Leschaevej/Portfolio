@@ -14,7 +14,7 @@
     border: 3px solid var(--mainBackgroundColor);
 }
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--buttonhovercolor);
+    background-color: var(--buttonHoverColor);
 }
 * {
     margin: 0;
@@ -133,7 +133,7 @@ main {
                     z-index: 2;
                 }
                 &::before {
-                content: "";
+                    content: "";
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -143,18 +143,27 @@ main {
                     z-index: 1;
                     transition: width 0.5s ease;
                 }
-                &:hover::before {
-                    width: 100%;
+                @media (hover: hover) and (pointer: fine) {
+                    &:hover {
+                        color: var(--secondTextColor);
+                        &::before {
+                            width: 100%;
+                        }
+                    }
                 }
-                &:hover {
+                &.tapped {
                     color: var(--secondTextColor);
+                    &::before {
+                        width: 100%;
+                        transition: width 0.5s ease;
+                    }
                 }
             }
             .primary {
                 background-color: var(--mainColor);
                 color: var(--secondTextColor);
                 &:hover {
-                    background-color: var(--buttonhovercolor);
+                    background-color: var(--buttonHoverColor);
                 }
                 &::before {
                     display: none;
@@ -184,21 +193,39 @@ main {
                     @include width(20px, 35px, 35px, 35px);
                     @include height(20px, 35px, 35px, 35px);
                 }
-                &:hover {
-                    border-radius: 25px;
+                @media (hover: hover) and (pointer: fine) {
+                    &:hover {
+                        border-radius: 25px;
+
+                        &.github svg {
+                        color: var(--githubcolor);
+                        }
+                        &.linkedin svg {
+                        color: var(--linkedincolor);
+                        }
+                        &.portfolio svg {
+                        color: var(--portfoliocolor);
+                        }
+                        &.skybound svg {
+                        color: var(--skyboundcolor);
+                        }
+                    }
                 }
-            }
-            a.github:hover svg {
-                color: var(--githubcolor);
-            }
-            a.linkedin:hover svg {
-                color: var(--linkedincolor);
-            }
-            a.portfolio:hover svg {
-                color: var(--portfoliocolor);
-            }
-            a.skybound:hover svg {
-                color: var(--skyboundcolor);
+                &.tapped {
+                    border-radius: 25px;
+                    &.github svg {
+                        color: var(--githubcolor);
+                    }
+                    &.linkedin svg {
+                        color: var(--linkedincolor);
+                    }
+                    &.portfolio svg {
+                        color: var(--portfoliocolor);
+                    }
+                    &.skybound svg {
+                        color: var(--skyboundcolor);
+                    }
+                }
             }
         }
     }
@@ -352,7 +379,7 @@ main {
                 justify-content: space-around;
                 height: 100%;
                 p {
-                font-size: clamp(12px, 1vw + 1.3vh, 60px);
+                font-size: clamp(10px, 1vw + 1.3vh, 60px);
                 color: var(--thirdTextColor);
                 }
             }
@@ -378,7 +405,7 @@ main {
                         width: 100%;
                         cursor: pointer;
                         font-size: clamp(18px, 2.5vw, 36px);
-                        @include height(50px, 50px, 70px, 70px);
+                        @include height(40px, 50px, 70px, 70px);
                         span {
                             display: inline-block;
                             transform: skew(45deg);
@@ -396,11 +423,20 @@ main {
                             z-index: 1;
                             transition: width 0.5s ease;
                         }
-                        &:hover::before {
-                            width: 100%;
+                        @media (hover: hover) and (pointer: fine) {
+                            &:hover {
+                                color: var(--secondTextColor);
+                                &::before {
+                                    width: 100%;
+                                }
+                            }
                         }
-                        &:hover {
+                        &.tapped {
                             color: var(--secondTextColor);
+                            &::before {
+                                width: 100%;
+                                transition: width 0.5s ease;
+                            }
                         }
                     }
                     span {
@@ -426,21 +462,39 @@ main {
                             @include width(20px, 25px, 35px, 35px);
                             @include height(20px, 25px, 35px, 35px);
                         }
-                        &:hover {
-                            border-radius: 25px;
+                        @media (hover: hover) and (pointer: fine) {
+                            &:hover {
+                                border-radius: 25px;
+
+                                &.github svg {
+                                color: var(--githubcolor);
+                                }
+                                &.linkedin svg {
+                                color: var(--linkedincolor);
+                                }
+                                &.portfolio svg {
+                                color: var(--portfoliocolor);
+                                }
+                                &.skybound svg {
+                                color: var(--skyboundcolor);
+                                }
+                            }
                         }
-                    }
-                    a.github:hover svg {
-                        color: var(--githubcolor);
-                    }
-                    a.linkedin:hover svg {
-                        color: var(--linkedincolor);
-                    }
-                    a.portfolio:hover svg {
-                        color: var(--portfoliocolor);
-                    }
-                    a.skybound:hover svg {
-                        color: var(--skyboundcolor);
+                        &.tapped {
+                            border-radius: 25px;
+                            &.github svg {
+                                color: var(--githubcolor);
+                            }
+                            &.linkedin svg {
+                                color: var(--linkedincolor);
+                            }
+                            &.portfolio svg {
+                                color: var(--portfoliocolor);
+                            }
+                            &.skybound svg {
+                                color: var(--skyboundcolor);
+                            }
+                        }
                     }
                 }
             }
@@ -549,12 +603,14 @@ main {
                             transition: transform 0.8s ease;
                             transform: translateX(0);
                         }
-                        &:hover {
-                            .logo {
-                                opacity: 0;
-                            }
-                            .modul {
-                                transform: translateX(calc(-100% + 80px));
+                        @media (hover: hover) and (pointer: fine) {
+                            &:hover {
+                                .logo {
+                                    opacity: 0;
+                                }
+                                .modul {
+                                    transform: translateX(calc(-100% + 80px));
+                                }
                             }
                         }
                     }
@@ -593,17 +649,17 @@ main {
         @include padding(30px 30px 30px 30px, 40px 40px 40px 40px, 80px 80px 80px 80px, 80px 80px 80px 80px);
     }
     h2{
-        font-size: clamp(32px, calc(4vw + 2vh), 60px);
+        font-size: clamp(28px, calc(4vw + 2vh), 60px);
         font-weight: bold;
     }
     .pub {
-        font-size: clamp(20px, calc(3vw + 1.5vh), 36px);
+        font-size: clamp(16px, calc(3vw + 1.5vh), 36px);
         span{
             font-weight: bold;
         }
     }
     .direct {
-        font-size: clamp(18px, calc(2.5vw + 1vh), 32px);
+        font-size: clamp(10px, calc(2.5vw + 1vh), 32px);
     }
 }
 

@@ -34,7 +34,7 @@
     box-sizing: border-box;
     background-color: transparent;
     color: var(--secondTextColor);
-    font-size: clamp(14px, calc(1.8vw + 0.5vh), 24px);
+    font-size: clamp(16px, calc(1.8vw + 0.5vh), 24px);
     &::placeholder {
         color: var(--fourthTextColor);
         font-style: italic;
@@ -78,7 +78,6 @@
     cursor: pointer;
     padding: 0;
     color: var(--fourthTextColor);
-
     svg {
         width: 60%;
         height: 60%;
@@ -87,25 +86,23 @@
         transition: transform 0.5s ease, fill 0.5s ease, color 0.3s ease;
         color: var(--fourthTextColor);
     }
-
-    &:hover:not(.sending):not(.success) svg {
-        transform: rotate(-90deg);
-        color: var(--secondTextColor);
+    @media (hover: hover) and (pointer: fine) {
+        &:hover:not(.sending):not(.success) svg {
+            transform: rotate(-90deg);
+            color: var(--secondTextColor);
+        }
     }
-
     &.sending svg,
     &.success svg {
         transform: rotate(-90deg);
         color: var(--successColor);
         transition: transform 0.5s ease, color 0.1s ease;
     }
-
     &.error-active svg {
         color: var(--errorColor);
         transform: rotate(-90deg);
         transition: color 0.1s ease, transform 0.5s ease;
     }
-
     &.sending,
     &.success,
     &.error {

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { FaGithub, FaDownload } from "react-icons/fa";
 import CardSVG from '../assets/card.svg';
 import "./Card.scss";
@@ -11,6 +11,7 @@ type CardProps = {
     githubLink?: string;
     pdfLink?: string;
 };
+
 const Card: React.FC<CardProps> = ({
     title,
     imageSrc,
@@ -20,15 +21,23 @@ const Card: React.FC<CardProps> = ({
     pdfLink,
 }) => {
     const [flipped, setFlipped] = useState(false);
+    const [tapped, setTapped] = useState(false);
+
+    const handleClick = () => {
+        setFlipped(!flipped);
+        setTapped(true);
+        setTimeout(() => setTapped(false), 500);
+    };
+
     return (
         <div
-            className={`cardContainer ${flipped ? "flipped" : ""}`}
-            onClick={() => setFlipped(!flipped)}
+            className={`cardContainer ${flipped ? "flipped" : ""} ${tapped ? "tapped" : ""}`}
+            onClick={handleClick}
             role="button"
             tabIndex={0}
-            onKeyDown={e => e.key === "Enter" && setFlipped(!flipped)}
+            onKeyDown={e => e.key === "Enter" && handleClick()}
             aria-label={`Afficher détails de ${title}`}
-            >
+        >
             <div className="card front">
                 <CardSVG className="svgBorder" />
                 <img src={imageSrc} alt={title} className="cardImage" />
@@ -42,14 +51,14 @@ const Card: React.FC<CardProps> = ({
                     <p>{description}</p>
                     <div className="footer">
                         {githubLink && (
-                        <a href={githubLink} target="_blank" rel="noopener noreferrer" aria-label="Voir le code source GitHub">
-                            <FaGithub size={24} />
-                        </a>
+                            <a href={githubLink} target="_blank" rel="noopener noreferrer" aria-label="Voir le code source GitHub">
+                                <FaGithub size={24} />
+                            </a>
                         )}
                         {pdfLink && (
-                        <a href={pdfLink} target="_blank" rel="noopener noreferrer" aria-label="Télécharger PDF">
-                            <FaDownload size={24} />
-                        </a>
+                            <a href={pdfLink} target="_blank" rel="noopener noreferrer" aria-label="Télécharger PDF">
+                                <FaDownload size={24} />
+                            </a>
                         )}
                     </div>
                 </div>
@@ -57,4 +66,5 @@ const Card: React.FC<CardProps> = ({
         </div>
     );
 };
+
 export default Card;

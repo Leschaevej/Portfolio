@@ -26,22 +26,33 @@
             filter: none;
             transition: filter 0.3s ease;
         }
-        &:not(.flipped):hover .front .svgBorder {
-            filter: drop-shadow(0 0 10px rgba(var(--mainColorRgb), 0.5));
+        @media (hover: hover) and (pointer: fine) {
+            &:not(.flipped):hover .front .svgBorder {
+                filter: drop-shadow(0 0 15px rgba(var(--mainColorRgb), 0.7));
+            }
+            &.flipped .back .svgBorder {
+                filter: drop-shadow(0 0 15px rgba(var(--mainColorRgb), 0.5));
+                transition: filter 0.5s ease;
+            }
+            &.flipped:hover .back .svgBorder {
+                filter: drop-shadow(0 0 25px rgba(var(--mainColorRgb), 0.9));
+            }
         }
         &.flipped .back .svgBorder {
-            filter: drop-shadow(0 0 10px rgba(var(--mainColorRgb), 0.5));
-        }
-        &.flipped:hover .back .svgBorder {
             filter: drop-shadow(0 0 15px rgba(var(--mainColorRgb), 0.7));
+            transition: filter 0.5s ease;
         }
-        &:not(.flipped):hover .front .svgBorder {
-            filter: drop-shadow(0 0 15px rgba(var(--mainColorRgb), 0.7));
-        }
-        &:not(.flipped) .back .svgBorder {
-            filter: none;
+        &.tapped {
+            .front .svgBorder,
+            &.flipped .back .svgBorder {
+                filter: drop-shadow(0 0 15px rgba(var(--mainColorRgb), 0.7));
+                transition: filter 0.5s ease;
+            }
         }
         &:not(.flipped):not(:hover) .front .svgBorder {
+            filter: none;
+        }
+        &:not(.flipped) .back .svgBorder {
             filter: none;
         }
         .card {
@@ -75,6 +86,7 @@
                 width: 100%;
                 height: 100%;
                 @include padding(10px, 10px, 20px, 20px);
+
                 .logoWrapper {
                     height: 20%;
                     max-width: 80%;
@@ -83,11 +95,13 @@
                     @include height(20%, 20%, 20%, 20%);
                     @include margin(0 0 8px 0, 0 0 10px 0, 0 0 30px 0, 0 0 30px 0);
                 }
+
                 .logo {
                     height: 100%;
                     width: auto;
                     object-fit: contain;
                 }
+
                 p {
                     line-height: 1.3;
                     font-size: clamp(10px, 2vw, 30px);
@@ -95,12 +109,25 @@
                     @include margin(0 0 8px 0, 0 0 10px 0, 0 0 20px 0, 0 0 20px 0);
                     @include padding(0, 0, 0 20px 0 20px, 0 20px 0 20px);
                 }
+
                 .footer {
                     display: flex;
                     justify-content: flex-end;
                     gap: 20px;
                     a {
                         color: var(--mainColor);
+                        &:hover {
+                            color: var(--buttonHoverColor);
+                            filter: drop-shadow(0 0 2px var(--mainColor));
+                        }
+                        svg {
+                            transition: color 0.3s ease, filter 0.3s ease;
+                            color: inherit;
+                            a:hover & {
+                                color: var(--buttonHoverColor);
+                                filter: drop-shadow(0 0 2px var(--mainColor));
+                            }
+                        }
                     }
                 }
             }

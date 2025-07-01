@@ -22,7 +22,7 @@
         .weather{
             display: flex;
             align-items: center;
-            margin-top: 10px;
+            @include margin(2px 0 0 0, 10px 0 0 0, 10px 0 0 0, 10px 0 0 0);
             .temperature {
                 font-size: clamp(15px, calc(1.2vw + 1.6vh), 40px);
                 font-weight: 700;
