@@ -84,7 +84,7 @@ export default function Contact() {
             status === 'sending'
               ? 'Vers l’infini...'
               : status === 'success'
-              ? 'Communication établi !!'
+              ? 'Communication établie !!'
               : status === 'error'
               ? 'Echec de la communication !!'
               : email
