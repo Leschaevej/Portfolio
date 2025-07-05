@@ -28,7 +28,7 @@
         width: 100%;
         height: 100%;
         cursor: pointer;
-        @include padding(10px, 20px, 40px, 40px);
+        @include padding(20px, 20px, 40px, 40px);
         &.active {
             grid-auto-rows: 1fr;
         }
@@ -37,13 +37,11 @@
             pointer-events: none;
         }
         @media (hover: hover) and (pointer: fine) {
-            .card {
-                &.boxShadowIn {
+            &.boxShadowIn {
                 animation: boxShadowIn 0.5s forwards;
-                }
-                &.boxShadowOut {
+            }
+            &.boxShadowOut {
                 animation: boxShadowOut 0.5s forwards;
-                }
             }
         }
         &.glowIn {
@@ -66,7 +64,7 @@
         h3 {
             font-size: clamp(16px, 2.5vw, 40px);
             color: var(--mainTextColor);
-            @include margin(0 0 2px 0, 0 0 10px 0, 0 0 20px 0, 0 0 20px 0);
+            @include margin(0 0 10px 0, 0 0 10px 0, 0 0 20px 0, 0 0 20px 0);
         }
         .wrapper {
             flex-grow: 1;
@@ -127,9 +125,9 @@
         img {
             width: 100px;
             opacity: 0;
-            @include width(15.625vw, 100px, 100px, 100px);
             animation: pngFlyIn 0.6s ease-out forwards;
             animation-delay: calc(var(--i) * 0.1s);
+            @include width(15.625vw, 100px, 100px, 100px);
         }
         &.closing img {
             opacity: 1;
