@@ -6,7 +6,7 @@ import Intro from './components/Intro';
 import { instrumentSans } from './fonts';
 
 export const metadata: Metadata = {
-  title: "Portfolio",
+  title: "Jimmyhub",
   description: "Bienvenue sur mon portfolio professionnel présentant mes projets et compétences.",
   icons: {
     icon: './favicon.ico',
