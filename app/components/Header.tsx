@@ -21,8 +21,6 @@ export default function Header() {
   const [maxSize, setMaxSize] = useState({ width: 600, height: 500 });
   const [minPos, setMinPos] = useState({ top: 50, right: 50 });
   const [maxPos, setMaxPos] = useState({ top: 40, right: 40 });
-
-  // --- Pour l'effet tactile sur logo ---
   const [logoTapped, setLogoTapped] = useState(false);
 
   useEffect(() => {
