@@ -177,7 +177,7 @@ export default function Home() {
                         </div>
                         <div className="link">
                             <div className="shortcuts">
-                                <button type="button" onClick={() => window.open("/CV.pdf", "_blank")}><span>Télécharger mon CV</span></button>
+                                <button type="button" onClick={() => window.open("/cv.pdf", "_blank")}><span>Télécharger mon CV</span></button>
                             </div>
                             <div className="socials">
                                 <a
