@@ -286,7 +286,7 @@ main {
         background-clip: text;
         color: transparent;
         font-weight: bold;
-        font-size: 41px;
+        font-size: 40px;
         text-align: center;
         background-size: 100% 200%;
         background-position: top;
@@ -346,7 +346,7 @@ main {
         background-clip: text;
         color: transparent;
         font-weight: bold;
-        font-size: 41px;
+        font-size: 40px;
         text-align: center;
         background-size: 100% 200%;
         background-position: top;
@@ -370,8 +370,9 @@ main {
             flex-shrink: 1;
         }
         .left {
+            min-height: 190px;
             justify-content: space-between;
-            @include gap(10px, 20px, 30px, 30px);
+            @include gap(5px, 20px, 30px, 30px);
             @include flex(1, 1, 1, 1);
             .introduction {
                 display: flex;
@@ -405,7 +406,7 @@ main {
                         width: 100%;
                         cursor: pointer;
                         font-size: clamp(18px, 2.5vw, 36px);
-                        @include height(40px, 50px, 70px, 70px);
+                        @include height(30px, 50px, 70px, 70px);
                         span {
                             display: inline-block;
                             transform: skew(45deg);

@@ -1,24 +1,26 @@
+@use '@/app/Mixins.scss' as *;
+
 footer {
     position: fixed;
     bottom: -330px;
     left: 0;
     width: 100%;
-    padding: 50px 50px;
     background-color: var(--footerBackgroundColor);
     color: var(--mainTextColor);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     transition: bottom 0.3s ease;
+    @include padding (30px 30px, 50px 50px, 50px 50px, 50px 50px);
     &.visible {
         bottom: 0;
     }
     .name {
-        font-size: 96px;
+        @include fontSize(24px, 32px, 96px, 96px)
     }
     .copyright {
         color: var(--fourthTextColor);
-        font-size: 32px;
         margin-top: auto;
+        @include fontSize(16px, 20px, 32px, 32px)
     }
 }
