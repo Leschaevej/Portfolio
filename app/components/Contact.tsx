@@ -8,7 +8,6 @@ export default function Contact() {
   const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const [shakeError, setShakeError] = useState(false);
 
   const validate = () => {
     if (!email.trim()) {

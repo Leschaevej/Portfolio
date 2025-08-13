@@ -1,5 +1,6 @@
-import { Analytics } from "@vercel/analytics/next"
 import type { Metadata } from "next";
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.scss";
 import Header from './components/Header';
 import Footer from './components/Footer';
@@ -34,6 +35,7 @@ export default function RootLayout({
                         </main>
                     <Footer />
                 <Analytics />
+                <SpeedInsights />
             </body>
         </html>
     );
