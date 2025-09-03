@@ -1,15 +1,16 @@
-# dependencies
-/node_modules
+node_modules/
+.next/
+.env
 
-# next.js
-/.next/
+out/
+dist/
+build/
 
-# env files
-.env*
-
-# typescript
-*.tsbuildinfo
-next-env.d.ts
+npm-debug.log*
+logs/
+*.log
 
 .vscode/
-*.log
+Thumbs.db
+*.tsbuildinfo
+.sass-cache/
