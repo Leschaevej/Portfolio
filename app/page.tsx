@@ -122,7 +122,7 @@ export default function Home() {
                             <LinkedIn />
                         </a>
                         <a
-                            href="https://jimmyleschaeve.fr"
+                            href="https://jimmyhub.fr"
                             className={`portfolio ${portfolioTapped ? "tapped" : ""}`}
                             target="_blank"
                             rel="noopener noreferrer"
