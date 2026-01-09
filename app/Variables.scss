@@ -39,4 +39,11 @@
     --designColor: #e27231;
     --toolsColor: #f1502f;
     --aiColor: #a259ff;
+
+    --fontSizeLarge: clamp(26px, 4vw, 52px);
+    --fontSizeMedium: clamp(22px, 3.2vw, 40px);
+    --fontSizeNormal: clamp(16px, 2.3vw, 26px);
+    --fontSizeSmall: clamp(14px, 2vw, 22px);
+    --fontSizeExtraSmall: clamp(12px, 1.5vw, 18px);
+    --fontSizeButton: clamp(17px, 2.5vw, 28px);
 }

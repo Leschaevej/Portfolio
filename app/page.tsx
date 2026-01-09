@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from "react";
-import Card from "./components/Card";
+import Carousel from "./components/Carousel";
 import projets from "../app/projects.json";
 import Contact from './components/Contact';
 import Clock from './components/Clock';
@@ -28,45 +28,36 @@ export default function Home() {
                 el.scrollIntoView({ behavior: "smooth" });
             }
     };
-
     const [aboutTapped, setAboutTapped] = useState(false);
     const [contactTapped, setContactTapped] = useState(false);
-
     const handleAboutTouchStart = () => {
         setAboutTapped(true);
         setTimeout(() => setAboutTapped(false), 500);
     };
-
     const handleContactTouchStart = () => {
         setContactTapped(true);
         setTimeout(() => setContactTapped(false), 500);
     };
-
     const [githubTapped, setGithubTapped] = useState(false);
     const [linkedinTapped, setLinkedinTapped] = useState(false);
     const [portfolioTapped, setPortfolioTapped] = useState(false);
     const [skyboundTapped, setSkyboundTapped] = useState(false);
-
     const handleGithubTouchStart = () => {
         setGithubTapped(true);
         setTimeout(() => setGithubTapped(false), 500);
     };
-
     const handleLinkedinTouchStart = () => {
         setLinkedinTapped(true);
         setTimeout(() => setLinkedinTapped(false), 500);
     };
-
     const handlePortfolioTouchStart = () => {
         setPortfolioTapped(true);
         setTimeout(() => setPortfolioTapped(false), 500);
     };
-
     const handleSkyboundTouchStart = () => {
         setSkyboundTapped(true);
         setTimeout(() => setSkyboundTapped(false), 500);
     };
-
     return (
         <main>
             <div id="home" className="section">
@@ -149,19 +140,7 @@ export default function Home() {
                     <div className="halo"></div>
                 </div>
                 <h2>Mes projets</h2>
-                <div className="cards">
-                    {projets.map((projet, index) => (
-                        <Card
-                        key={index}
-                        title={projet.title}
-                        imageSrc={projet.imageSrc}
-                        modalImageSrc={projet.modalImageSrc}
-                        githubLink={projet.githubLink}
-                        pdfLink={projet.pdfLink}
-                        description={projet.description}
-                        />
-                    ))}
-                </div>
+                <Carousel projects={projets} />
             </div>
             <div id="about" className="section">
                 <div className="haloWrapper">

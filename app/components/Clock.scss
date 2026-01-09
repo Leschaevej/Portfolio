@@ -7,9 +7,9 @@
     flex-direction: column;
     line-height: 1;
     .hours {
-        font-size: 64px;
+        font-size: var(--fontSizeLarge);
     }
     .minutes {
-        font-size: 64px;
+        font-size: var(--fontSizeLarge);
     }
 }

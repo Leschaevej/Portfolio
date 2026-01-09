@@ -11,13 +11,13 @@ interface WeatherData {
     weatherCode: number;
 }
 function getWeatherIcon(code: number) {
-        if (code === 0) return <WiDaySunny className="weatherIcon" color="#f39c12" />;
-        if ([1, 2, 3].includes(code)) return <WiCloudy className="weatherIcon" color="#95a5a6" />;
-        if ([45, 48].includes(code)) return <WiFog className="weatherIcon" color="#7f8c8d" />;
-        if ([51, 53, 55, 61, 63, 65].includes(code)) return <WiRain className="weatherIcon" color="#3498db" />;
-        if ([71, 73, 75].includes(code)) return <WiSnow className="weatherIcon" color="#ecf0f1" />;
-        if ([95, 96, 99].includes(code)) return <WiThunderstorm className="weatherIcon" color="#9b59b6" />;
-        return <WiDaySunny className="weatherIcon" color="#f39c12" />;
+        if (code === 0) return <WiDaySunny className="icone" color="#f39c12" />;
+        if ([1, 2, 3].includes(code)) return <WiCloudy className="icone" color="#95a5a6" />;
+        if ([45, 48].includes(code)) return <WiFog className="icone" color="#7f8c8d" />;
+        if ([51, 53, 55, 61, 63, 65].includes(code)) return <WiRain className="icone" color="#3498db" />;
+        if ([71, 73, 75].includes(code)) return <WiSnow className="icone" color="#ecf0f1" />;
+        if ([95, 96, 99].includes(code)) return <WiThunderstorm className="icone" color="#9b59b6" />;
+        return <WiDaySunny className="icone" color="#f39c12" />;
     }
     export default function Meteo() {
         const [weather, setWeather] = useState<WeatherData | null>(null);
@@ -46,11 +46,11 @@ function getWeatherIcon(code: number) {
     }, []);
     if (!weather) return <div>Chargement météo...</div>;
     return (
-        <div className="weatherContainer">
+        <div className="conteneur">
             <p className="location"><FiMapPin className="logo"/>Aix en Provence</p>
-            <div className="weatherCondition">
+            <div className="conditions">
                 <div className="weather">
-                    <p className="weatherCode">{getWeatherIcon(weather.weatherCode)}</p>
+                    <p className="code">{getWeatherIcon(weather.weatherCode)}</p>
                     <p className="temperature">{weather.temperature}°C</p>
                 </div>
                 <div className="condition">

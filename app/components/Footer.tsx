@@ -40,7 +40,7 @@ export default function Footer() {
     return (
         <footer className={`footer ${visible ? 'visible' : ''}`}>
         <p className='name'>JIMMY<br />LESCHAEVE</p>
-        <p className='copyright'>©copyright 2025</p>
+        <p className='copyright'>©copyright 2026</p>
         </footer>
     );
 }

@@ -62,7 +62,7 @@
             pointer-events: none;
         }
         h3 {
-            font-size: clamp(16px, 2.5vw, 40px);
+            font-size: var(--fontSizeMedium);
             color: var(--mainTextColor);
             @include margin(0 0 10px 0, 0 0 10px 0, 0 0 20px 0, 0 0 20px 0);
         }

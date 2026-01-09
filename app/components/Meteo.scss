@@ -1,6 +1,6 @@
 @use '@/app/Mixins.scss' as *;
 
-.weatherContainer{
+.conteneur{
     display: flex;
     flex-direction: column;
     @include padding(10px, 10px, 2.083vw, 30px);
@@ -8,13 +8,13 @@
         display: flex;
         align-items: center;
         color: var(--fourthTextColor);
-        font-size: clamp(12px, calc(1vw + 1vh), 16px);
+        font-size: var(--fontSizeSmall);
         gap: 5px;
         .logo{
-            font-size: 16px;
+            font-size: var(--fontSizeSmall);
         }
     }
-    .weatherCondition {
+    .conditions {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -24,12 +24,12 @@
             align-items: center;
             @include margin(2px 0 0 0, 10px 0 0 0, 10px 0 0 0, 10px 0 0 0);
             .temperature {
-                font-size: clamp(15px, calc(1.2vw + 1.6vh), 40px);
+                font-size: var(--fontSizeMedium);
                 font-weight: 700;
             }
-            .weatherCode{
+            .code{
                 @include height(30px, 30px, 3.472vw, 50px);
-                .weatherIcon{
+                .icone{
                     @include height(30px, 30px, 3.472vw, 50px);
                     @include width(30px, 30px, 3.472vw, 50px);
                 }
@@ -45,20 +45,20 @@
                 display: flex;
                 align-items: center;
                 color: var(--windColor);
-                font-size: clamp(10px, 0.5vw + 1vh, 20px);
+                font-size: var(--fontSizeExtraSmall);
                 gap: 3px;
                 .logo{
-                    font-size: clamp(10px, 0.5vw + 1vh, 20px);
+                    font-size: var(--fontSizeExtraSmall);
                 }
             }
             .humidity {
                 display: flex;
                 align-items: center;
                 color: var(--humidityColor);
-                font-size: clamp(10px, 0.5vw + 1vh, 20px);
+                font-size: var(--fontSizeExtraSmall);
                 gap: 3px;
                 .logo{
-                    font-size: clamp(10px, 0.5vw + 1vh, 20px);
+                    font-size: var(--fontSizeExtraSmall);
                 }
             }
         }

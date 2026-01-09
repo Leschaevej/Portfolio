@@ -2,168 +2,146 @@
 @use '@/app/Animations.scss' as *;
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-  @include padding(30px, 50px, 50px, 50px);
-
-  .logo {
-    fill: currentColor;
-    color: var(--mainColor);
-    height: 50px;
-    width: 50px;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
-      filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-
-    @media (hover: hover) and (pointer: fine) {
-      &:hover {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 5px var(--mainColor));
-      }
-    }
-
-    &.tapped {
-        transform: scale(1.1);
-        filter: drop-shadow(0 0 5px var(--mainColor));
-        transition: transform 0.5s ease, filter 0.5s ease;
-    }
-  }
-
-  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     position: fixed;
-    top: 50px;
-    right: 50px;
-    width: 150px;
-    height: 50px;
-    border-radius: 30px;
-    overflow: hidden;
-    z-index: 30;
-    @include top(30px, 50px, 50px, 50px);
-    @include right(30px, 50px, 50px, 50px);
-  }
-
-  .menu,
-  .close {
-    position: absolute;
     top: 0;
     left: 0;
-    height: 50px;
-    width: 150px;
-    font-size: 24px;
-    font-weight: bold;
-    background-color: var(--mainColor);
-    border: 2px solid var(--mainBackgroundColor);
-    border-radius: 30px;
-    cursor: pointer;
-    opacity: 1;
-    transition: opacity 0.3s ease;
-
-    span {
-      display: inline-block;
-      backface-visibility: hidden;
-      transition: none;
-    }
-
-    &.hovered span {
-      animation: frontFlip 0.5s forwards;
-      opacity: 1;
-    }
-
-    &.leaving span {
-      animation: leaveFlip 0.7s forwards;
-      opacity: 1;
-    }
-
-    &.push-in-from-top {
-      animation: pushInFromTop 0.5s forwards;
-    }
-
-    &.pushing-up {
-      animation: pushUp 0.5s forwards;
-    }
-
-    &.pushing-down {
-      animation: pushDown 0.5s forwards;
-    }
-
-    &.push-in-from-bottom {
-      animation: pushInFromBottom 0.5s forwards;
-    }
-  }
-
-  .menu {
-    color: var(--secondTextColor);
-  }
-
-  .close {
-    color: var(--mainColor);
-    background-color: var(--mainBackgroundColor);
-  }
-
-  .overlay {
-    position: fixed;
-    top: 0;
     right: 0;
-    bottom: 0;
-    left: 0;
-
-    .modal {
-      position: absolute;
-      background-color: var(--mainColor);
-      border-radius: 30px;
-      transform-origin: top right;
-      overflow: hidden;
-      border: 2px solid var(--mainBackgroundColor);
-      box-shadow: inset 0 0 10px rgba(var(--mainBackgroundColorRgb), 0.8);
-      @include top(20px, 40px, 40px, 40px);
-      @include right(20px, 40px, 40px, 40px);
-      @include width(150px, 150px, 150px, 150px);
-      @include height(50px, 50px, 50px, 50px);
-
-      &.modal-open {
-        animation: modalOpen 0.5s ease forwards;
-        z-index: 5;
-        @include width(280px, 400px, 600px, 600px);
-        @include height(300px, 300px, 500px, 500px);
-      }
-
-      &.modal-close {
-        animation: modalClose 0.5s ease forwards;
-        z-index: 5;
-      }
-
-      nav {
-        display: flex;
-        flex-direction: column;
-        color: var(--secondTextColor);
-        font-weight: bold;
-        gap: 30px;
-        @include padding(70px 30px, 70px 50px, 70px 50px, 70px 50px);
-        @include fontSize(32px, 40px, 64px, 64px);
-
-        .link-wrapper {
-          overflow: hidden;
-          @include height(42px, 50px, 88px, 88px);
-
-          a {
-            display: block;
-            @include height(32px, 40px, 78px, 78px);
-          }
+    z-index: 10;
+    @include padding(30px, 50px, 50px, 50px);
+    .logo {
+        fill: currentColor;
+        color: var(--mainColor);
+        height: 50px;
+        width: 50px;
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        cursor: pointer;
+        @media (hover: hover) and (pointer: fine) {
+        &:hover {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 5px var(--mainColor));
         }
-
-        &.hide-links .link-wrapper a {
-          animation: slideDownHide 0.5s ease forwards;
         }
-        &.show-links .link-wrapper a {
-          animation: slideDownShow 0.5s ease forwards;
+        &.tapped {
+            transform: scale(1.1);
+            filter: drop-shadow(0 0 5px var(--mainColor));
+            transition: transform 0.5s ease, filter 0.5s ease;
         }
-      }
     }
-  }
+    .button-container {
+        position: fixed;
+        top: 50px;
+        right: 50px;
+        width: 150px;
+        height: 50px;
+        border-radius: 30px;
+        overflow: hidden;
+        z-index: 30;
+        @include top(30px, 50px, 50px, 50px);
+        @include right(30px, 50px, 50px, 50px);
+    }
+    .menu,
+    .close {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 50px;
+        width: 150px;
+        font-size: var(--fontSizeButton);
+        font-weight: bold;
+        background-color: var(--mainColor);
+        border: 2px solid var(--mainBackgroundColor);
+        border-radius: 30px;
+        cursor: pointer;
+        opacity: 1;
+        transition: opacity 0.3s ease;
+        span {
+        display: inline-block;
+        backface-visibility: hidden;
+        transition: none;
+        }
+        &.hovered span {
+        animation: frontFlip 0.5s forwards;
+        opacity: 1;
+        }
+        &.leaving span {
+        animation: leaveFlip 0.7s forwards;
+        opacity: 1;
+        }
+        &.push-in-from-top {
+        animation: pushInFromTop 0.5s forwards;
+        }
+        &.pushing-up {
+        animation: pushUp 0.5s forwards;
+        }
+        &.pushing-down {
+        animation: pushDown 0.5s forwards;
+        }
+        &.push-in-from-bottom {
+        animation: pushInFromBottom 0.5s forwards;
+        }
+    }
+    .menu {
+        color: var(--secondTextColor);
+    }
+    .close {
+        color: var(--mainColor);
+        background-color: var(--mainBackgroundColor);
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        .modal {
+            position: absolute;
+            background-color: var(--mainColor);
+            border-radius: 30px;
+            transform-origin: top right;
+            overflow: hidden;
+            border: 2px solid var(--mainBackgroundColor);
+            box-shadow: inset 0 0 10px rgba(var(--mainBackgroundColorRgb), 0.8);
+            @include top(20px, 40px, 40px, 40px);
+            @include right(20px, 40px, 40px, 40px);
+            @include width(150px, 150px, 150px, 150px);
+            @include height(50px, 50px, 50px, 50px);
+            &.modal-open {
+                animation: modalOpen 0.5s ease forwards;
+                z-index: 5;
+                @include width(280px, 400px, 600px, 600px);
+                @include height(300px, 300px, 500px, 500px);
+            }
+            &.modal-close {
+                animation: modalClose 0.5s ease forwards;
+                z-index: 5;
+            }
+            nav {
+                display: flex;
+                flex-direction: column;
+                color: var(--secondTextColor);
+                font-weight: bold;
+                gap: 30px;
+                @include padding(70px 30px, 70px 50px, 70px 50px, 70px 50px);
+                @include fontSize(32px, 40px, 64px, 64px);
+                .link-wrapper {
+                    overflow: hidden;
+                    @include height(42px, 50px, 88px, 88px);
+                    a {
+                        display: block;
+                        @include height(32px, 40px, 78px, 78px);
+                    }
+                }
+                &.hide-links .link-wrapper a {
+                    animation: slideDownHide 0.5s ease forwards;
+                }
+                &.show-links .link-wrapper a {
+                    animation: slideDownShow 0.5s ease forwards;
+                }
+            }
+        }
+    }
 }

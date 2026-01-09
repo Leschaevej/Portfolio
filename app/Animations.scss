@@ -70,14 +70,6 @@
         opacity: 1;
     }
 }
-@keyframes slideUpReveal {
-    0% {
-        transform: translateY(120px);
-    }
-    100% {
-        transform: translateY(0);
-    }
-}
 @keyframes slideDownHide {
     0% {
         transform: translateY(0);
@@ -213,5 +205,11 @@
     100% {
         transform: scale(1);
         filter: drop-shadow(0 0 0px currentColor);
+    }
+}
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
     }
 }
