@@ -1,18 +1,18 @@
 [
-  {
-    "title": "Skybound Studio",
-    "imageSrc": "/skybound.png",
-    "description": "Agence digitale spécialisée en développement web et design",
-    "longDescription": "Site vitrine pour Skybound Studio, une agence digitale moderne offrant des services de développement web et design. Interface élégante avec animations fluides et présentation des services proposés.",
-    "technologies": ["Next.js", "TypeScript", "SCSS", "React"],
-    "liveLink": "https://skyboundstudio.fr"
-  },
-  {
-    "title": "Mathilde Dubois",
-    "imageSrc": "/mathilde.png",
-    "description": "Portfolio professionnel pour photographe",
-    "longDescription": "Site portfolio créé pour Mathilde Dubois, mettant en valeur son travail photographique avec une galerie optimisée et un design épuré. Focus sur l'expérience utilisateur et la mise en valeur des créations visuelles.",
-    "technologies": ["React", "Next.js", "SCSS", "Responsive Design"],
-    "liveLink": "https://mathildedubois.fr"
-  }
+    {
+        "title": "Skybound Studio",
+        "imageSrc": "/skybound.png",
+        "description": "Agence digitale spécialisée en développement web et design",
+        "longDescription": "Site vitrine pour Skybound Studio, une agence digitale moderne offrant des services de développement web et design. Interface élégante avec animations fluides et présentation des services proposés.",
+        "technologies": ["Next.js", "TypeScript", "SCSS", "React"],
+        "liveLink": "https://skyboundstudio.fr"
+    },
+    {
+        "title": "Mathilde Dubois",
+        "imageSrc": "/mathilde.png",
+        "description": "Portfolio professionnel pour photographe",
+        "longDescription": "Site portfolio créé pour Mathilde Dubois, mettant en valeur son travail photographique avec une galerie optimisée et un design épuré. Focus sur l'expérience utilisateur et la mise en valeur des créations visuelles.",
+        "technologies": ["Next.js", "TypeScript", "SCSS", "React"],
+        "liveLink": "https://mathildedubois.fr"
+    }
 ]

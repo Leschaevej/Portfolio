@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from "react";
+import './page.scss';
 import Carousel from "./components/carousel/Carousel";
 import projets from "../app/projects.json";
 import Contact from './components/contact/Contact';
