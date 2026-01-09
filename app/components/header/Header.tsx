@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Logo from "../assets/logo.svg";
+import Logo from "../../assets/logo.svg";
 import "./Header.scss";
 
 export default function Header() {

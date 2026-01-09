@@ -1,13 +1,13 @@
 'use client';
 
 import React, { useState } from "react";
-import Carousel from "./components/Carousel";
+import Carousel from "./components/carousel/Carousel";
 import projets from "../app/projects.json";
-import Contact from './components/Contact';
-import Clock from './components/Clock';
-import Meteo from './components/Meteo';
-import Contribution from './components/Contribution';
-import Technology from './components/Technology';
+import Contact from './components/contact/Contact';
+import Clock from './components/clock/Clock';
+import Meteo from './components/meteo/Meteo';
+import Contribution from './components/contribution/Contribution';
+import Technology from './components/technology/Technology';
 import GitHub from '../app/assets/github.svg';
 import LinkedIn from '../app/assets/linkedin.svg';
 import Portfolio from '../app/assets/logo.svg';

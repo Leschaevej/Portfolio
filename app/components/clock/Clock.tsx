@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState } from 'react';
-import { spaceMono } from '../fonts';
-import '../components/Clock.scss';
+import { spaceMono } from '../../fonts';
+import './Clock.scss';
 
 export default function Clock({ className = '' }: { className?: string }) {
     const [time, setTime] = useState({ hours: '--', minutes: '--' });

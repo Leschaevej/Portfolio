@@ -1,11 +1,11 @@
 import React, { useState, useRef, useEffect } from "react";
 import "./Technology.scss";
-import Frontend from "../assets/frontend.svg";
-import Backend from "../assets/backend.svg";
-import Deployment from "../assets/deployment.svg";
-import Design from "../assets/design.svg";
-import Tools from "../assets/tools.svg";
-import Ai from "../assets/ai.svg";
+import Frontend from "../../assets/frontend.svg";
+import Backend from "../../assets/backend.svg";
+import Deployment from "../../assets/deployment.svg";
+import Design from "../../assets/design.svg";
+import Tools from "../../assets/tools.svg";
+import Ai from "../../assets/ai.svg";
 
 type TechId = "Frontend" | "Backend" | "Deployment" | "Design" | "Tools" | "Ai";
 const techItems: {

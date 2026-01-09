@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useState } from 'react';
-import '../components/Meteo.scss';
+import './Meteo.scss';
 import { WiDaySunny, WiCloudy, WiRain, WiSnow, WiThunderstorm, WiFog, WiStrongWind, WiHumidity } from 'react-icons/wi';
 import { FiMapPin } from 'react-icons/fi';
 
