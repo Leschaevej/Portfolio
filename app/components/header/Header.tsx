@@ -131,16 +131,16 @@ export default function Header() {
     };
     return (
         <header className="header">
-        <a href="#home">
-            <Logo
-            className={`logo ${logoTapped ? "tapped" : ""}`}
-            onTouchStart={handleLogoTouchStart}
-            role="img"
-            aria-label="Logo"
-            tabIndex={0}
-            />
-        </a>
-        <div className="button-container">
+            <a href="#home">
+                <Logo
+                className={`logo ${logoTapped ? "tapped" : ""}`}
+                onTouchStart={handleLogoTouchStart}
+                role="img"
+                aria-label="Logo"
+                tabIndex={0}
+                />
+            </a>
+            <div className="button-container">
             {menuState !== "hidden" && (
             <button
                 className={`
@@ -175,7 +175,7 @@ export default function Header() {
                 <span>CLOSE</span>
             </button>
             )}
-        </div>
+            </div>
         {(isModalOpen || isAnimating) && (
             <div className="overlay" onClick={toggleModal}>
             <div

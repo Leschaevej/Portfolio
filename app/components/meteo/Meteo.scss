@@ -1,9 +1,9 @@
-@use '@/app/Mixins.scss' as *;
+@use '@/app/Functions.scss' as *;
 
 .conteneur{
     display: flex;
     flex-direction: column;
-    @include padding(10px, 10px, 2.083vw, 30px);
+    padding: fluid(10, 30);
     .location {
         display: flex;
         align-items: center;
@@ -22,16 +22,16 @@
         .weather{
             display: flex;
             align-items: center;
-            @include margin(2px 0 0 0, 10px 0 0 0, 10px 0 0 0, 10px 0 0 0);
+            margin: fluid(2, 10) 0 0 0;
             .temperature {
                 font-size: var(--fontSizeMedium);
                 font-weight: 700;
             }
             .code{
-                @include height(30px, 30px, 3.472vw, 50px);
+                height: fluid(30, 50);
                 .icone{
-                    @include height(30px, 30px, 3.472vw, 50px);
-                    @include width(30px, 30px, 3.472vw, 50px);
+                    height: fluid(30, 50);
+                    width: fluid(30, 50);
                 }
             }
         }

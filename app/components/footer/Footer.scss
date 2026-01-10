@@ -1,4 +1,4 @@
-@use '@/app/Mixins.scss' as *;
+@use '@/app/Functions.scss' as *;
 
 footer {
     position: fixed;
@@ -11,16 +11,16 @@ footer {
     justify-content: space-between;
     align-items: flex-start;
     transition: bottom 0.3s ease;
-    @include padding (30px 30px, 50px 50px, 50px 50px, 50px 50px);
+    padding: fluid(30, 50);
     &.visible {
         bottom: 0;
     }
     .name {
-        @include fontSize(24px, 32px, 96px, 96px)
+        font-size: fluid(24, 96);
     }
     .copyright {
         color: var(--fourthTextColor);
         margin-top: auto;
-        @include fontSize(16px, 20px, 32px, 32px)
+        font-size: fluid(16, 32);
     }
 }

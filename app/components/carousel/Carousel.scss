@@ -1,4 +1,4 @@
-@use '@/app/Mixins.scss' as *;
+@use '@/app/Functions.scss' as *;
 
 .carousel {
     position: relative;
@@ -7,14 +7,14 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    @include padding(30px 20px, 60px 40px, 80px 80px, 80px 100px);
-    @include gap(10px, 15px, 40px, 50px);
+    padding: fluid(30, 80) fluid(20, 100);
+    gap: fluid(10, 50);
     .wrapper {
         position: relative;
         width: 100%;
         display: flex;
         flex-direction: column;
-        @include gap(30px, 40px, 50px, 50px);
+        gap: fluid(30, 50);
         cursor: grab;
         user-select: none;
         &:active {
@@ -24,10 +24,12 @@
     .content {
         width: 100%;
         display: flex;
-        flex-direction: column;
         transition: opacity 0.5s ease, transform 0.5s ease;
-        @include flexDirection(column, column, row, row);
-        @include gap(10px, 15px, 40px, 50px);
+        flex-direction: column;
+        gap: fluid(10, 50);
+        @media (min-width: 1025px) {
+            flex-direction: row;
+        }
         &.exit {
             position: absolute;
             top: 0;
@@ -50,7 +52,10 @@
             overflow: hidden;
             box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.4);
             transition: all 0.5s ease;
-            @include height(200px, 250px, auto, auto);
+            height: fluid(200, 250);
+            @media (min-width: 1025px) {
+                height: auto;
+            }
             &:hover {
                 box-shadow: inset 0 0 15px rgba(var(--mainColorRgb), 0.6);
             }
@@ -65,7 +70,7 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            @include gap(10px, 20px, 30px, 30px);
+            gap: fluid(10, 30);
 
             .header {
                 display: flex;
@@ -211,8 +216,6 @@
         background-color: var(--secondBackgroundColor);
         border: none;
         color: var(--mainColor);
-        width: 40px;
-        height: 40px;
         border-radius: 15px;
         display: flex;
         align-items: center;
@@ -221,8 +224,8 @@
         transition: all 0.5s ease;
         z-index: 10;
         box-shadow: inset 0 0 5px rgba(var(--mainColorRgb), 0.3);
-        @include width(35px, 38px, 40px, 40px);
-        @include height(35px, 38px, 40px, 40px);
+        width: fluid(35, 40);
+        height: fluid(35, 40);
         @media (hover: hover) and (pointer: fine) {
             &:hover {
                 box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.5);
@@ -233,8 +236,7 @@
             transform: scale(0.95);
         }
         svg {
-            font-size: 18px;
-            @include fontSize(14px, 16px, 18px, 18px);
+            font-size: fluid(14, 18);
         }
     }
 }
