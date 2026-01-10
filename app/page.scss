@@ -12,9 +12,9 @@
         flex-direction: column;
         gap: fluid(30, 50);
         h1{
-            font-size: var(--fontSizeLargeMobile);
+            font-size: var(--fontSizeH1Mobile);
             @media (min-width: 1025px) {
-                font-size: var(--fontSizeLarge);
+                font-size: var(--fontSizeH1);
             }
             span{
                 color: var(--mainColor);
@@ -22,9 +22,9 @@
         }
         p {
             color: var(--thirdTextColor);
-            font-size: var(--fontSizeNormalMobile);
+            font-size: var(--fontSizePMobile);
             @media (min-width: 1025px) {
-                font-size: var(--fontSizeNormal);
+                font-size: var(--fontSizeP);
             }
         }
     }
@@ -50,13 +50,13 @@
                 overflow: hidden;
                 transition: all 0.5s ease;
                 cursor: pointer;
-                font-size: var(--fontSizeNormalMobile);
+                font-size: var(--fontSizePMobile);
                 width: 100%;
                 height: fit-content;
                 padding: 15px;
                 @media (min-width: 1025px) {
                     width: 30%;
-                    font-size: var(--fontSizeNormal);
+                    font-size: var(--fontSizeP);
                 }
                 span {
                     position: relative;
@@ -165,7 +165,9 @@
     display: flex;
     flex-direction: column;
     position: relative;
+    justify-content: center;
     z-index: 1;
+    padding: fluid(110, 150) fluid(30, 150) fluid(30, 150) fluid(30, 150);
     &::after {
         content: "";
         position: absolute;
@@ -210,18 +212,11 @@
         border-radius: 50%;
         }
     }
-    h2 {
-        background: linear-gradient(to bottom, #6d7173, #fcfcfc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
-        font-weight: bold;
-        font-size: var(--fontSizeLarge);
-        text-align: center;
-        background-size: 100% 200%;
-        background-position: top;
-        padding: fluid(50, 30) 0 0 0;
+    .carousel{
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: fluid(10, 30);
     }
 }
 #about {
@@ -270,19 +265,6 @@
             border-radius: 50%;
         }
     }
-    h2 {
-        background: linear-gradient(to bottom, #6d7173, #fcfcfc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
-        font-weight: bold;
-        font-size: var(--fontSizeLarge);
-        text-align: center;
-        background-size: 100% 200%;
-        background-position: top;
-        padding: fluid(90, 50) 0 0 0;
-    }
     .content {
         display: flex;
         flex-grow: 1;
@@ -314,7 +296,7 @@
                 justify-content: space-around;
                 height: 100%;
                 p {
-                font-size: var(--fontSizeNormal);
+                font-size: var(--fontSizeH3);
                 color: var(--thirdTextColor);
                 }
             }
@@ -350,7 +332,7 @@
                         transition: all 0.5s ease;
                         width: 100%;
                         cursor: pointer;
-                        font-size: var(--fontSizeNormal);
+                        font-size: var(--fontSizeH3);
                         height: fluid(30, 70);
                         span {
                             position: relative;
@@ -598,17 +580,17 @@
         color: var(--secondTextColor);
         padding: fluid(30, 80);
     }
-    h2{
-        font-size: var(--fontSizeLarge);
+    h3{
+        font-size: var(--fontSizeH2);
         font-weight: bold;
     }
     .pub {
-        font-size: var(--fontSizeMedium);
+        font-size: var(--fontSizeH3);
         span{
             font-weight: bold;
         }
     }
     .direct {
-        font-size: var(--fontSizeNormal);
+        font-size: var(--fontSizeP);
     }
 }

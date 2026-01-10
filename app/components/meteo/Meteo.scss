@@ -8,10 +8,10 @@
         display: flex;
         align-items: center;
         color: var(--fourthTextColor);
-        font-size: var(--fontSizeSmall);
+        font-size: var(--fontSizeP);
         gap: 5px;
         .logo{
-            font-size: var(--fontSizeSmall);
+            font-size: var(--fontSizeP);
         }
     }
     .conditions {
@@ -24,7 +24,7 @@
             align-items: center;
             margin: fluid(2, 10) 0 0 0;
             .temperature {
-                font-size: var(--fontSizeMedium);
+                font-size: var(--fontSizeH2);
                 font-weight: 700;
             }
             .code{
@@ -45,20 +45,20 @@
                 display: flex;
                 align-items: center;
                 color: var(--windColor);
-                font-size: var(--fontSizeExtraSmall);
+                font-size: var(--fontSizeWind);
                 gap: 3px;
                 .logo{
-                    font-size: var(--fontSizeExtraSmall);
+                    font-size: var(--fontSizeWind);
                 }
             }
             .humidity {
                 display: flex;
                 align-items: center;
                 color: var(--humidityColor);
-                font-size: var(--fontSizeExtraSmall);
+                font-size: var(--fontSizeWind);
                 gap: 3px;
                 .logo{
-                    font-size: var(--fontSizeExtraSmall);
+                    font-size: var(--fontSizeWind);
                 }
             }
         }

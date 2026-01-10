@@ -235,7 +235,7 @@ export default function Home() {
             </div>
             <div id="contact" className="section">
                 <div className="box">
-                    <h2>Besoin d'un partenaire pour votre projet web ?</h2>
+                    <h3>Besoin d'un partenaire pour votre projet web ?</h3>
                     <p className="pub">Explorez l'étendue de nos services et transformez votre vision digitale avec <span>Skybound Studio</span>.</p>
                     <p className="direct">Vous préférez un contact direct ?<br/>Laissez-nous votre e-mail, nous reviendrons vers vous !</p>
                     <Contact />

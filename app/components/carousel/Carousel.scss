@@ -1,20 +1,12 @@
 @use '@/app/Functions.scss' as *;
 
 .carousel {
-    position: relative;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: fluid(30, 80) fluid(20, 100);
-    gap: fluid(10, 50);
     .wrapper {
         position: relative;
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: fluid(30, 50);
+        gap: fluid(10, 30);
         cursor: grab;
         user-select: none;
         &:active {
@@ -26,7 +18,7 @@
         display: flex;
         transition: opacity 0.5s ease, transform 0.5s ease;
         flex-direction: column;
-        gap: fluid(10, 50);
+        gap: fluid(10, 30);
         @media (min-width: 1025px) {
             flex-direction: row;
         }
@@ -71,20 +63,25 @@
             flex-direction: column;
             justify-content: space-between;
             gap: fluid(10, 30);
-
             .header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 h3 {
-                    font-size: var(--fontSizeMedium);
+                    font-size: var(--fontSizeH3Mobile);
+                    @media (min-width: 1025px) {
+                        font-size: var(--fontSizeH3);
+                    }
                     color: var(--mainColor);
                     margin: 0;
                     font-weight: 700;
                     text-shadow: 0 0 10px rgba(var(--mainColorRgb), 0.5);
                 }
                 .number {
-                    font-size: var(--fontSizeSmall);
+                    font-size: var(--fontSizePMobile);
+                    @media (min-width: 1025px) {
+                        font-size: var(--fontSizeP);
+                    }
                     color: var(--mainColor);
                     opacity: 0.7;
                     font-weight: 600;
@@ -92,7 +89,10 @@
                 }
             }
             .description {
-                font-size: var(--fontSizeNormal);
+                font-size: var(--fontSizePMobile);
+                @media (min-width: 1025px) {
+                    font-size: var(--fontSizeP);
+                }
                 line-height: 1.6;
                 color: var(--mainTextColor);
                 margin: 0;
@@ -105,10 +105,13 @@
                     padding: 6px 14px;
                     background-color: var(--secondBackgroundColor);
                     border-radius: 15px;
-                    font-size: var(--fontSizeSmall);
                     color: var(--mainColor);
                     box-shadow: inset 0 0 5px rgba(var(--mainColorRgb), 0.3);
                     transition: all 0.3s ease;
+                    font-size: var(--fontSizePMobile);
+                    @media (min-width: 1025px) {
+                        font-size: var(--fontSizeP);
+                    }
                     @media (hover: hover) and (pointer: fine) {
                         &:hover {
                             box-shadow: inset 0 0 8px rgba(var(--mainColorRgb), 0.5);
@@ -118,9 +121,7 @@
             }
             .links {
                 display: flex;
-                gap: 15px;
                 flex-wrap: wrap;
-                margin-top: 10px;
                 .link {
                     display: flex;
                     align-items: center;
@@ -131,7 +132,6 @@
                     border-radius: 15px;
                     color: var(--mainColor);
                     text-decoration: none;
-                    font-size: var(--fontSizeButton);
                     font-weight: 600;
                     transition: all 0.5s ease;
                     cursor: pointer;
@@ -148,6 +148,10 @@
                         background-color: var(--mainColor);
                         z-index: -1;
                         transition: width 0.5s ease;
+                    }
+                    font-size: var(--fontSizePMobile);
+                    @media (min-width: 1025px) {
+                        font-size: var(--fontSizeP);
                     }
                     @media (hover: hover) and (pointer: fine) {
                         &:hover {
