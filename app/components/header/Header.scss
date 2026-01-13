@@ -1,5 +1,26 @@
 @use '@/app/Functions.scss' as *;
 
+@keyframes slideDownShow {
+    from {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes slideDownHide {
+    from {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
 header {
     display: flex;
     justify-content: space-between;
@@ -7,34 +28,35 @@ header {
     position: fixed;
     top: 0;
     left: 0;
-    right: 12px;
+    right: 0;
     z-index: 10;
     padding: fluid(30, 50);
     box-sizing: border-box;
-
+    pointer-events: none;
     a {
         display: flex;
         align-items: center;
         line-height: 0;
+        pointer-events: auto;
     }
-
     .logo {
         fill: currentColor;
         color: var(--mainColor);
         height: 50px;
         width: 50px;
+        filter: drop-shadow(0 0 1px var(--mainBackgroundColor)) drop-shadow(0 0 1px var(--mainBackgroundColor));
         transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         cursor: pointer;
         @media (hover: hover) and (pointer: fine) {
         &:hover {
             transform: scale(1.1);
-            filter: drop-shadow(0 0 5px var(--mainColor));
+            filter: drop-shadow(0 0 1px var(--mainBackgroundColor)) drop-shadow(0 0 1px var(--mainBackgroundColor)) drop-shadow(0 0 5px var(--mainColor));
         }
         }
         &.tapped {
             transform: scale(1.1);
-            filter: drop-shadow(0 0 5px var(--mainColor));
+            filter: drop-shadow(0 0 1px var(--mainBackgroundColor)) drop-shadow(0 0 1px var(--mainBackgroundColor)) drop-shadow(0 0 5px var(--mainColor));
             transition: transform 0.5s ease, filter 0.5s ease;
         }
     }
@@ -48,25 +70,28 @@ header {
         display: flex;
         align-items: center;
         justify-content: center;
+        box-sizing: border-box;
+        border: 2px solid var(--mainBackgroundColor);
+        pointer-events: auto;
     }
     .menu,
     .close {
         position: absolute;
         top: 0;
         left: 0;
-        height: 50px;
+        height: 46px;
         width: 150px;
         font-weight: bold;
         background-color: var(--mainColor);
         border: none;
-        border-radius: 30px;
+        border-radius: 15px;
         cursor: pointer;
         opacity: 1;
         transition: opacity 0.3s ease;
-        font-size: var(--fontSizePMobile);
-        @media (min-width: 1025px) {
-            font-size: var(--fontSizeP);
-        }
+        font-size: var(--fontSizeP);
+        display: flex;
+        align-items: center;
+        justify-content: center;
         span {
         display: inline-block;
         backface-visibility: hidden;
@@ -140,10 +165,18 @@ header {
                 .link-wrapper {
                     overflow: hidden;
                     height: fluid(42, 88);
+                    display: flex;
+                    align-items: center;
                     a {
                         display: block;
                         height: fluid(32, 78);
+                        line-height: fluid(32, 78);
+                        transform: translateY(100%);
+                        opacity: 0;
                     }
+                }
+                &:not(.show-links):not(.hide-links) .link-wrapper a {
+                    visibility: hidden;
                 }
                 &.hide-links .link-wrapper a {
                     animation: slideDownHide 0.5s ease forwards;

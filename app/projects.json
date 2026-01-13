@@ -2,16 +2,14 @@
     {
         "title": "Skybound Studio",
         "imageSrc": "/skybound.png",
-        "description": "Agence digitale spécialisée en développement web et design",
-        "longDescription": "Site vitrine pour Skybound Studio, une agence digitale moderne offrant des services de développement web et design. Interface élégante avec animations fluides et présentation des services proposés.",
+        "description": "Site vitrine moderne pour agence digitale spécialisée en développement web et design. Interface élégante avec animations fluides, présentation des services et portfolio de réalisations.",
         "technologies": ["Next.js", "TypeScript", "Vercel"],
         "liveLink": "https://skyboundstudio.fr"
     },
     {
         "title": "Mathilde Dubois",
         "imageSrc": "/mathilde.png",
-        "description": "Portfolio professionnel pour photographe",
-        "longDescription": "Site portfolio créé pour Mathilde Dubois, mettant en valeur son travail photographique avec une galerie optimisée et un design épuré. Focus sur l'expérience utilisateur et la mise en valeur des créations visuelles.",
+        "description": "Portfolio photographique professionnel mettant en valeur le travail créatif. Galerie optimisée avec design épuré, navigation intuitive et mise en avant des visuels artistiques.",
         "technologies": ["Next.js", "TypeScript", "Vercel"],
         "liveLink": "https://mathildedubois.fr"
     }

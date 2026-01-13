@@ -16,7 +16,7 @@ export default function Header() {
     const [isCloseLeaving, setIsCloseLeaving] = useState(false);
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [isAnimating, setIsAnimating] = useState(false);
-    const [showLinks, setShowLinks] = useState(false);
+    const [linksState, setLinksState] = useState<'hidden' | 'showing' | 'visible' | 'hiding'>('hidden');
     const [minSize, setMinSize] = useState({ width: 150, height: 50 });
     const [maxSize, setMaxSize] = useState({ width: 600, height: 500 });
     const [minPos, setMinPos] = useState({ top: 50, right: 50 });
@@ -86,14 +86,14 @@ export default function Header() {
         setIsModalOpen(true);
         setMenuState("pushingUp");
         setCloseState("pushingInFromBottom");
-        setShowLinks(false);
+        setLinksState('hidden');
         animateModal(true, 500, () => {
             setMenuState("hidden");
             setCloseState("visible");
-            setShowLinks(true);
+            setLinksState('showing');
         });
         } else {
-        setShowLinks(false);
+        setLinksState('hiding');
         setTimeout(() => {
             setCloseState("pushingDown");
             setMenuState("pushingInFromTop");
@@ -101,8 +101,9 @@ export default function Header() {
             animateModal(false, 500, () => {
             setCloseState("hidden");
             setMenuState("visible");
+            setLinksState('hidden');
             });
-        }, 400);
+        }, 500);
         }
     };
     const handleMenuMouseEnter = () => {
@@ -189,7 +190,7 @@ export default function Header() {
                 }}
                 onClick={(e) => e.stopPropagation()}
             >
-                <nav className={showLinks ? "show-links" : "hide-links"}>
+                <nav className={linksState === 'showing' ? "show-links" : linksState === 'hiding' ? "hide-links" : ""}>
                 <div className="link-wrapper">
                     <a href="#project" onClick={toggleModal}>
                     Projets

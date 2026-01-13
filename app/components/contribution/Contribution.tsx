@@ -3,21 +3,23 @@ import { useEffect, useState, useRef, useLayoutEffect } from 'react';
 import './Contribution.scss';
 
 type ContributionData = number[][];
-const CELL_SIZE = 15;
-const GAP_SIZE = 3;
+
+const ROW_COUNT = 4;
+
 export default function Contribution() {
     const [data, setData] = useState<ContributionData>([]);
     const [maxValue, setMaxValue] = useState(0);
     const containerRef = useRef<HTMLDivElement>(null);
     const [containerWidth, setContainerWidth] = useState(0);
     const [containerHeight, setContainerHeight] = useState(0);
+
     useLayoutEffect(() => {
         function updateSize() {
-        if (containerRef.current) {
-            const rect = containerRef.current.getBoundingClientRect();
-            setContainerWidth(rect.width);
-            setContainerHeight(rect.height);
-        }
+            if (containerRef.current) {
+                const rect = containerRef.current.getBoundingClientRect();
+                setContainerWidth(rect.width);
+                setContainerHeight(rect.height);
+            }
         }
         updateSize();
         window.addEventListener('resize', updateSize);
@@ -48,26 +50,48 @@ export default function Contribution() {
         if (value <= 4 * step) return '#53d166';
         return '#53d166';
     }
-    const colCount = Math.floor((containerWidth + GAP_SIZE) / (CELL_SIZE + GAP_SIZE)) || 1;
-    const rowCount = Math.floor((containerHeight + GAP_SIZE) / (CELL_SIZE + GAP_SIZE)) || 1;
-    const maxCells = colCount * rowCount;
+
+    // Calculer gap proportionnel
+    const gapSize = containerHeight > 0 ? Math.max(2, Math.min(containerHeight, containerWidth) * 0.015) : 3;
+
+    // Calculer la taille des cellules basée sur la hauteur (4 lignes fixes)
+    const cellSizeFromHeight = containerHeight > 0 ? (containerHeight - gapSize * (ROW_COUNT - 1)) / ROW_COUNT : 15;
+
+    // Calculer le nombre de colonnes qui peuvent rentrer avec cette taille de carré
+    const colCountEstimate = containerWidth > 0 && cellSizeFromHeight > 0
+        ? Math.floor((containerWidth + gapSize) / (cellSizeFromHeight + gapSize))
+        : 1;
+
+    // Recalculer la taille exacte pour remplir la largeur avec ce nombre de colonnes
+    // Les cellules seront légèrement rectangulaires mais rempliront tout l'espace
+    const cellWidth = containerWidth > 0 && colCountEstimate > 0
+        ? (containerWidth - gapSize * (colCountEstimate - 1)) / colCountEstimate
+        : cellSizeFromHeight;
+
+    const cellHeight = cellSizeFromHeight;
+    const colCount = colCountEstimate;
+
+    const maxCells = colCount * ROW_COUNT;
     const flatData = data.flat();
     const reversedData = [...flatData].reverse();
     const cellsGrid = new Array(maxCells).fill(0);
+
     for (let i = 0; i < reversedData.length; i++) {
-        const col = colCount - 1 - Math.floor(i / rowCount);
+        const col = colCount - 1 - Math.floor(i / ROW_COUNT);
         if (col < 0) break;
-        const row = rowCount - 1 - (i % rowCount);
+        const row = ROW_COUNT - 1 - (i % ROW_COUNT);
         const indexGrid = row * colCount + col;
         cellsGrid[indexGrid] = reversedData[i];
     }
+
     return (
         <div
             ref={containerRef}
             className="grid"
             style={{
-                gridTemplateColumns: `repeat(${colCount}, ${CELL_SIZE}px)`,
-                gap: `${GAP_SIZE}px`,
+                gridTemplateColumns: `repeat(${colCount}, ${cellWidth}px)`,
+                gridTemplateRows: `repeat(${ROW_COUNT}, ${cellHeight}px)`,
+                gap: `${gapSize}px`,
             }}
             >
             {cellsGrid.length > 0 ? (

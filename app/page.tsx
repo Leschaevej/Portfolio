@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import './page.scss';
 import Carousel from "./components/carousel/Carousel";
 import projets from "../app/projects.json";
@@ -20,6 +20,38 @@ import RocketFire from '../app/assets/fire.svg';
 import Moon from '../app/assets/moon.svg';
 
 export default function Home() {
+    const [isDesktop, setIsDesktop] = useState(false);
+    const clockRef = useRef<HTMLDivElement>(null);
+    const logoRef = useRef<SVGSVGElement>(null);
+    const modulRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const handleResize = () => {
+            setIsDesktop(window.innerWidth >= 769);
+        };
+
+        handleResize();
+        window.addEventListener('resize', handleResize);
+        return () => window.removeEventListener('resize', handleResize);
+    }, []);
+
+    useEffect(() => {
+        const calculateOffset = () => {
+            if (clockRef.current && logoRef.current && modulRef.current) {
+                const clockRect = clockRef.current.getBoundingClientRect();
+                const logoRect = logoRef.current.getBoundingClientRect();
+                const modulRect = modulRef.current.getBoundingClientRect();
+
+                const offset = clockRect.width - modulRect.width - (logoRect.left - clockRect.left) * 2;
+                clockRef.current.style.setProperty('--modul-offset', `${offset}px`);
+            }
+        };
+
+        calculateOffset();
+        window.addEventListener('resize', calculateOffset);
+        return () => window.removeEventListener('resize', calculateOffset);
+    }, [isDesktop]);
+
     const scrollToSection = (id: string) => {
         if (window.location.hash !== `#${id}`) {
             window.location.hash = `#${id}`;
@@ -137,9 +169,6 @@ export default function Home() {
                 </div>
             </div>
             <div id="project" className="section">
-                <div className="haloWrapper">
-                    <div className="halo"></div>
-                </div>
                 <h2>Mes projets</h2>
                 <Carousel projects={projets} />
             </div>
@@ -204,26 +233,28 @@ export default function Home() {
                         </div>
                     </div>
                     <div className="right">
-                        <div className="gadget">
-                            <div className="rocket">
-                                <Cloud1 className="cloud cloud1" />
-                                <Cloud2 className="cloud cloud2" />
-                                <div className="rocketWrapper">
-                                    <RocketIcon className="rocketIcon" />
-                                    <RocketFire className="rocketFire" />
+                        {isDesktop && (
+                            <div className="gadget">
+                                <div className="rocket">
+                                    <Cloud1 className="cloud cloud1" />
+                                    <Cloud2 className="cloud cloud2" />
+                                    <div className="rocketWrapper">
+                                        <RocketIcon className="rocketIcon" />
+                                        <RocketFire className="rocketFire" />
+                                    </div>
+                                    <Moon className="moon" />
                                 </div>
-                                <Moon className="moon" />
-                            </div>
-                            <div className="meteoClock">
-                                <div className="clock">
-                                    <Portfolio className="logo"/>
-                                    <Clock className="modul" />
+                                <div className="clock" ref={clockRef}>
+                                    <Portfolio className="logo" ref={logoRef}/>
+                                    <div ref={modulRef}>
+                                        <Clock className="modul" />
+                                    </div>
                                 </div>
                                 <div className="meteo">
                                     <Meteo />
                                 </div>
                             </div>
-                        </div>
+                        )}
                         <div className="contribution">
                             <Contribution />
                         </div>

@@ -10,11 +10,11 @@ export default function Contact() {
     const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
     const validate = () => {
         if (!email.trim()) {
-        setError("Veuillez renseigner votre e-mail.");
+        setError("Renseigner votre email");
         return false;
         }
         if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-        setError("L'email n'est pas valide.");
+        setError("Email non valide");
         return false;
         }
         setError('');

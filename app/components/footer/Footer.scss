@@ -1,26 +1,19 @@
 @use '@/app/Functions.scss' as *;
 
 footer {
-    position: fixed;
-    bottom: -330px;
-    left: 0;
     width: 100%;
     background-color: var(--footerBackgroundColor);
     color: var(--mainTextColor);
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    transition: bottom 0.3s ease;
     padding: fluid(30, 50);
-    &.visible {
-        bottom: 0;
-    }
     .name {
-        font-size: fluid(24, 96);
+        font-size: var(--fontSizeH1);
     }
     .copyright {
         color: var(--fourthTextColor);
         margin-top: auto;
-        font-size: fluid(16, 32);
+        font-size: var(--fontSizeH3);
     }
 }

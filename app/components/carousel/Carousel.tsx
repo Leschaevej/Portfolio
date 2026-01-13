@@ -5,8 +5,7 @@ import "./Carousel.scss";
 type Project = {
     title: string;
     imageSrc: string;
-    description: string;
-    longDescription?: string;
+    description?: string;
     technologies?: string[];
     githubLink?: string;
     liveLink?: string;
@@ -148,7 +147,7 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
                         </div>
                     </div>
                     <p className="description">
-                        {project.longDescription || project.description}
+                        {project.description}
                     </p>
                     {project.technologies && project.technologies.length > 0 && (
                         <div className="techs">
@@ -159,43 +158,15 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
                             ))}
                         </div>
                     )}
-                    <div className="links">
-                        {project.githubLink && (
-                            <a
-                                href={project.githubLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="link"
-                                aria-label="Voir le code source"
-                            >
-                                <FaGithub size={20} />
-                                <span>Code source</span>
-                            </a>
-                        )}
-                        {project.liveLink && (
-                            <a
-                                href={project.liveLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="link primary"
-                                aria-label="Voir le projet en ligne"
-                            >
-                                <span>Voir le projet</span>
-                            </a>
-                        )}
-                        {project.pdfLink && (
-                            <a
-                                href={project.pdfLink}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="link"
-                                aria-label="Télécharger PDF"
-                            >
-                                <FaDownload size={18} />
-                                <span>Documentation</span>
-                            </a>
-                        )}
-                    </div>
+                        <a
+                            href={project.liveLink}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="link"
+                            aria-label="Voir le projet en ligne"
+                        >
+                            <span>Voir le projet</span>
+                        </a>
                 </div>
             </div>
         );

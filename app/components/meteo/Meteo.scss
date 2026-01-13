@@ -3,7 +3,8 @@
 .conteneur{
     display: flex;
     flex-direction: column;
-    padding: fluid(10, 30);
+    justify-content: space-between;
+    height: 100%;
     .location {
         display: flex;
         align-items: center;
@@ -18,11 +19,11 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
+        gap: fluid(30, 50);
         height: 100%;
         .weather{
             display: flex;
             align-items: center;
-            margin: fluid(2, 10) 0 0 0;
             .temperature {
                 font-size: var(--fontSizeH2);
                 font-weight: 700;

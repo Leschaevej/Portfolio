@@ -40,7 +40,6 @@ const pngLists: Record<TechId, string[]> = {
         "/technology/deployment/vercel.png",
         "/technology/deployment/cloudinary.png",
         "/technology/deployment/githubaction.png",
-        "/technology/deployment/netifly.png",
     ],
     Design: [
         "/technology/design/figma.png",
@@ -70,6 +69,7 @@ export default function Technology() {
     const [isMobile, setIsMobile] = useState(false);
     const [hoveredCard, setHoveredCard] = useState<TechId | null>(null);
     const [unhoveredCard, setUnhoveredCard] = useState<TechId | null>(null);
+    const [pngPosition, setPngPosition] = useState({ top: 0, left: 0 });
     const gridRef = useRef<HTMLDivElement | null>(null);
     const bottomRow: TechId[] = ["Frontend", "Backend", "Deployment"];
     useEffect(() => {
@@ -122,6 +122,65 @@ export default function Technology() {
         setClosingId(null);
         setIsClosingPng(false);
         setShowPngs(false);
+
+        // Calculer la position des PNG
+        setTimeout(() => {
+            if (gridRef.current) {
+                const gridRect = gridRef.current.getBoundingClientRect();
+                const cards = Array.from(gridRef.current.querySelectorAll('.card'));
+
+                if (isMobile) {
+                    // Mobile: position gauche ou droite
+                    // En mobile: 2 colonnes, Frontend/Design/Tools sont colonne gauche (0), Backend/Deployment/Ai sont colonne droite (1)
+                    const clickedCardIndex = cards.findIndex(c => c.querySelector('h3')?.textContent === title);
+                    const clickedCol = clickedCardIndex % 2;
+                    // Afficher les PNG sur l'autre colonne
+                    const targetCol = clickedCol === 0 ? 1 : 0;
+                    const targetCards = cards.filter((_, idx) => idx % 2 === targetCol);
+
+                    if (targetCards.length > 0) {
+                        // Centre vertical de la grille (relatif)
+                        const centerY = gridRect.height / 2;
+
+                        // Centre horizontal de la colonne cible (relatif)
+                        const firstCard = targetCards[0].getBoundingClientRect();
+                        const centerX = firstCard.left - gridRect.left + firstCard.width / 2;
+
+                        setPngPosition({
+                            top: centerY,
+                            left: centerX
+                        });
+                    }
+                } else {
+                    // Desktop: position haut ou bas
+                    // En desktop: Frontend, Backend, Deployment sont en première ligne (row 0)
+                    // Design, Tools, Ai sont en deuxième ligne (row 1)
+                    const clickedCardIndex = cards.findIndex(c => c.querySelector('h3')?.textContent === title);
+                    const clickedRow = Math.floor(clickedCardIndex / 3);
+                    // Afficher les PNG sur l'autre ligne
+                    const targetRow = clickedRow === 0 ? 1 : 0;
+                    const targetCards = cards.filter((_, idx) => {
+                        const row = Math.floor(idx / 3);
+                        return row === targetRow;
+                    });
+
+                    if (targetCards.length > 0) {
+                        const firstCard = targetCards[0].getBoundingClientRect();
+                        const lastCard = targetCards[targetCards.length - 1].getBoundingClientRect();
+                        // Centre vertical de la ligne cible (relatif)
+                        const centerY = firstCard.top - gridRect.top + firstCard.height / 2;
+                        // Centre horizontal de la grille (relatif)
+                        const centerX = gridRect.width / 2;
+
+                        setPngPosition({
+                            top: centerY,
+                            left: centerX
+                        });
+                    }
+                }
+            }
+        }, 100);
+
         setTimeout(() => setShowPngs(true), 500);
         setTimeout(() => {
             const card = document.querySelector(`.card.active`);
@@ -188,6 +247,11 @@ export default function Technology() {
             className={`png ${getPngListPositionClass()} ${
                 isClosingPng ? "closing" : ""
             }`}
+            style={{
+                top: `${pngPosition.top}px`,
+                left: `${pngPosition.left}px`,
+                transform: 'translate(-50%, -50%)'
+            }}
             >
             {currentPngList.map((src, i) => (
                 <img

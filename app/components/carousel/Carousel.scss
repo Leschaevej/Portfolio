@@ -6,7 +6,6 @@
         width: 100%;
         display: flex;
         flex-direction: column;
-        gap: fluid(10, 30);
         cursor: grab;
         user-select: none;
         &:active {
@@ -19,8 +18,10 @@
         transition: opacity 0.5s ease, transform 0.5s ease;
         flex-direction: column;
         gap: fluid(10, 30);
+        align-items: flex-start;
         @media (min-width: 1025px) {
             flex-direction: row;
+            align-items: center;
         }
         &.exit {
             position: absolute;
@@ -33,55 +34,51 @@
             animation: slideIn 0.8s ease forwards;
         }
         .image {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
             width: 100%;
-            aspect-ratio: 16 / 9;
+            position: relative;
             border-radius: 15px;
             overflow: hidden;
             box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.4);
             transition: all 0.5s ease;
-            height: fluid(200, 250);
+            aspect-ratio: 16/9;
+            flex-shrink: 0;
             @media (min-width: 1025px) {
-                height: auto;
+                width: 50%;
             }
             &:hover {
                 box-shadow: inset 0 0 15px rgba(var(--mainColorRgb), 0.6);
             }
             img {
+                position: absolute;
+                top: 0;
+                left: 0;
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
             }
         }
         .info {
-            flex: 1;
+            width: 100%;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             gap: fluid(10, 30);
+            @media (min-width: 1025px) {
+                width: 50%;
+            }
             .header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 h3 {
-                    font-size: var(--fontSizeH3Mobile);
-                    @media (min-width: 1025px) {
-                        font-size: var(--fontSizeH3);
-                    }
+                    font-size: var(--fontSizeH3);
                     color: var(--mainColor);
                     margin: 0;
                     font-weight: 700;
                     text-shadow: 0 0 10px rgba(var(--mainColorRgb), 0.5);
                 }
                 .number {
-                    font-size: var(--fontSizePMobile);
-                    @media (min-width: 1025px) {
-                        font-size: var(--fontSizeP);
-                    }
+                    font-size: var(--fontSizeP);
                     color: var(--mainColor);
                     opacity: 0.7;
                     font-weight: 600;
@@ -89,10 +86,7 @@
                 }
             }
             .description {
-                font-size: var(--fontSizePMobile);
-                @media (min-width: 1025px) {
-                    font-size: var(--fontSizeP);
-                }
+                font-size: var(--fontSizeP);
                 line-height: 1.6;
                 color: var(--mainTextColor);
                 margin: 0;
@@ -100,18 +94,16 @@
             .techs {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 10px;
+                gap: fluid(10, 30);
                 .tech {
-                    padding: 6px 14px;
                     background-color: var(--secondBackgroundColor);
-                    border-radius: 15px;
+                    border-radius: fluid(10, 15);
+                    padding: fluid(10, 15);
                     color: var(--mainColor);
                     box-shadow: inset 0 0 5px rgba(var(--mainColorRgb), 0.3);
                     transition: all 0.3s ease;
-                    font-size: var(--fontSizePMobile);
-                    @media (min-width: 1025px) {
-                        font-size: var(--fontSizeP);
-                    }
+                    font-size: var(--fontSizeP);
+                    height: fit-content;
                     @media (hover: hover) and (pointer: fine) {
                         &:hover {
                             box-shadow: inset 0 0 8px rgba(var(--mainColorRgb), 0.5);
@@ -119,66 +111,22 @@
                     }
                 }
             }
-            .links {
+            .link {
                 display: flex;
-                flex-wrap: wrap;
-                .link {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                    padding: 12px 24px;
-                    background-color: var(--mainBackgroundColor);
-                    border: 1px solid var(--mainColor);
-                    border-radius: 15px;
-                    color: var(--mainColor);
-                    text-decoration: none;
-                    font-weight: 600;
-                    transition: all 0.5s ease;
-                    cursor: pointer;
-                    position: relative;
-                    overflow: hidden;
-                    z-index: 1;
-                    &::before {
-                        content: "";
-                        position: absolute;
-                        top: 0;
-                        left: 0;
-                        height: 100%;
-                        width: 0%;
-                        background-color: var(--mainColor);
-                        z-index: -1;
-                        transition: width 0.5s ease;
-                    }
-                    font-size: var(--fontSizePMobile);
-                    @media (min-width: 1025px) {
-                        font-size: var(--fontSizeP);
-                    }
-                    @media (hover: hover) and (pointer: fine) {
-                        &:hover {
-                            color: var(--secondTextColor);
-                            &::before {
-                                width: 100%;
-                            }
-                        }
-                    }
-                    &:active {
-                        transform: scale(0.98);
-                    }
-                    &.primary {
-                        background-color: var(--mainColor);
-                        color: var(--secondTextColor);
-                        &::before {
-                            display: none;
-                        }
-                        @media (hover: hover) and (pointer: fine) {
-                            &:hover {
-                                background-color: var(--buttonHoverColor);
-                            }
-                        }
-                    }
-                    svg {
-                        flex-shrink: 0;
-                    }
+                align-items: center;
+                width: fit-content;
+                border-radius: fluid(10, 15);
+                padding: fluid(10, 15);
+                font-weight: 600;
+                transition: all 0.5s ease;
+                cursor: pointer;
+                z-index: 1;
+                background-color: var(--mainColor);
+                color: var(--secondTextColor);
+                font-size: var(--fontSizeP);
+                height: fit-content;
+                &:hover{
+                    background-color: var(--buttonHoverColor);
                 }
             }
         }
@@ -187,11 +135,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 20px;
-        z-index: 10;
+        gap: fluid(10, 30);
+        z-index: 1;
         .dots {
             display: flex;
-            gap: 10px;
+            gap: fluid(10, 30);
             .dot {
                 width: 12px;
                 height: 12px;
@@ -220,7 +168,8 @@
         background-color: var(--secondBackgroundColor);
         border: none;
         color: var(--mainColor);
-        border-radius: 15px;
+        border-radius: fluid(10, 15);
+        padding: fluid(10, 15);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -228,8 +177,6 @@
         transition: all 0.5s ease;
         z-index: 10;
         box-shadow: inset 0 0 5px rgba(var(--mainColorRgb), 0.3);
-        width: fluid(35, 40);
-        height: fluid(35, 40);
         @media (hover: hover) and (pointer: fine) {
             &:hover {
                 box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.5);
