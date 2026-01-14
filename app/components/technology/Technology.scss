@@ -104,7 +104,7 @@
             }
         }
     }
-    .png {
+    .image-list {
         display: flex;
         position: absolute;
         gap: 20px;
@@ -123,10 +123,10 @@
             animation: pngFlyOut 0.6s ease-in forwards;
             animation-delay: calc(var(--i) * 0.1s);
         }
-        &.pngTop, &.pngBottom {
+        &.imageTop, &.imageBottom {
             flex-direction: row;
         }
-        &.pngLeft, &.pngRight {
+        &.imageLeft, &.imageRight {
             flex-direction: column;
         }
     }
