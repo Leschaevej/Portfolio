@@ -13,7 +13,6 @@ interface SiteConfig {
     title: string;
     description: string;
 }
-
 interface PersonInfo {
     name: string;
     givenName: string;
@@ -22,14 +21,12 @@ interface PersonInfo {
     github: string;
     linkedin: string;
 }
-
 const SITE_CONFIG: SiteConfig = {
     url: 'https://jimmyhub.fr',
     name: 'Jimmyhub',
     title: 'Jimmy Leschaeve - Développeur Fullstack Créatif',
     description: 'Portfolio de Jimmy Leschaeve, développeur fullstack créatif spécialisé dans la création d\'interfaces épurées et de logiciels optimisés. Mon objectif : l\'efficacité au service de l\'innovation.',
 };
-
 const PERSON_INFO: PersonInfo = {
     name: 'Jimmy Leschaeve',
     givenName: 'Jimmy',
@@ -38,9 +35,7 @@ const PERSON_INFO: PersonInfo = {
     github: 'https://github.com/Leschaevej',
     linkedin: 'https://www.linkedin.com/in/jimmy-leschaeve-11728a168/',
 };
-
 export const metadataBase = new URL(SITE_CONFIG.url);
-
 export const metadata: Metadata = {
     title: {
         default: SITE_CONFIG.title,
@@ -105,12 +100,10 @@ export const metadata: Metadata = {
         languages: { 'fr-FR': SITE_CONFIG.url },
     },
 };
-
 export const viewport = {
     width: 'device-width',
     initialScale: 1,
 };
-
 const personSchema = {
     '@context': 'https://schema.org',
     '@type': 'Person',
@@ -138,7 +131,6 @@ const personSchema = {
         'Fullstack Development',
     ],
 };
-
 const websiteSchema = {
     '@context': 'https://schema.org',
     '@type': 'WebSite',
@@ -151,7 +143,6 @@ const websiteSchema = {
         name: PERSON_INFO.name,
     },
 };
-
 const profilePageSchema = {
     '@context': 'https://schema.org',
     '@type': 'ProfilePage',
@@ -163,7 +154,6 @@ const profilePageSchema = {
     name: SITE_CONFIG.title,
     description: SITE_CONFIG.description,
 };
-
 export default function RootLayout({
     children,
 }: Readonly<{
@@ -187,11 +177,9 @@ export default function RootLayout({
             </head>
             <body className={instrumentSans.className}>
                 <Intro />
-                    <Header />
-                        <main>
-                            {children}
-                        </main>
-                    <Footer />
+                <Header />
+                {children}
+                <Footer />
                 <Analytics />
                 <SpeedInsights />
             </body>

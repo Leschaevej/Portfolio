@@ -1,0 +1,42 @@
+@use '@/app/Functions.scss' as *;
+
+.notFound {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: fluid(10, 30);
+    padding: fluid(20, 50);
+    text-align: center;
+    h1 {
+        font-size: var(--fontSizeH1);
+        color: var(--mainColor);
+        font-weight: bold;
+    }
+    h2 {
+        font-size: var(--fontSizeH2);
+        font-weight: normal;
+    }
+    p {
+        max-width: 50%;
+        line-height: 1.6;
+        font-size: var(--fontSizeP);
+    }
+    .back {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        border-radius: fluid(10, 15);
+        padding: fluid(10, 15);
+        font-weight: bold;
+        transition: all 0.5s ease;
+        cursor: pointer;
+        background-color: var(--mainColor);
+        color: var(--secondTextColor);
+        font-size: var(--fontSizeP);
+        &:hover {
+            background-color: var(--buttonHoverColor);
+        }
+    }
+}

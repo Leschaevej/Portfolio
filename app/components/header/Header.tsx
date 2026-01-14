@@ -1,9 +1,13 @@
 "use client";
 import React, { useState, useEffect } from "react";
+import { useRouter, usePathname } from "next/navigation";
+import Link from "next/link";
 import Logo from "../../assets/logo.svg";
 import "./Header.scss";
 
 export default function Header() {
+    const router = useRouter();
+    const pathname = usePathname();
     const [menuState, setMenuState] = useState<
         "visible" | "pushingUp" | "hidden" | "pushingInFromTop"
     >("visible");
@@ -130,17 +134,22 @@ export default function Header() {
         setLogoTapped(false);
         }, 500);
     };
+    const handleLogoClick = (e: React.MouseEvent) => {
+        if (pathname === '/') {
+            e.preventDefault();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+    };
     return (
         <header className="header">
-            <a href="#home">
+            <Link href="/" className="logo-link" onClick={handleLogoClick}>
                 <Logo
-                className={`logo ${logoTapped ? "tapped" : ""}`}
-                onTouchStart={handleLogoTouchStart}
-                role="img"
-                aria-label="Logo"
-                tabIndex={0}
+                    className={`logo ${logoTapped ? "tapped" : ""}`}
+                    onTouchStart={handleLogoTouchStart}
+                    role="img"
+                    aria-label="Logo"
                 />
-            </a>
+            </Link>
             <div className="button-container">
             {menuState !== "hidden" && (
             <button

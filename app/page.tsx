@@ -24,34 +24,28 @@ export default function Home() {
     const clockRef = useRef<HTMLDivElement>(null);
     const logoRef = useRef<SVGSVGElement>(null);
     const modulRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         const handleResize = () => {
             setIsDesktop(window.innerWidth >= 769);
         };
-
         handleResize();
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     }, []);
-
     useEffect(() => {
         const calculateOffset = () => {
             if (clockRef.current && logoRef.current && modulRef.current) {
                 const clockRect = clockRef.current.getBoundingClientRect();
                 const logoRect = logoRef.current.getBoundingClientRect();
                 const modulRect = modulRef.current.getBoundingClientRect();
-
                 const offset = clockRect.width - modulRect.width - (logoRect.left - clockRect.left) * 2;
                 clockRef.current.style.setProperty('--modul-offset', `${offset}px`);
             }
         };
-
         calculateOffset();
         window.addEventListener('resize', calculateOffset);
         return () => window.removeEventListener('resize', calculateOffset);
     }, [isDesktop]);
-
     const scrollToSection = (id: string) => {
         if (window.location.hash !== `#${id}`) {
             window.location.hash = `#${id}`;

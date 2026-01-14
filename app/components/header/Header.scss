@@ -1,26 +1,5 @@
 @use '@/app/Functions.scss' as *;
 
-@keyframes slideDownShow {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-
-@keyframes slideDownHide {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-}
 header {
     display: flex;
     justify-content: space-between;
@@ -32,12 +11,11 @@ header {
     z-index: 10;
     padding: fluid(30, 50);
     box-sizing: border-box;
-    pointer-events: none;
-    a {
+    .logo-link {
         display: flex;
         align-items: center;
-        line-height: 0;
-        pointer-events: auto;
+        cursor: pointer;
+        text-decoration: none;
     }
     .logo {
         fill: currentColor;
@@ -47,7 +25,6 @@ header {
         filter: drop-shadow(0 0 1px var(--mainBackgroundColor)) drop-shadow(0 0 1px var(--mainBackgroundColor));
         transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
         filter 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-        cursor: pointer;
         @media (hover: hover) and (pointer: fine) {
         &:hover {
             transform: scale(1.1);

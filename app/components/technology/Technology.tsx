@@ -122,55 +122,36 @@ export default function Technology() {
         setClosingId(null);
         setIsClosingImages(false);
         setShowImages(false);
-
-        // Calculer la position des images
         setTimeout(() => {
             if (gridRef.current) {
                 const gridRect = gridRef.current.getBoundingClientRect();
                 const cards = Array.from(gridRef.current.querySelectorAll('.card'));
-
                 if (isMobile) {
-                    // Mobile: position gauche ou droite
-                    // En mobile: 2 colonnes, Frontend/Design/Tools sont colonne gauche (0), Backend/Deployment/Ai sont colonne droite (1)
                     const clickedCardIndex = cards.findIndex(c => c.querySelector('h3')?.textContent === title);
                     const clickedCol = clickedCardIndex % 2;
-                    // Afficher les images sur l'autre colonne
                     const targetCol = clickedCol === 0 ? 1 : 0;
                     const targetCards = cards.filter((_, idx) => idx % 2 === targetCol);
-
                     if (targetCards.length > 0) {
-                        // Centre vertical de la grille (relatif)
                         const centerY = gridRect.height / 2;
-
-                        // Centre horizontal de la colonne cible (relatif)
                         const firstCard = targetCards[0].getBoundingClientRect();
                         const centerX = firstCard.left - gridRect.left + firstCard.width / 2;
-
                         setImagePosition({
                             top: centerY,
                             left: centerX
                         });
                     }
                 } else {
-                    // Desktop: position haut ou bas
-                    // En desktop: Frontend, Backend, Deployment sont en première ligne (row 0)
-                    // Design, Tools, Ai sont en deuxième ligne (row 1)
                     const clickedCardIndex = cards.findIndex(c => c.querySelector('h3')?.textContent === title);
                     const clickedRow = Math.floor(clickedCardIndex / 3);
-                    // Afficher les images sur l'autre ligne
                     const targetRow = clickedRow === 0 ? 1 : 0;
                     const targetCards = cards.filter((_, idx) => {
                         const row = Math.floor(idx / 3);
                         return row === targetRow;
                     });
-
                     if (targetCards.length > 0) {
                         const firstCard = targetCards[0].getBoundingClientRect();
-                        // Centre vertical de la ligne cible (relatif)
                         const centerY = firstCard.top - gridRect.top + firstCard.height / 2;
-                        // Centre horizontal de la grille (relatif)
                         const centerX = gridRect.width / 2;
-
                         setImagePosition({
                             top: centerY,
                             left: centerX
@@ -179,7 +160,6 @@ export default function Technology() {
                 }
             }
         }, 100);
-
         setTimeout(() => setShowImages(true), 500);
         setTimeout(() => {
             const card = document.querySelector(`.card.active`);
