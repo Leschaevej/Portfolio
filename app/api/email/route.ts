@@ -2,7 +2,7 @@ import nodemailer from 'nodemailer';
 
 export async function POST(req: Request) {
   try {
-    const { name, email, message } = await req.json();
+    const { email, message } = await req.json();
 
     if (!email || !message) {
       return new Response(JSON.stringify({ success: false, message: 'Champs manquants' }), { status: 400 });

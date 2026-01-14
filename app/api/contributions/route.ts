@@ -1,11 +1,9 @@
-import { NextRequest } from 'next/server';
-
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN!;
 const USERNAME = 'Leschaevej';
 
 type ContributionData = number[][];
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   const query = `
   {
     user(login: "${USERNAME}") {
@@ -39,12 +37,19 @@ export async function GET(req: NextRequest) {
 
     const weeks = json.data.user.contributionsCollection.contributionCalendar.weeks;
 
-    const data: ContributionData = weeks.map((week: any) =>
-      week.contributionDays.map((day: any) => day.contributionCount)
+    interface GitHubDay {
+      contributionCount: number;
+    }
+    interface GitHubWeek {
+      contributionDays: GitHubDay[];
+    }
+
+    const data: ContributionData = weeks.map((week: GitHubWeek) =>
+      week.contributionDays.map((day: GitHubDay) => day.contributionCount)
     );
 
     return new Response(JSON.stringify(data), { status: 200, headers: { 'Content-Type': 'application/json' } });
-  } catch (error) {
+  } catch {
     return new Response(JSON.stringify({ error: 'Erreur interne serveur' }), { status: 500 });
   }
 }

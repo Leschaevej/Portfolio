@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FaGithub, FaDownload, FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./Carousel.scss";
 
 type Project = {

@@ -166,7 +166,6 @@ export default function Technology() {
 
                     if (targetCards.length > 0) {
                         const firstCard = targetCards[0].getBoundingClientRect();
-                        const lastCard = targetCards[targetCards.length - 1].getBoundingClientRect();
                         // Centre vertical de la ligne cible (relatif)
                         const centerY = firstCard.top - gridRect.top + firstCard.height / 2;
                         // Centre horizontal de la grille (relatif)
