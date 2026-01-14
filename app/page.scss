@@ -247,7 +247,7 @@
         padding: 0 fluid(30, 150) fluid(30, 150) fluid(30, 150);
         @media (min-width: 1025px) {
             flex-direction: row;
-            align-items: center;
+            align-items: stretch;
         }
         .left {
             width: 100%;
@@ -397,9 +397,15 @@
             display: grid;
             grid-template-columns: 1fr;
             grid-template-rows: auto;
-            @media (min-width: 769px) {
+            @media (min-width: 769px) and (max-width: 1024px) {
                 grid-template-columns: 1fr 1fr;
                 grid-template-rows: 1fr 1fr 0.5fr;
+            }
+            @media (min-width: 1025px) {
+                width: 50%;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr 1fr 0.5fr;
+                min-height: 600px;
             }
             .gadget {
                 display: none;
