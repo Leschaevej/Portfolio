@@ -20,56 +20,56 @@ const techItems: {
   { title: "Tools", Icon: Tools, className: "tools" },
   { title: "Ai", Icon: Ai, className: "ai" },
 ];
-const pngLists: Record<TechId, string[]> = {
+const techImages: Record<TechId, string[]> = {
     Frontend: [
-        "/technology/frontend/javascript.png",
-        "/technology/frontend/typescript.png",
-        "/technology/frontend/tailwind.png",
-        "/technology/frontend/react.png",
-        "/technology/frontend/next.png",
+        "/technology/frontend/javascript.webp",
+        "/technology/frontend/typescript.webp",
+        "/technology/frontend/tailwind.webp",
+        "/technology/frontend/react.webp",
+        "/technology/frontend/next.webp",
     ],
     Backend: [
-        "/technology/backend/mongodb.png",
-        "/technology/backend/node.png",
-        "/technology/backend/mongoose.png",
-        "/technology/backend/express.png",
+        "/technology/backend/mongodb.webp",
+        "/technology/backend/node.webp",
+        "/technology/backend/mongoose.webp",
+        "/technology/backend/express.webp",
     ],
     Deployment: [
-        "/technology/deployment/docker.png",
-        "/technology/deployment/aws.png",
-        "/technology/deployment/vercel.png",
-        "/technology/deployment/cloudinary.png",
-        "/technology/deployment/githubaction.png",
+        "/technology/deployment/docker.webp",
+        "/technology/deployment/aws.webp",
+        "/technology/deployment/vercel.webp",
+        "/technology/deployment/cloudinary.webp",
+        "/technology/deployment/githubaction.webp",
     ],
     Design: [
-        "/technology/design/figma.png",
-        "/technology/design/photoshop.png",
-        "/technology/design/lightroom.png",
-        "/technology/design/canva.png",
+        "/technology/design/figma.webp",
+        "/technology/design/photoshop.webp",
+        "/technology/design/lightroom.webp",
+        "/technology/design/canva.webp",
     ],
     Tools: [
-        "/technology/tools/git.png",
-        "/technology/tools/github.png",
-        "/technology/tools/postman.png",
-        "/technology/tools/vscode.png",
+        "/technology/tools/git.webp",
+        "/technology/tools/github.webp",
+        "/technology/tools/postman.webp",
+        "/technology/tools/vscode.webp",
     ],
     Ai: [
-        "/technology/ai/gemini.png",
-        "/technology/ai/huggingface.png",
-        "/technology/ai/tensorflow.png",
-        "/technology/ai/openai.png",
+        "/technology/ai/gemini.webp",
+        "/technology/ai/huggingface.webp",
+        "/technology/ai/tensorflow.webp",
+        "/technology/ai/openai.webp",
     ],
 };
 export default function Technology() {
     const [selected, setSelected] = useState<TechId | null>(null);
     const [closingId, setClosingId] = useState<TechId | null>(null);
-    const [isClosingPng, setIsClosingPng] = useState(false);
-    const [showPngs, setShowPngs] = useState(false);
+    const [isClosingImages, setIsClosingImages] = useState(false);
+    const [showImages, setShowImages] = useState(false);
     const [gridHeight, setGridHeight] = useState<number | null>(null);
     const [isMobile, setIsMobile] = useState(false);
     const [hoveredCard, setHoveredCard] = useState<TechId | null>(null);
     const [unhoveredCard, setUnhoveredCard] = useState<TechId | null>(null);
-    const [pngPosition, setPngPosition] = useState({ top: 0, left: 0 });
+    const [imagePosition, setImagePosition] = useState({ top: 0, left: 0 });
     const gridRef = useRef<HTMLDivElement | null>(null);
     const bottomRow: TechId[] = ["Frontend", "Backend", "Deployment"];
     useEffect(() => {
@@ -88,18 +88,18 @@ export default function Technology() {
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
     }, [selected]);
-    const getPngListPositionClass = (): string => {
+    const getImageListPositionClass = (): string => {
         const id = selected ?? closingId;
         if (!id) return "";
         if (isMobile) {
-        return ["Backend", "Design", "Ai"].includes(id) ? "pngLeft" : "pngRight";
+        return ["Backend", "Design", "Ai"].includes(id) ? "imageLeft" : "imageRight";
         }
-        return bottomRow.includes(id) ? "pngBottom" : "pngTop";
+        return bottomRow.includes(id) ? "imageBottom" : "imageTop";
     };
     const handleCardClose = (id: TechId) => {
         setClosingId(id);
-        setIsClosingPng(true);
-        setShowPngs(false);
+        setIsClosingImages(true);
+        setShowImages(false);
         setGridHeight(null);
         const card = document.querySelector(`.card.active .wrapper svg`) as HTMLElement;
         if (card) {
@@ -107,11 +107,11 @@ export default function Technology() {
         void card.offsetWidth;
         card.classList.add("techOut");
         }
-        const delay = 600 + (pngLists[id].length - 1) * 100;
+        const delay = 600 + (techImages[id].length - 1) * 100;
         setTimeout(() => {
         setSelected(null);
         setClosingId(null);
-        setIsClosingPng(false);
+        setIsClosingImages(false);
         }, delay);
     };
     const handleCardClick = (title: TechId) => {
@@ -120,10 +120,10 @@ export default function Technology() {
         } else {
         setSelected(title);
         setClosingId(null);
-        setIsClosingPng(false);
-        setShowPngs(false);
+        setIsClosingImages(false);
+        setShowImages(false);
 
-        // Calculer la position des PNG
+        // Calculer la position des images
         setTimeout(() => {
             if (gridRef.current) {
                 const gridRect = gridRef.current.getBoundingClientRect();
@@ -134,7 +134,7 @@ export default function Technology() {
                     // En mobile: 2 colonnes, Frontend/Design/Tools sont colonne gauche (0), Backend/Deployment/Ai sont colonne droite (1)
                     const clickedCardIndex = cards.findIndex(c => c.querySelector('h3')?.textContent === title);
                     const clickedCol = clickedCardIndex % 2;
-                    // Afficher les PNG sur l'autre colonne
+                    // Afficher les images sur l'autre colonne
                     const targetCol = clickedCol === 0 ? 1 : 0;
                     const targetCards = cards.filter((_, idx) => idx % 2 === targetCol);
 
@@ -146,7 +146,7 @@ export default function Technology() {
                         const firstCard = targetCards[0].getBoundingClientRect();
                         const centerX = firstCard.left - gridRect.left + firstCard.width / 2;
 
-                        setPngPosition({
+                        setImagePosition({
                             top: centerY,
                             left: centerX
                         });
@@ -157,7 +157,7 @@ export default function Technology() {
                     // Design, Tools, Ai sont en deuxième ligne (row 1)
                     const clickedCardIndex = cards.findIndex(c => c.querySelector('h3')?.textContent === title);
                     const clickedRow = Math.floor(clickedCardIndex / 3);
-                    // Afficher les PNG sur l'autre ligne
+                    // Afficher les images sur l'autre ligne
                     const targetRow = clickedRow === 0 ? 1 : 0;
                     const targetCards = cards.filter((_, idx) => {
                         const row = Math.floor(idx / 3);
@@ -172,7 +172,7 @@ export default function Technology() {
                         // Centre horizontal de la grille (relatif)
                         const centerX = gridRect.width / 2;
 
-                        setPngPosition({
+                        setImagePosition({
                             top: centerY,
                             left: centerX
                         });
@@ -181,7 +181,7 @@ export default function Technology() {
             }
         }, 100);
 
-        setTimeout(() => setShowPngs(true), 500);
+        setTimeout(() => setShowImages(true), 500);
         setTimeout(() => {
             const card = document.querySelector(`.card.active`);
             if (card) {
@@ -195,7 +195,7 @@ export default function Technology() {
         }
     };
     const currentId = selected ?? closingId;
-    const currentPngList = currentId ? pngLists[currentId] : [];
+    const currentImageList = currentId ? techImages[currentId] : [];
     return (
         <div
         className="grid"
@@ -242,18 +242,18 @@ export default function Technology() {
             </div>
             );
         })}
-        {(showPngs || isClosingPng) && currentId && (
+        {(showImages || isClosingImages) && currentId && (
             <div
-            className={`png ${getPngListPositionClass()} ${
-                isClosingPng ? "closing" : ""
+            className={`image-list ${getImageListPositionClass()} ${
+                isClosingImages ? "closing" : ""
             }`}
             style={{
-                top: `${pngPosition.top}px`,
-                left: `${pngPosition.left}px`,
+                top: `${imagePosition.top}px`,
+                left: `${imagePosition.left}px`,
                 transform: 'translate(-50%, -50%)'
             }}
             >
-            {currentPngList.map((src, i) => (
+            {currentImageList.map((src, i) => (
                 <img
                 key={i}
                 src={src}
