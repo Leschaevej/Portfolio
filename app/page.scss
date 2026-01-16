@@ -35,8 +35,11 @@
             @media (min-width: 1025px) {
                 flex-direction: row;
             }
-            button {
+            a {
                 position: relative;
+                display: flex;
+                align-items: center;
+                justify-content: center;
                 background-color: var(--mainBackgroundColor);
                 color: var(--mainTextColor);
                 border: 1px solid var(--mainColor);
@@ -50,6 +53,7 @@
                 font-size: var(--fontSizeP);
                 width: 100%;
                 height: fit-content;
+                text-decoration: none;
                 @media (min-width: 1025px) {
                     width: 30%;
                 }
@@ -74,13 +78,6 @@
                         &::before {
                             width: 100%;
                         }
-                    }
-                }
-                &.tapped {
-                    color: var(--secondTextColor);
-                    &::before {
-                        width: 100%;
-                        transition: width 0.5s ease;
                     }
                 }
             }

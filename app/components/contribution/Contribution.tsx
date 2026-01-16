@@ -1,12 +1,21 @@
 'use client';
-import { useEffect, useState, useRef, useLayoutEffect } from 'react';
+import { useMemo, useRef, useLayoutEffect, useState } from 'react';
+import useSWR from 'swr';
 import './Contribution.scss';
 
 type ContributionData = number[][];
 const ROW_COUNT = 4;
+
+const fetcher = (url: string) => fetch(url).then(res => {
+    if (!res.ok) throw new Error('Erreur réseau');
+    return res.json();
+});
 export default function Contribution() {
-    const [data, setData] = useState<ContributionData>([]);
-    const [maxValue, setMaxValue] = useState(0);
+    const { data, error } = useSWR<ContributionData>('/api/contributions', fetcher, {
+        revalidateOnFocus: false,
+        refreshInterval: 3600000,
+        keepPreviousData: true,
+    });
     const containerRef = useRef<HTMLDivElement>(null);
     const [containerWidth, setContainerWidth] = useState(0);
     const [containerHeight, setContainerHeight] = useState(0);
@@ -31,22 +40,11 @@ export default function Contribution() {
             window.removeEventListener('resize', updateSize);
         };
     }, []);
-    useEffect(() => {
-        async function fetchData() {
-        try {
-            const res = await fetch('/api/contributions');
-            if (!res.ok) throw new Error('Erreur réseau');
-            const jsonData: ContributionData = await res.json();
-            setData(jsonData);
-            const flat = jsonData.flat();
-            const max = Math.max(...flat);
-            setMaxValue(max);
-        } catch (error) {
-            console.error('Erreur fetch contributions:', error);
-        }
-        }
-        fetchData();
-    }, []);
+    const maxValue = useMemo(() => {
+        if (!data) return 0;
+        const flat = data.flat();
+        return Math.max(...flat);
+    }, [data]);
     function getColorFromValue(value: number, max: number) {
         if (value === 0) return '#141b26';
         const step = max / 4;
@@ -67,7 +65,7 @@ export default function Contribution() {
     const cellHeight = cellSizeFromHeight;
     const colCount = colCountEstimate;
     const maxCells = colCount * ROW_COUNT;
-    const flatData = data.flat();
+    const flatData = data ? data.flat() : [];
     const reversedData = [...flatData].reverse();
     const cellsGrid = new Array(maxCells).fill(0);
     for (let i = 0; i < reversedData.length; i++) {
@@ -87,7 +85,13 @@ export default function Contribution() {
                 gap: `${gapSize}px`,
             }}
             >
-            {cellsGrid.length > 0 ? (
+            {error ? (
+                <p className="status">Erreur</p>
+            ) : !data ? (
+                Array.from({ length: maxCells }).map((_, index) => (
+                    <div key={index} className="cell skeleton" />
+                ))
+            ) : (
                 cellsGrid.map((value, index) => (
                 <div
                     key={index}
@@ -95,8 +99,6 @@ export default function Contribution() {
                     style={{ backgroundColor: getColorFromValue(value, maxValue) }}
                 />
                 ))
-            ) : (
-                <p>Chargement...</p>
             )}
         </div>
     );

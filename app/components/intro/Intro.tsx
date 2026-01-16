@@ -15,8 +15,18 @@ const Intro: React.FC = () => {
     const [shrink, setShrink] = useState(false);
     const [slideUp, setSlideUp] = useState(false);
     const [hidden, setHidden] = useState(false);
+    const [checked, setChecked] = useState(false);
     const pathsRef = useRef<(SVGPathElement | null)[]>([]);
+
     useEffect(() => {
+        if (sessionStorage.getItem('introSeen') === 'true') {
+            setHidden(true);
+        }
+        setChecked(true);
+    }, []);
+
+    useEffect(() => {
+        if (!checked || hidden) return;
         const start = performance.now();
         const animate = (now: number) => {
         const progress = Math.min((now - start) / animationDuration, 1);
@@ -36,14 +46,18 @@ const Intro: React.FC = () => {
         const shrinkTimer = setTimeout(() => setShrink(true), animationDuration + slideUpDelay - 300);
         const slideTimer = setTimeout(() => {
         setSlideUp(true);
-        setTimeout(() => setHidden(true), 1000);
+        setTimeout(() => {
+            setHidden(true);
+            sessionStorage.setItem('introSeen', 'true');
+        }, 1000);
         }, animationDuration + slideUpDelay);
         return () => {
             clearTimeout(fillTimer);
             clearTimeout(shrinkTimer);
             clearTimeout(slideTimer);
         };
-    }, []);
+    }, [checked, hidden]);
+
     if (hidden) return null;
     return (
         <div className={`intro ${slideUp ? "slideUp" : ""}`}>

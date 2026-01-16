@@ -1,5 +1,43 @@
 @use '@/app/Functions.scss' as *;
 
+.skeleton {
+    display: block;
+    background: linear-gradient(90deg, var(--secondBackgroundColor) 25%, var(--thirdBackgroundColor) 50%, var(--secondBackgroundColor) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+}
+.skeleton-icon {
+    width: fluid(30, 50);
+    height: fluid(30, 50);
+    border-radius: 50%;
+}
+.skeleton-temp {
+    width: fluid(60, 100);
+    height: var(--fontSizeH2);
+    margin-left: 5px;
+}
+.skeleton-value {
+    width: fluid(40, 60);
+    height: var(--fontSizeWind);
+}
+@keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+}
+.error {
+    color: var(--mainTextColor);
+    font-size: var(--fontSizeH3);
+}
+.status {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: var(--fontSizeH3);
+    color: var(--mainTextColor);
+}
 .conteneur{
     display: flex;
     flex-direction: column;

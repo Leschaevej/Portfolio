@@ -38,11 +38,7 @@ export default function Contact() {
         headers: {
             'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-            name: 'Utilisateur',
-            email,
-            message: 'Formulaire rapide',
-        }),
+        body: JSON.stringify({ email }),
         });
         const data = await res.json();
         if (data.success) {
@@ -52,7 +48,6 @@ export default function Contact() {
         throw new Error('Échec envoi');
         }
     } catch (error) {
-        console.error('Erreur envoi email :', error);
         setStatus('error');
     } finally {
         setTimeout(() => setStatus('idle'), 2000);

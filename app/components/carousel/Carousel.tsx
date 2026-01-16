@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Image from "next/image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
 import "./Carousel.scss";
 
@@ -133,12 +134,20 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
         };
         return (
             <div key={`project-${index}`} className={`content ${animClass}`} style={style}>
-                <div className="image">
-                    <img
+                <a
+                    href={project.liveLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="image"
+                >
+                    <Image
                         src={project.imageSrc}
                         alt={project.title}
+                        fill
+                        sizes="(max-width: 768px) 100vw, 50vw"
+                        priority
                     />
-                </div>
+                </a>
                 <div className="info">
                     <div className="header">
                         <h3>{project.title}</h3>

@@ -9,10 +9,8 @@ import Clock from './components/clock/Clock';
 import Meteo from './components/meteo/Meteo';
 import Contribution from './components/contribution/Contribution';
 import Technology from './components/technology/Technology';
-import GitHub from '../app/assets/github.svg';
-import LinkedIn from '../app/assets/linkedin.svg';
+import Social from './components/social/Social';
 import Portfolio from '../app/assets/logo.svg';
-import Skybound from '../app/assets/skyboundStudio.svg';
 import Cloud1 from '../app/assets/cloud1.svg';
 import Cloud2 from '../app/assets/cloud2.svg';
 import RocketIcon from '../app/assets/rocket.svg';
@@ -33,6 +31,12 @@ export default function Home() {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
     useEffect(() => {
+        const timer = setTimeout(() => {
+            document.documentElement.classList.add('smooth-scroll');
+        }, 100);
+        return () => clearTimeout(timer);
+    }, []);
+    useEffect(() => {
         const calculateOffset = () => {
             if (clockRef.current && logoRef.current && modulRef.current) {
                 const clockRect = clockRef.current.getBoundingClientRect();
@@ -46,46 +50,7 @@ export default function Home() {
         window.addEventListener('resize', calculateOffset);
         return () => window.removeEventListener('resize', calculateOffset);
     }, [isDesktop]);
-    const scrollToSection = (id: string) => {
-        if (window.location.hash !== `#${id}`) {
-            window.location.hash = `#${id}`;
-        }
-        const el = document.getElementById(id);
-            if (el) {
-                el.scrollIntoView({ behavior: "smooth" });
-            }
-    };
-    const [aboutTapped, setAboutTapped] = useState(false);
-    const [contactTapped, setContactTapped] = useState(false);
-    const handleAboutTouchStart = () => {
-        setAboutTapped(true);
-        setTimeout(() => setAboutTapped(false), 500);
-    };
-    const handleContactTouchStart = () => {
-        setContactTapped(true);
-        setTimeout(() => setContactTapped(false), 500);
-    };
-    const [githubTapped, setGithubTapped] = useState(false);
-    const [linkedinTapped, setLinkedinTapped] = useState(false);
-    const [portfolioTapped, setPortfolioTapped] = useState(false);
-    const [skyboundTapped, setSkyboundTapped] = useState(false);
-    const handleGithubTouchStart = () => {
-        setGithubTapped(true);
-        setTimeout(() => setGithubTapped(false), 500);
-    };
-    const handleLinkedinTouchStart = () => {
-        setLinkedinTapped(true);
-        setTimeout(() => setLinkedinTapped(false), 500);
-    };
-    const handlePortfolioTouchStart = () => {
-        setPortfolioTapped(true);
-        setTimeout(() => setPortfolioTapped(false), 500);
-    };
-    const handleSkyboundTouchStart = () => {
-        setSkyboundTapped(true);
-        setTimeout(() => setSkyboundTapped(false), 500);
-    };
-    return (
+        return (
         <main>
             <div id="home" className="section">
                 <div className="introduction">
@@ -94,72 +59,17 @@ export default function Home() {
                 </div>
                 <div className="link">
                     <div className="shortcuts">
-                        <button
-                            type="button"
-                            onClick={() => scrollToSection("project")}
-                            className="primary"
-                            >
+                        <a href="#project" className="primary">
                             <span>Projet</span>
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => scrollToSection("about")}
-                            onTouchStart={handleAboutTouchStart}
-                            className={aboutTapped ? "tapped" : ""}
-                            >
+                        </a>
+                        <a href="#about">
                             <span>A Propos</span>
-                        </button>
-                        <button
-                            type="button"
-                            onClick={() => scrollToSection("contact")}
-                            onTouchStart={handleContactTouchStart}
-                            className={contactTapped ? "tapped" : ""}
-                            >
+                        </a>
+                        <a href="#contact">
                             <span>Contact</span>
-                        </button>
-                    </div>
-                    <div className="socials">
-                        <a
-                            href="https://github.com/Leschaevej?tab=repositories"
-                            className={`github ${githubTapped ? "tapped" : ""}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="GitHub"
-                            onTouchStart={handleGithubTouchStart}
-                        >
-                            <GitHub />
-                        </a>
-                        <a
-                            href="https://linkedin.com/in/jimmy-leschaeve-11728a168/"
-                            className={`linkedin ${linkedinTapped ? "tapped" : ""}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="LinkedIn"
-                            onTouchStart={handleLinkedinTouchStart}
-                        >
-                            <LinkedIn />
-                        </a>
-                        <a
-                            href="https://jimmyhub.fr"
-                            className={`portfolio ${portfolioTapped ? "tapped" : ""}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Portfolio"
-                            onTouchStart={handlePortfolioTouchStart}
-                        >
-                            <Portfolio />
-                        </a>
-                        <a
-                            href="https://skyboundstudio.fr"
-                            className={`skybound ${skyboundTapped ? "tapped" : ""}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            aria-label="Skybound Studio"
-                            onTouchStart={handleSkyboundTouchStart}
-                        >
-                            <Skybound />
                         </a>
                     </div>
+                    <Social />
                 </div>
             </div>
             <div id="project" className="section">
@@ -182,48 +92,7 @@ export default function Home() {
                             <div className="shortcuts">
                                 <button type="button" onClick={() => window.open("/cv.pdf", "_blank")}><span>Télécharger mon CV</span></button>
                             </div>
-                            <div className="socials">
-                                <a
-                                    href="https://github.com/Leschaevej?tab=repositories"
-                                    className={`github ${githubTapped ? "tapped" : ""}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="GitHub"
-                                    onTouchStart={handleGithubTouchStart}
-                                >
-                                    <GitHub />
-                                </a>
-                                <a
-                                    href="https://linkedin.com/in/jimmy-leschaeve-11728a168/"
-                                    className={`linkedin ${linkedinTapped ? "tapped" : ""}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="LinkedIn"
-                                    onTouchStart={handleLinkedinTouchStart}
-                                >
-                                    <LinkedIn />
-                                </a>
-                                <a
-                                    href="https://jimmyleschaeve.fr"
-                                    className={`portfolio ${portfolioTapped ? "tapped" : ""}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Portfolio"
-                                    onTouchStart={handlePortfolioTouchStart}
-                                >
-                                    <Portfolio />
-                                </a>
-                                <a
-                                    href="https://skyboundstudio.fr"
-                                    className={`skybound ${skyboundTapped ? "tapped" : ""}`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label="Skybound Studio"
-                                    onTouchStart={handleSkyboundTouchStart}
-                                >
-                                    <Skybound />
-                                </a>
-                            </div>
+                            <Social />
                         </div>
                     </div>
                     <div className="right">

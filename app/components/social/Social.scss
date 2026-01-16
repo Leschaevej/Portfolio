@@ -1,0 +1,59 @@
+@use '@/app/Functions.scss' as *;
+
+.socials {
+    display: flex;
+    z-index: 1;
+    gap: fluid(10, 30);
+    justify-content: space-around;
+    @media (min-width: 769px) {
+        justify-content: flex-start;
+    }
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: var(--secondBackgroundColor);
+        transition: border-radius 0.2s ease, background-color 0.2s ease;
+        aspect-ratio: 1/1;
+        flex: 1;
+        max-width: 70px;
+        svg {
+            transition: fill 0.2s ease, color 0.2s ease;
+            width: 60%;
+            height: 60%;
+        }
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                border-radius: 50%;
+                &.github svg {
+                    color: var(--githubcolor);
+                }
+                &.linkedin svg {
+                    color: var(--linkedincolor);
+                }
+                &.portfolio svg {
+                    color: var(--portfoliocolor);
+                }
+                &.skybound svg {
+                    color: var(--skyboundcolor);
+                }
+            }
+        }
+        &.tapped {
+            border-radius: 25px;
+
+            &.github svg {
+                color: var(--githubcolor);
+            }
+            &.linkedin svg {
+                color: var(--linkedincolor);
+            }
+            &.portfolio svg {
+                color: var(--portfoliocolor);
+            }
+            &.skybound svg {
+                color: var(--skyboundcolor);
+            }
+        }
+    }
+}

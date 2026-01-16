@@ -1,12 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "../../assets/logo.svg";
 import "./Header.scss";
 
 export default function Header() {
-    const router = useRouter();
     const pathname = usePathname();
     const [menuState, setMenuState] = useState<
         "visible" | "pushingUp" | "hidden" | "pushingInFromTop"

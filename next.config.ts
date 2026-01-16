@@ -3,6 +3,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   devIndicators: false,
   productionBrowserSourceMaps: true,
+  experimental: {
+    scrollRestoration: true,
+  },
 
   turbopack: {
     rules: {
