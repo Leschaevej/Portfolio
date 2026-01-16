@@ -68,9 +68,7 @@ a {
 }
 html {
     overflow-x: hidden;
-    &.smooth-scroll {
-        scroll-behavior: smooth;
-    }
+    scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: var(--scroolBarThumb) transparent;
     @media (max-width: 768px) {

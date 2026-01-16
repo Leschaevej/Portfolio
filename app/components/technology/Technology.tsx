@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import Image from "next/image";
 import "./Technology.scss";
 import Frontend from "../../assets/frontend.svg";
 import Backend from "../../assets/backend.svg";
@@ -233,10 +234,12 @@ export default function Technology() {
             }}
             >
             {currentImageList.map((src, i) => (
-                <img
+                <Image
                 key={i}
                 src={src}
                 alt={`${currentId} logo ${i}`}
+                width={100}
+                height={100}
                 style={{ "--i": i } as React.CSSProperties}
                 />
             ))}
