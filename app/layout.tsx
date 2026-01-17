@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Analytics } from "@vercel/analytics/next"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.scss";
 import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Intro from './components/intro/Intro';
+import Cookies from './components/cookies/Cookies';
 import { instrumentSans } from './fonts';
 
 interface SiteConfig {
@@ -180,7 +180,7 @@ export default function RootLayout({
                 <Header />
                 {children}
                 <Footer />
-                <Analytics />
+                <Cookies />
                 <SpeedInsights />
             </body>
         </html>

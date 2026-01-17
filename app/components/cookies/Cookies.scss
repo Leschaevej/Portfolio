@@ -1,0 +1,172 @@
+@use '@/app/Functions.scss' as *;
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9998;
+    padding: fluid(15, 30);
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+    pointer-events: none;
+    .modal {
+        display: flex;
+        flex-direction: column;
+        background-color: var(--secondBackgroundColor);
+        border-radius: fluid(15, 30);
+        width: 100%;
+        box-shadow: inset 0 0 5px rgba(var(--mainColorRgb), 0.3);
+        padding: fluid(15, 30);
+        gap: fluid(10, 30);
+        transform: translateX(0);
+        transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        pointer-events: auto;
+        @media (min-width: 1025px) {
+            width: 70%;
+        }
+        &.entering {
+            transform: translateX(120%);
+        }
+        &.exiting {
+            transform: translateX(120%);
+        }
+        .header {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            gap: fluid(10, 30);
+            h2 {
+                font-size: var(--fontSizeH3);
+                color: var(--mainColor);
+                text-shadow: 0 0 10px rgba(var(--mainColorRgb), 0.5);
+            }
+            p {
+                font-size: var(--fontSizeP);
+                color: var(--mainTextColor);
+                line-height: 1.4;
+            }
+        }
+        .content {
+            display: flex;
+            flex-direction: column;
+            gap: fluid(10, 30);
+            .item {
+                display: flex;
+                flex-direction: column;
+                gap: fluid(10, 30);
+                border: 2px solid var(--mainColor);
+                border-radius: fluid(10, 15);
+                color: var(--mainTextColor);
+                padding: fluid(10, 15);
+                box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.2);
+                .top {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    gap: fluid(10, 30);
+                    h3 {
+                        font-size: var(--fontSizeP);
+                        color: var(--mainColor);
+                        margin: 0;
+                    }
+                    .switch {
+                        display: flex;
+                        align-items: center;
+                        gap: fluid(10, 30);
+                        .text {
+                            font-size: var(--fontSizeP);
+                            color: var(--fourthTextColor);
+                            white-space: nowrap;
+                        }
+                        .toggle {
+                            width: fluid(44, 50);
+                            height: fluid(24, 28);
+                            background-color: var(--thirdBackgroundColor);
+                            border-radius: fluid(12, 14);
+                            position: relative;
+                            cursor: pointer;
+                            border: 2px solid var(--mainColor);
+                            transition: background-color 0.3s ease-in-out;
+                            flex-shrink: 0;
+                            &.enabled {
+                                background-color: rgba(var(--mainColorRgb), 0.3);
+                                .dot {
+                                    transform: translate(calc(100% + 2px), -50%);
+                                    background-color: var(--mainColor);
+                                }
+                            }
+                            .dot {
+                                width: fluid(16, 20);
+                                height: fluid(16, 20);
+                                background-color: var(--fourthTextColor);
+                                border-radius: 50%;
+                                position: absolute;
+                                top: 50%;
+                                left: 2px;
+                                transform: translateY(-50%);
+                                transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+                            }
+                        }
+                    }
+                }
+                p {
+                    font-size: var(--fontSizeP);
+                    color: var(--fourthTextColor);
+                    line-height: 1.4;
+                }
+            }
+        }
+        .actions {
+            display: flex;
+            gap: fluid(10, 30);
+            flex-direction: column;
+            @media (min-width: 1025px) {
+                flex-direction: row;
+            }
+            button {
+                font-size: var(--fontSizeP);
+                padding: fluid(10, 15);
+                border: 2px solid var(--mainColor);
+                border-radius: fluid(10, 15);
+                cursor: pointer;
+                transition: all 0.3s ease;
+                flex: 1;
+                font-weight: 600;
+                &.accept {
+                    background-color: var(--mainColor);
+                    color: var(--secondTextColor);
+                    @media (hover: hover) and (pointer: fine) {
+                        &:hover {
+                            background-color: var(--buttonHoverColor);
+                            border-color: var(--buttonHoverColor);
+                        }
+                    }
+                }
+                &.minimum,
+                &.manage {
+                    background-color: transparent;
+                    color: var(--mainColor);
+                    @media (hover: hover) and (pointer: fine) {
+                        &:hover {
+                            background-color: var(--mainColor);
+                            color: var(--secondTextColor);
+                        }
+                    }
+                }
+                &.save {
+                    background-color: var(--mainColor);
+                    color: var(--secondTextColor);
+                    @media (hover: hover) and (pointer: fine) {
+                        &:hover {
+                            background-color: var(--buttonHoverColor);
+                            border-color: var(--buttonHoverColor);
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
