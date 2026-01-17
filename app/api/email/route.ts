@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import type SMTPTransport from 'nodemailer/lib/smtp-transport';
 
 const emailLimiter = new Map<string, number[]>();
 const MAX_EMAILS_PER_HOUR = 3;
@@ -63,7 +64,7 @@ export async function POST(req: Request) {
                 pass: process.env.MAIL_PASSWORD,
             },
             timeout: 10000,
-        });
+        } as SMTPTransport.Options);
         await transporter.sendMail({
             from: process.env.MAIL_USER,
             to: process.env.MAIL_USER,

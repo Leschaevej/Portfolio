@@ -1,7 +1,7 @@
 'use client';
 import { useEffect, useState, useRef } from 'react';
-import { spaceMono } from '../../fonts';
-import Portfolio from '../../assets/logo.svg';
+import { spaceMono } from '@/app/fonts';
+import Portfolio from '@/app/assets/logo.svg';
 import './Clock.scss';
 
 export default function Clock() {

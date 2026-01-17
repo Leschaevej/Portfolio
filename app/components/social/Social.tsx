@@ -1,10 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import GitHub from '../../assets/github.svg';
-import LinkedIn from '../../assets/linkedin.svg';
-import Portfolio from '../../assets/logo.svg';
-import Skybound from '../../assets/skyboundStudio.svg';
+import GitHub from '@/app/assets/github.svg';
+import LinkedIn from '@/app/assets/linkedin.svg';
+import Portfolio from '@/app/assets/logo.svg';
+import Skybound from '@/app/assets/skyboundStudio.svg';
+import { ANIMATION } from '@/app/constants';
 import './Social.scss';
 
 interface SocialLink {
@@ -48,7 +49,7 @@ export default function Social() {
     const [tappedLink, setTappedLink] = useState<string | null>(null);
     const handleTouchStart = (id: string) => {
         setTappedLink(id);
-        setTimeout(() => setTappedLink(null), 500);
+        setTimeout(() => setTappedLink(null), ANIMATION.TAP_FEEDBACK);
     };
     return (
         <div className="socials">

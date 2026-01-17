@@ -3,24 +3,25 @@
 import { useState, useEffect } from "react";
 import './page.scss';
 import Carousel from "./components/carousel/Carousel";
-import projets from "../app/projects.json";
-import Contact from './components/contact/Contact';
-import Clock from './components/clock/Clock';
-import Meteo from './components/meteo/Meteo';
-import Contribution from './components/contribution/Contribution';
-import Technology from './components/technology/Technology';
-import Social from './components/social/Social';
-import Cloud1 from '../app/assets/cloud1.svg';
-import Cloud2 from '../app/assets/cloud2.svg';
-import RocketIcon from '../app/assets/rocket.svg';
-import RocketFire from '../app/assets/fire.svg';
-import Moon from '../app/assets/moon.svg';
+import projets from "@/app/projects.json";
+import Contact from '@/app/components/contact/Contact';
+import Clock from '@/app/components/clock/Clock';
+import Meteo from '@/app/components/meteo/Meteo';
+import Contribution from '@/app/components/contribution/Contribution';
+import Technology from '@/app/components/technology/Technology';
+import Social from '@/app/components/social/Social';
+import Cloud1 from '@/app/assets/cloud1.svg';
+import Cloud2 from '@/app/assets/cloud2.svg';
+import RocketIcon from '@/app/assets/rocket.svg';
+import RocketFire from '@/app/assets/fire.svg';
+import Moon from '@/app/assets/moon.svg';
+import { BREAKPOINTS } from '@/app/constants';
 
 export default function Home() {
     const [isDesktop, setIsDesktop] = useState(false);
     useEffect(() => {
         const handleResize = () => {
-            setIsDesktop(window.innerWidth >= 769);
+            setIsDesktop(window.innerWidth >= BREAKPOINTS.TABLET);
         };
         handleResize();
         window.addEventListener('resize', handleResize);

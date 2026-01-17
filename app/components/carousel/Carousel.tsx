@@ -19,40 +19,37 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isAnimating, setIsAnimating] = useState(false);
     const [animationDirection, setAnimationDirection] = useState<"left" | "right" | null>(null);
+    const [pendingIndex, setPendingIndex] = useState<number | null>(null);
     const [touchStart, setTouchStart] = useState<number | null>(null);
     const [touchEnd, setTouchEnd] = useState<number | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [dragOffset, setDragOffset] = useState(0);
     const minSwipeDistance = 50;
+    const handleAnimationEnd = () => {
+        if (pendingIndex !== null) {
+            setCurrentIndex(pendingIndex);
+            setPendingIndex(null);
+        }
+        setIsAnimating(false);
+        setAnimationDirection(null);
+    };
     const handlePrevious = () => {
         if (isAnimating) return;
         setIsAnimating(true);
         setAnimationDirection("right");
-        setTimeout(() => {
-            setCurrentIndex((prev) => (prev === 0 ? projects.length - 1 : prev - 1));
-            setIsAnimating(false);
-            setAnimationDirection(null);
-        }, 800);
+        setPendingIndex(currentIndex === 0 ? projects.length - 1 : currentIndex - 1);
     };
     const handleNext = () => {
         if (isAnimating) return;
         setIsAnimating(true);
         setAnimationDirection("left");
-        setTimeout(() => {
-            setCurrentIndex((prev) => (prev === projects.length - 1 ? 0 : prev + 1));
-            setIsAnimating(false);
-            setAnimationDirection(null);
-        }, 800);
+        setPendingIndex(currentIndex === projects.length - 1 ? 0 : currentIndex + 1);
     };
     const handleDotClick = (index: number) => {
         if (index === currentIndex || isAnimating) return;
         setIsAnimating(true);
         setAnimationDirection(index > currentIndex ? "left" : "right");
-        setTimeout(() => {
-            setCurrentIndex(index);
-            setIsAnimating(false);
-            setAnimationDirection(null);
-        }, 800);
+        setPendingIndex(index);
     };
     const onTouchStart = (e: React.TouchEvent) => {
         setTouchEnd(null);
@@ -122,7 +119,7 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
         ? (currentIndex === projects.length - 1 ? 0 : currentIndex + 1)
         : (currentIndex === 0 ? projects.length - 1 : currentIndex - 1);
     const nextProject = isAnimating ? projects[nextIndex] : null;
-    const renderProject = (project: Project, index: number, animClass: string, direction?: number) => {
+    const renderProject = (project: Project, index: number, animClass: string, direction?: number, onAnimEnd?: () => void) => {
         const baseTransform = direction ? `translateX(${direction * 150}%)` : '';
         const dragTransform = dragOffset !== 0 && !direction ? `translateX(${dragOffset}px)` : '';
         const transform = dragTransform || baseTransform;
@@ -133,7 +130,7 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
             transition: dragOffset !== 0 ? 'none' : undefined
         };
         return (
-            <div key={`project-${index}`} className={`content ${animClass}`} style={style}>
+            <div key={`project-${index}`} className={`content ${animClass}`} style={style} onAnimationEnd={onAnimEnd}>
                 <a
                     href={project.liveLink}
                     target="_blank"
@@ -202,7 +199,8 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
                     nextProject,
                     nextIndex,
                     "enter",
-                    animationDirection === "left" ? 1 : -1
+                    animationDirection === "left" ? 1 : -1,
+                    handleAnimationEnd
                 )}
             </div>
             <div className="controls">

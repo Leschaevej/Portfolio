@@ -2,7 +2,7 @@
 
 import { useState, FormEvent } from 'react';
 import './Contact.scss';
-import NavetteSVG from '../../assets/navette.svg';
+import NavetteSVG from '@/app/assets/navette.svg';
 
 export default function Contact() {
     const [email, setEmail] = useState('');

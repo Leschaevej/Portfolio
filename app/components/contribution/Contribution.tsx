@@ -54,35 +54,41 @@ export default function Contribution() {
         if (value <= 4 * step) return '#53d166';
         return '#53d166';
     }
-    const gapSize = containerHeight > 0 ? Math.max(2, Math.min(containerHeight, containerWidth) * 0.015) : 3;
-    const cellSizeFromHeight = containerHeight > 0 ? (containerHeight - gapSize * (ROW_COUNT - 1)) / ROW_COUNT : 15;
-    const colCountEstimate = containerWidth > 0 && cellSizeFromHeight > 0
-        ? Math.floor((containerWidth + gapSize) / (cellSizeFromHeight + gapSize))
-        : 1;
-    const cellWidth = containerWidth > 0 && colCountEstimate > 0
-        ? (containerWidth - gapSize * (colCountEstimate - 1)) / colCountEstimate
-        : cellSizeFromHeight;
-    const cellHeight = cellSizeFromHeight;
-    const colCount = colCountEstimate;
-    const maxCells = colCount * ROW_COUNT;
-    const flatData = data ? data.flat() : [];
-    const reversedData = [...flatData].reverse();
-    const cellsGrid = new Array(maxCells).fill(0);
-    for (let i = 0; i < reversedData.length; i++) {
-        const col = colCount - 1 - Math.floor(i / ROW_COUNT);
-        if (col < 0) break;
-        const row = ROW_COUNT - 1 - (i % ROW_COUNT);
-        const indexGrid = row * colCount + col;
-        cellsGrid[indexGrid] = reversedData[i];
-    }
+    const gridLayout = useMemo(() => {
+        const gapSize = containerHeight > 0 ? Math.max(2, Math.min(containerHeight, containerWidth) * 0.015) : 3;
+        const cellSizeFromHeight = containerHeight > 0 ? (containerHeight - gapSize * (ROW_COUNT - 1)) / ROW_COUNT : 15;
+        const colCountEstimate = containerWidth > 0 && cellSizeFromHeight > 0
+            ? Math.floor((containerWidth + gapSize) / (cellSizeFromHeight + gapSize))
+            : 1;
+        const cellWidth = containerWidth > 0 && colCountEstimate > 0
+            ? (containerWidth - gapSize * (colCountEstimate - 1)) / colCountEstimate
+            : cellSizeFromHeight;
+        return { gapSize, cellWidth, cellHeight: cellSizeFromHeight, colCount: colCountEstimate };
+    }, [containerWidth, containerHeight]);
+
+    const cellsGrid = useMemo(() => {
+        const maxCells = gridLayout.colCount * ROW_COUNT;
+        const flatData = data ? data.flat() : [];
+        const reversedData = [...flatData].reverse();
+        const grid = new Array(maxCells).fill(0);
+        for (let i = 0; i < reversedData.length; i++) {
+            const col = gridLayout.colCount - 1 - Math.floor(i / ROW_COUNT);
+            if (col < 0) break;
+            const row = ROW_COUNT - 1 - (i % ROW_COUNT);
+            const indexGrid = row * gridLayout.colCount + col;
+            grid[indexGrid] = reversedData[i];
+        }
+        return grid;
+    }, [data, gridLayout.colCount]);
+    const maxCells = gridLayout.colCount * ROW_COUNT;
     return (
         <div
             ref={containerRef}
             className="grid"
             style={{
-                gridTemplateColumns: `repeat(${colCount}, ${cellWidth}px)`,
-                gridTemplateRows: `repeat(${ROW_COUNT}, ${cellHeight}px)`,
-                gap: `${gapSize}px`,
+                gridTemplateColumns: `repeat(${gridLayout.colCount}, ${gridLayout.cellWidth}px)`,
+                gridTemplateRows: `repeat(${ROW_COUNT}, ${gridLayout.cellHeight}px)`,
+                gap: `${gridLayout.gapSize}px`,
             }}
             >
             {error ? (

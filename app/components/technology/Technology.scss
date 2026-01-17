@@ -107,7 +107,7 @@
     .image-list {
         display: flex;
         position: absolute;
-        gap: 20px;
+        gap: fluid(10, 30);
         justify-content: center;
         align-items: center;
         pointer-events: none;
@@ -117,6 +117,8 @@
             animation: pngFlyIn 0.6s ease-out forwards;
             animation-delay: calc(var(--i) * 0.1s);
             width: fluid(60, 100);
+            height: auto;
+            object-fit: contain;
         }
         &.closing img {
             opacity: 1;
