@@ -1,3 +1,4 @@
+"use client";
 import React, { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import "./Technology.scss";
@@ -168,6 +169,10 @@ export default function Technology() {
                         key={title}
                         className={`card ${isOther ? "fadeOut" : "fadeIn"} ${(isSelected || isClosing) ? "active" : ""} ${isSelected ? "glowIn pulse" : ""} ${isClosing ? "glowOut isClosing" : ""}`}
                         onClick={() => handleCardClick(title)}
+                        onKeyDown={(e) => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); handleCardClick(title); } }}
+                        tabIndex={0}
+                        role="button"
+                        aria-pressed={isSelected}
                     >
                         <h3>{title}</h3>
                         <div className="wrapper">
@@ -181,16 +186,20 @@ export default function Technology() {
                     className={`image-list ${getImageListPositionClass()} ${isClosingImages ? "closing" : ""}`}
                     style={{ top: imagePosition.top, left: imagePosition.left, transform: 'translate(-50%, -50%)' }}
                 >
-                    {currentImageList.map((src, i) => (
-                        <Image
-                            key={src}
-                            src={src}
-                            alt={`${currentId} logo ${i}`}
-                            width={100}
-                            height={100}
-                            style={{ "--i": i } as React.CSSProperties}
-                        />
-                    ))}
+                    {currentImageList.map((src, i) => {
+                        const techName = src.split('/').pop()?.replace('.webp', '') ?? '';
+                        return (
+                            <Image
+                                key={src}
+                                src={src}
+                                alt={`Logo ${techName}`}
+                                width={100}
+                                height={100}
+                                loading="lazy"
+                                style={{ "--i": i } as React.CSSProperties}
+                            />
+                        );
+                    })}
                 </div>
             )}
         </div>

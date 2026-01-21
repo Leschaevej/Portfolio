@@ -36,19 +36,16 @@
                 flex-direction: row;
             }
             a {
-                position: relative;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 background-color: var(--mainBackgroundColor);
                 color: var(--mainTextColor);
-                border: 1px solid var(--mainColor);
+                border: 2px solid var(--mainColor);
                 border-radius: fluid(10, 15);
                 padding: fluid(10, 15);
                 font-weight: bold;
-                z-index: 1;
-                overflow: hidden;
-                transition: all 0.5s ease;
+                transition: all $transition;
                 cursor: pointer;
                 font-size: var(--fontSizeP);
                 width: 100%;
@@ -57,96 +54,24 @@
                 @media (min-width: 1025px) {
                     width: 30%;
                 }
-                span {
-                    position: relative;
-                    z-index: 2;
-                }
-                &::before {
-                    content: "";
-                    position: absolute;
-                    top: 0;
-                    left: 0;
-                    height: 100%;
-                    width: 0%;
-                    background-color: var(--mainColor);
-                    z-index: 1;
-                    transition: width 0.5s ease;
-                }
                 @media (hover: hover) and (pointer: fine) {
                     &:hover {
+                        background-color: var(--mainColor);
                         color: var(--secondTextColor);
-                        &::before {
-                            width: 100%;
-                        }
                     }
                 }
             }
             .primary {
                 background-color: var(--mainColor);
                 color: var(--secondTextColor);
+                border: 2px solid var(--mainColor);
                 &::before {
                     display: none;
                 }
                 @media (hover: hover) and (pointer: fine) {
                     &:hover {
-                        background-color: var(--buttonHoverColor);
-                    }
-                }
-            }
-        }
-        .socials {
-            display: flex;
-            z-index: 1;
-            gap: fluid(10, 30);
-            justify-content: space-around;
-            @media (min-width: 769px) {
-                justify-content: flex-start;
-            }
-            a {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                background-color: var(--secondBackgroundColor);
-                transition: border-radius 0.2s ease, background-color 0.2s ease;
-                aspect-ratio: 1/1;
-                flex: 1;
-                max-width: 70px;
-                svg {
-                    transition: fill 0.2s ease, color 0.2s ease;
-                    width: 60%;
-                    height: 60%;
-                }
-                @media (hover: hover) and (pointer: fine) {
-                    &:hover {
-                        border-radius: 50%;
-
-                        &.github svg {
-                        color: var(--githubcolor);
-                        }
-                        &.linkedin svg {
-                        color: var(--linkedincolor);
-                        }
-                        &.portfolio svg {
-                        color: var(--portfoliocolor);
-                        }
-                        &.skybound svg {
-                        color: var(--skyboundcolor);
-                        }
-                    }
-                }
-                &.tapped {
-                    border-radius: 25px;
-                    &.github svg {
-                        color: var(--githubcolor);
-                    }
-                    &.linkedin svg {
-                        color: var(--linkedincolor);
-                    }
-                    &.portfolio svg {
-                        color: var(--portfoliocolor);
-                    }
-                    &.skybound svg {
-                        color: var(--skyboundcolor);
+                        background-color: var(--mainBackgroundColor);
+                        color: var(--mainColor);
                     }
                 }
             }
@@ -159,18 +84,6 @@
     z-index: 1;
     padding: 0 fluid(30, 150) fluid(30, 150) fluid(30, 150);
     gap: fluid(30, 50);
-    h2 {
-        background: linear-gradient(to bottom, #6d7173, #fcfcfc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
-        font-weight: bold;
-        font-size: var(--fontSizeH2);
-        text-align: center;
-        background-size: 100% 200%;
-        background-position: top;
-    }
     .carousel{
         position: relative;
         display: flex;
@@ -224,19 +137,6 @@
             border-radius: 50%;
         }
     }
-    h2 {
-        background: linear-gradient(to bottom, #6d7173, #fcfcfc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
-        font-weight: bold;
-        font-size: var(--fontSizeH2);
-        text-align: center;
-        background-size: 100% 200%;
-        background-position: top;
-        margin: fluid(30, 50) 0 fluid(30, 50) 0;
-    }
     .content {
         display: flex;
         flex-direction: column;
@@ -283,106 +183,22 @@
                     @media (min-width: 1025px) {
                         width: 100%;
                     }
-                    button {
-                        position: relative;
+                    a {
                         background-color: var(--mainBackgroundColor);
                         color: var(--mainTextColor);
-                        border: 1px solid var(--mainColor);
+                        border: 2px solid var(--mainColor);
                         border-radius: fluid(10, 15);
                         padding: fluid(10, 15);
                         font-weight: bold;
-                        z-index: 1;
-                        overflow: hidden;
-                        transition: all 0.5s ease;
+                        transition: all $transition;
                         width: 100%;
-                        cursor: pointer;
                         font-size: var(--fontSizeH3);
                         height: fit-content;
-                        span {
-                            position: relative;
-                            z-index: 2;
-                        }
-                        &::before {
-                            content: "";
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            height: 100%;
-                            width: 0%;
-                            background-color: var(--mainColor);
-                            z-index: 1;
-                            transition: width 0.5s ease;
-                        }
+                        text-align: center;
                         @media (hover: hover) and (pointer: fine) {
                             &:hover {
+                                background-color: var(--mainColor);
                                 color: var(--secondTextColor);
-                                &::before {
-                                    width: 100%;
-                                }
-                            }
-                        }
-                        &.tapped {
-                            color: var(--secondTextColor);
-                            &::before {
-                                width: 100%;
-                                transition: width 0.5s ease;
-                            }
-                        }
-                    }
-                }
-                .socials {
-                    display: flex;
-                    z-index: 1;
-                    gap: fluid(10, 30);
-                    justify-content: space-around;
-                    @media (min-width: 769px) {
-                        justify-content: flex-start;
-                    }
-                    a {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        background-color: var(--secondBackgroundColor);
-                        transition: border-radius 0.2s ease, background-color 0.2s ease;
-                        aspect-ratio: 1/1;
-                        flex: 1;
-                        max-width: 70px;
-                        svg {
-                            transition: fill 0.2s ease, color 0.2s ease;
-                            width: 60%;
-                            height: 60%;
-                        }
-                        @media (hover: hover) and (pointer: fine) {
-                            &:hover {
-                                border-radius: 50%;
-
-                                &.github svg {
-                                color: var(--githubcolor);
-                                }
-                                &.linkedin svg {
-                                color: var(--linkedincolor);
-                                }
-                                &.portfolio svg {
-                                color: var(--portfoliocolor);
-                                }
-                                &.skybound svg {
-                                color: var(--skyboundcolor);
-                                }
-                            }
-                        }
-                        &.tapped {
-                            border-radius: 25px;
-                            &.github svg {
-                                color: var(--githubcolor);
-                            }
-                            &.linkedin svg {
-                                color: var(--linkedincolor);
-                            }
-                            &.portfolio svg {
-                                color: var(--portfoliocolor);
-                            }
-                            &.skybound svg {
-                                color: var(--skyboundcolor);
                             }
                         }
                     }
@@ -480,7 +296,7 @@
                     --modul-offset: 0px;
                     .logo {
                         color: var(--secondTextColor);
-                        transition: opacity 0.5s ease;
+                        transition: opacity $transition;
                         height: fluid(50, 100);
                     }
                     > div {
@@ -525,12 +341,14 @@
 }
 #technology {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0 fluid(30, 150) fluid(30, 150) fluid(30, 150);
 }
 #contact {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding: 0 fluid(30, 150) fluid(30, 150) fluid(30, 150);

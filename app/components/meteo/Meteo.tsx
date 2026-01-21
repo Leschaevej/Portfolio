@@ -1,5 +1,5 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import './Meteo.scss';
 import { WiDaySunny, WiCloudy, WiRain, WiSnow, WiThunderstorm, WiFog, WiStrongWind, WiHumidity } from 'react-icons/wi';
@@ -29,26 +29,22 @@ function getWeatherIcon(code: number) {
     return <WiDaySunny className="icone" color="#f39c12" />;
 }
 
-function getCache(): WeatherData | undefined {
-    if (typeof window === 'undefined') return undefined;
-    try {
-        const cached = localStorage.getItem(CACHE_KEY);
-        return cached ? JSON.parse(cached) : undefined;
-    } catch {
-        return undefined;
-    }
-}
-
 export default function Meteo() {
-    const { data: weather, error } = useSWR<WeatherData>('/api/weather', fetcher, {
+    const [mounted, setMounted] = useState(false);
+    const { data: weather, error } = useSWR<WeatherData>(mounted ? '/api/weather' : null, fetcher, {
         revalidateOnFocus: false,
         refreshInterval: 600000,
-        fallbackData: getCache(),
     });
 
     useEffect(() => {
+        setMounted(true);
+    }, []);
+
+    useEffect(() => {
         if (weather) {
-            localStorage.setItem(CACHE_KEY, JSON.stringify(weather));
+            try {
+                localStorage.setItem(CACHE_KEY, JSON.stringify(weather));
+            } catch {}
         }
     }, [weather]);
     const isLoading = !weather && !error;

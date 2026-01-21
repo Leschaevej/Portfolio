@@ -6,7 +6,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    z-index: 9998;
+    z-index: 3;
     padding: fluid(15, 30);
     display: flex;
     align-items: flex-end;
@@ -89,7 +89,7 @@
                             position: relative;
                             cursor: pointer;
                             border: 2px solid var(--mainColor);
-                            transition: background-color 0.3s ease-in-out;
+                            transition: background-color $transition;
                             flex-shrink: 0;
                             &.enabled {
                                 background-color: rgba(var(--mainColorRgb), 0.3);
@@ -107,7 +107,7 @@
                                 top: 50%;
                                 left: 2px;
                                 transform: translateY(-50%);
-                                transition: transform 0.3s ease-in-out, background-color 0.3s ease-in-out;
+                                transition: transform $transition, background-color $transition;
                             }
                         }
                     }
@@ -132,7 +132,7 @@
                 border: 2px solid var(--mainColor);
                 border-radius: fluid(10, 15);
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all $transition;
                 flex: 1;
                 font-weight: 600;
                 &.accept {
@@ -140,8 +140,8 @@
                     color: var(--secondTextColor);
                     @media (hover: hover) and (pointer: fine) {
                         &:hover {
-                            background-color: var(--buttonHoverColor);
-                            border-color: var(--buttonHoverColor);
+                            background-color: var(--mainBackgroundColor);
+                            color: var(--mainColor);
                         }
                     }
                 }
@@ -161,8 +161,8 @@
                     color: var(--secondTextColor);
                     @media (hover: hover) and (pointer: fine) {
                         &:hover {
-                            background-color: var(--buttonHoverColor);
-                            border-color: var(--buttonHoverColor);
+                            background-color: var(--mainBackgroundColor);
+                            color: var(--mainColor);
                         }
                     }
                 }

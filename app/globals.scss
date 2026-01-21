@@ -12,14 +12,10 @@
     --secondTextColor: #101010;
     --thirdTextColor: #DBDBDB;
     --fourthTextColor:#6e6e6e;
-    --buttonHoverColor: #6cb33a;
     --inputColor: #DBDBDB;
     --errorColor: #c52724;
     --errorColorRgb: 197, 39, 36;
     --successColor: #428611;
-    --scroolBarThumb: #6b6b6b;
-    --scroolBarHover: #555;
-    --scroolBarBorder: #ffffff;
     --githubcolor:#3D2C8D;
     --linkedincolor:#0077B5;
     --portfoliocolor:#7bce3f;
@@ -39,21 +35,6 @@
     --fontSizeP: #{fluidFont(1, 1.75)};
     --fontSizeWind: #{fluidFont(1, 1.125)};
 }
-::-webkit-scrollbar {
-    width: 12px;
-    height: 12px;
-}
-::-webkit-scrollbar-track {
-    margin: 0;
-}
-::-webkit-scrollbar-thumb {
-    background-color: var(--mainColor);
-    border-radius: 6px;
-    border: 3px solid var(--mainBackgroundColor);
-}
-::-webkit-scrollbar-thumb:hover {
-    background-color: var(--buttonHoverColor);
-}
 * {
     margin: 0;
     padding: 0;
@@ -62,11 +43,6 @@
 html {
     overflow-x: hidden;
     scroll-behavior: smooth;
-    scrollbar-width: thin;
-    scrollbar-color: var(--scroolBarThumb) transparent;
-    @media (max-width: 768px) {
-        scrollbar-width: none;
-    }
 }
 body {
     position: relative;
@@ -77,12 +53,6 @@ body {
     max-width: 100vw;
     min-height: 100vh;
 }
-@media (max-width: 768px) {
-    html::-webkit-scrollbar,
-    body::-webkit-scrollbar {
-        display: none;
-    }
-}
 body::before {
     content: "";
     position: absolute;
@@ -91,7 +61,6 @@ body::before {
     transform: translateX(-50%);
     height: 100dvh;
     width: 100%;
-    max-width: 1920px;
     z-index: 0;
     pointer-events: none;
     background-image:
@@ -121,104 +90,25 @@ main {
     color: var(--mainTextColor);
     width: 100%;
 }
+h2 {
+        background: linear-gradient(to bottom, #6d7173, #fcfcfc);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+        font-weight: bold;
+        font-size: var(--fontSizeH2);
+        text-align: center;
+        background-size: 100% 200%;
+        background-position: top;
+        margin: fluid(30, 50) 0 fluid(30, 50) 0;
+    }
 button {
     font-family: inherit;
 }
 a {
     color: inherit;
     text-decoration: none;
-}
-@keyframes frontFlip {
-    0% {
-        transform: rotateX(0deg);
-        opacity: 1;
-    }
-    100% {
-        transform: rotateX(360deg);
-        opacity: 1;
-    }
-}
-@keyframes leaveFlip {
-    0% {
-        transform: translateY(0) rotateX(0deg);
-        opacity: 1;
-    }
-    40% {
-        transform: translateY(30px) rotateX(-45deg);
-        opacity: 0.5;
-    }
-    60% {
-        transform: translateY(60px) rotateX(-90deg);
-        opacity: 0;
-    }
-    61% {
-        transform: translateY(-60px) rotateX(90deg);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0) rotateX(0deg);
-        opacity: 1;
-    }
-}
-@keyframes pushUp {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-}
-@keyframes pushDown {
-    0% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    100% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-}
-@keyframes pushInFromTop {
-    0% {
-        transform: translateY(-100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-@keyframes pushInFromBottom {
-    0% {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    100% {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-@keyframes slideDownShow {
-    from {
-        transform: translateY(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
-@keyframes slideDownHide {
-    from {
-        transform: translateY(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateY(100%);
-        opacity: 0;
-    }
 }
 @keyframes float {
     0%, 100% { transform: translateY(0); }

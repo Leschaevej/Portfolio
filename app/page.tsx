@@ -1,32 +1,21 @@
-'use client';
-
-import { useState, useEffect } from "react";
+import dynamic from 'next/dynamic';
 import './page.scss';
-import Carousel from "./components/carousel/Carousel";
-import projets from "@/app/projects.json";
-import Contact from '@/app/components/contact/Contact';
-import Clock from '@/app/components/clock/Clock';
-import Meteo from '@/app/components/meteo/Meteo';
-import Contribution from '@/app/components/contribution/Contribution';
-import Technology from '@/app/components/technology/Technology';
+import Carousel from '@/app/components/carousel/Carousel';
+import projets from '@/app/projects.json';
 import Social from '@/app/components/social/Social';
 import Cloud1 from '@/app/assets/cloud1.svg';
 import Cloud2 from '@/app/assets/cloud2.svg';
 import RocketIcon from '@/app/assets/rocket.svg';
 import RocketFire from '@/app/assets/fire.svg';
 import Moon from '@/app/assets/moon.svg';
-import { BREAKPOINTS } from '@/app/constants';
+
+const Contact = dynamic(() => import('@/app/components/contact/Contact'));
+const Contribution = dynamic(() => import('@/app/components/contribution/Contribution'));
+const Technology = dynamic(() => import('@/app/components/technology/Technology'));
+const Clock = dynamic(() => import('@/app/components/clock/Clock'));
+const Meteo = dynamic(() => import('@/app/components/meteo/Meteo'));
 
 export default function Home() {
-    const [isDesktop, setIsDesktop] = useState(false);
-    useEffect(() => {
-        const handleResize = () => {
-            setIsDesktop(window.innerWidth >= BREAKPOINTS.TABLET);
-        };
-        handleResize();
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
     return (
         <main>
             <div id="home" className="section">
@@ -67,29 +56,27 @@ export default function Home() {
                         </div>
                         <div className="link">
                             <div className="shortcuts">
-                                <button type="button" onClick={() => window.open("/cv.pdf", "_blank")}><span>Télécharger mon CV</span></button>
+                                <a href="/cv.pdf" target="_blank" rel="noopener noreferrer"><span>Télécharger mon CV</span></a>
                             </div>
                             <Social />
                         </div>
                     </div>
                     <div className="right">
-                        {isDesktop && (
-                            <div className="gadget">
-                                <div className="rocket">
-                                    <Cloud1 className="cloud cloud1" />
-                                    <Cloud2 className="cloud cloud2" />
-                                    <div className="rocketWrapper">
-                                        <RocketIcon className="rocketIcon" />
-                                        <RocketFire className="rocketFire" />
-                                    </div>
-                                    <Moon className="moon" />
+                        <div className="gadget">
+                            <div className="rocket">
+                                <Cloud1 className="cloud cloud1" />
+                                <Cloud2 className="cloud cloud2" />
+                                <div className="rocketWrapper">
+                                    <RocketIcon className="rocketIcon" />
+                                    <RocketFire className="rocketFire" />
                                 </div>
-                                <Clock />
-                                <div className="meteo">
-                                    <Meteo />
-                                </div>
+                                <Moon className="moon" />
                             </div>
-                        )}
+                            <Clock />
+                            <div className="meteo">
+                                <Meteo />
+                            </div>
+                        </div>
                         <div className="contribution">
                             <Contribution />
                         </div>
@@ -97,9 +84,11 @@ export default function Home() {
                 </div>
             </div>
             <div id="technology" className="section">
+                <h2>Technologies</h2>
                 <Technology />
             </div>
             <div id="contact" className="section">
+                <h2>Contact</h2>
                 <div className="box">
                     <h3>Besoin d'un partenaire pour votre projet web ?</h3>
                     <p className="pub">Explorez l'étendue de nos services et transformez votre vision digitale avec <span>Skybound Studio</span>.</p>

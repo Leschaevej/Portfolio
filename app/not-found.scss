@@ -30,13 +30,17 @@
         border-radius: fluid(10, 15);
         padding: fluid(10, 15);
         font-weight: bold;
-        transition: all 0.5s ease;
+        transition: all $transition;
         cursor: pointer;
         background-color: var(--mainColor);
         color: var(--secondTextColor);
+        border: 2px solid var(--mainColor);
         font-size: var(--fontSizeP);
-        &:hover {
-            background-color: var(--buttonHoverColor);
+        @media (hover: hover) and (pointer: fine) {
+            &:hover {
+                background-color: var(--mainBackgroundColor);
+                color: var(--mainColor);
+            }
         }
     }
 }

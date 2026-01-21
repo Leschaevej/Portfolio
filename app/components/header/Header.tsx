@@ -1,12 +1,11 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/app/assets/logo.svg";
-import { BREAKPOINTS, ANIMATION } from "@/app/constants";
+import { ANIMATION } from "@/app/constants";
 import "./Header.scss";
 
-const MIN_SIZE = { width: 150, height: 50 };
 const NAV_LINKS = [
     { href: '#project', label: 'Projets' },
     { href: '#about', label: 'À propos' },
@@ -14,92 +13,33 @@ const NAV_LINKS = [
 ];
 export default function Header() {
     const pathname = usePathname();
-    const [menuState, setMenuState] = useState<"visible" | "pushingUp" | "hidden" | "pushingInFromTop">("visible");
-    const [closeState, setCloseState] = useState<"hidden" | "pushingDown" | "visible" | "pushingInFromBottom">("hidden");
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [isAnimating, setIsAnimating] = useState(false);
-    const [linksState, setLinksState] = useState<'hidden' | 'showing' | 'hiding'>('hidden');
-    const [maxSize, setMaxSize] = useState({ width: 600, height: 500 });
-    const [minPos, setMinPos] = useState({ top: 50, right: 50 });
-    const [maxPos, setMaxPos] = useState({ top: 40, right: 40 });
+    const [isOpen, setIsOpen] = useState(false);
     const [logoTapped, setLogoTapped] = useState(false);
-    const [modalSize, setModalSize] = useState(MIN_SIZE);
-    const [modalPos, setModalPos] = useState({ top: 50, right: 50 });
+    const menuRef = useRef<HTMLDivElement>(null);
+    const toggle = () => setIsOpen(!isOpen);
     useEffect(() => {
-        function updateSizes() {
-            const width = window.innerWidth;
-            if (width < BREAKPOINTS.MOBILE) {
-                setMaxSize({ width: 280, height: 300 });
-                setMinPos({ top: 30, right: 30 });
-                setMaxPos({ top: 20, right: 20 });
-            } else if (width < BREAKPOINTS.DESKTOP) {
-                setMaxSize({ width: 400, height: 300 });
-                setMinPos({ top: 50, right: 50 });
-                setMaxPos({ top: 40, right: 40 });
-            } else {
-                setMaxSize({ width: 600, height: 500 });
-                setMinPos({ top: 50, right: 50 });
-                setMaxPos({ top: 40, right: 40 });
+        if (!isOpen) return;
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === "Escape") {
+                setIsOpen(false);
+                return;
             }
-        }
-        updateSizes();
-        window.addEventListener("resize", updateSizes);
-        return () => window.removeEventListener("resize", updateSizes);
-    }, []);
-    function animateModal(opening: boolean, duration = ANIMATION.DURATION, callback?: () => void) {
-        setIsAnimating(true);
-        const startTime = performance.now();
-        function step(time: number) {
-            const elapsed = time - startTime;
-            let progress = Math.min(elapsed / duration, 1);
-            progress = progress < 0.5
-                ? 2 * progress * progress
-                : -1 + (4 - 2 * progress) * progress;
-            if (!opening) progress = 1 - progress;
-            const width = MIN_SIZE.width + (maxSize.width - MIN_SIZE.width) * progress;
-            const height = MIN_SIZE.height + (maxSize.height - MIN_SIZE.height) * progress;
-            const top = minPos.top + (maxPos.top - minPos.top) * progress;
-            const right = minPos.right + (maxPos.right - minPos.right) * progress;
-            setModalSize({ width, height });
-            setModalPos({ top, right });
-            if (elapsed < duration) {
-                requestAnimationFrame(step);
-            } else {
-                setIsAnimating(false);
-                if (!opening) {
-                    setIsModalOpen(false);
-                    setModalSize(MIN_SIZE);
-                    setModalPos(minPos);
+            if (e.key === "Tab" && menuRef.current) {
+                const focusable = menuRef.current.querySelectorAll<HTMLElement>("button, a");
+                const first = focusable[0];
+                const last = focusable[focusable.length - 1];
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
                 }
-                if (callback) callback();
             }
-        }
-        requestAnimationFrame(step);
-    }
-    const toggleModal = () => {
-        if (!isModalOpen) {
-            setIsModalOpen(true);
-            setMenuState("pushingUp");
-            setCloseState("pushingInFromBottom");
-            setLinksState('hidden');
-            animateModal(true, 500, () => {
-                setMenuState("hidden");
-                setCloseState("visible");
-                setLinksState('showing');
-            });
-        } else {
-            setLinksState('hiding');
-            setTimeout(() => {
-                setCloseState("pushingDown");
-                setMenuState("pushingInFromTop");
-                animateModal(false, 500, () => {
-                    setCloseState("hidden");
-                    setMenuState("visible");
-                    setLinksState('hidden');
-                });
-            }, ANIMATION.DURATION);
-        }
-    };
+        };
+        document.addEventListener("keydown", handleKeyDown);
+        return () => document.removeEventListener("keydown", handleKeyDown);
+    }, [isOpen]);
     const handleLogoTouchStart = () => {
         setLogoTapped(true);
         setTimeout(() => setLogoTapped(false), ANIMATION.DURATION);
@@ -111,8 +51,8 @@ export default function Header() {
         }
     };
     return (
-        <header className="header">
-            <Link href="/" className="logo-link" onClick={handleLogoClick}>
+        <header>
+            <Link href="/" className="link" onClick={handleLogoClick}>
                 <Logo
                     className={`logo ${logoTapped ? "tapped" : ""}`}
                     onTouchStart={handleLogoTouchStart}
@@ -120,49 +60,17 @@ export default function Header() {
                     aria-label="Logo"
                 />
             </Link>
-            <div className="button-container">
-                {menuState !== "hidden" && (
-                    <button
-                        className={`menu ${menuState === "pushingUp" ? "pushing-up" : ""} ${menuState === "pushingInFromTop" ? "push-in-from-top" : ""}`}
-                        onClick={toggleModal}
-                        type="button"
-                    >
-                        <span>MENU</span>
-                    </button>
-                )}
-                {closeState !== "hidden" && (
-                    <button
-                        className={`close ${closeState === "pushingDown" ? "pushing-down" : ""} ${closeState === "pushingInFromBottom" ? "push-in-from-bottom" : ""}`}
-                        onClick={toggleModal}
-                        type="button"
-                    >
-                        <span>CLOSE</span>
-                    </button>
-                )}
-            </div>
-            {(isModalOpen || isAnimating) && (
-                <div className="overlay" onClick={toggleModal}>
-                    <div
-                        className={`modal ${isModalOpen ? "modal-open" : ""}`}
-                        style={{
-                            width: modalSize.width,
-                            height: modalSize.height,
-                            top: modalPos.top,
-                            right: modalPos.right,
-                            zIndex: 5,
-                        }}
-                        onClick={(e) => e.stopPropagation()}
-                    >
-                        <nav className={linksState === 'showing' ? "show-links" : linksState === 'hiding' ? "hide-links" : ""}>
-                            {NAV_LINKS.map(({ href, label }) => (
-                                <div key={href} className="link-wrapper">
-                                    <a href={href} onClick={toggleModal}>{label}</a>
-                                </div>
-                            ))}
-                        </nav>
+            <div className={`menu ${isOpen ? "open" : ""}`} ref={menuRef}>
+                <button onClick={toggle} type="button">MENU</button>
+                <nav>
+                    <div className="inner">
+                        {NAV_LINKS.map(({ href, label }) => (
+                            <a key={href} href={href} onClick={toggle}>{label}</a>
+                        ))}
                     </div>
-                </div>
-            )}
+                </nav>
+            </div>
+            {isOpen && <div className="backdrop" onClick={toggle} />}
         </header>
     );
 }

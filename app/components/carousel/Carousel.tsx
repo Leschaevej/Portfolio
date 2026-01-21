@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from "react";
 import Image from "next/image";
 import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
@@ -114,6 +115,13 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
             setDragOffset(0);
         }
     };
+    const onKeyDown = (e: React.KeyboardEvent) => {
+        if (e.key === "ArrowLeft") {
+            handlePrevious();
+        } else if (e.key === "ArrowRight") {
+            handleNext();
+        }
+    };
     const currentProject = projects[currentIndex];
     const nextIndex = animationDirection === "left"
         ? (currentIndex === projects.length - 1 ? 0 : currentIndex + 1)
@@ -142,7 +150,7 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
                         alt={project.title}
                         fill
                         sizes="(max-width: 768px) 100vw, 50vw"
-                        priority
+                        priority={index === 0}
                     />
                 </a>
                 <div className="info">
@@ -178,7 +186,7 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
         );
     };
     return (
-        <div className="carousel">
+        <div className="carousel" tabIndex={0} onKeyDown={onKeyDown}>
             <div
                 className="wrapper"
                 onTouchStart={onTouchStart}

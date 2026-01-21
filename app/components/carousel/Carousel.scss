@@ -15,7 +15,7 @@
     .content {
         width: 100%;
         display: flex;
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        transition: opacity $transition, transform $transition;
         flex-direction: column;
         gap: fluid(10, 30);
         align-items: flex-start;
@@ -39,7 +39,7 @@
             border-radius: 15px;
             overflow: hidden;
             box-shadow: inset 0 0 10px rgba(var(--mainColorRgb), 0.4);
-            transition: all 0.5s ease;
+            transition: all $transition;
             aspect-ratio: 16/9;
             flex-shrink: 0;
             @media (min-width: 1025px) {
@@ -101,7 +101,7 @@
                     padding: fluid(10, 15);
                     color: var(--mainColor);
                     box-shadow: inset 0 0 5px rgba(var(--mainColorRgb), 0.3);
-                    transition: all 0.3s ease;
+                    transition: all $transition;
                     font-size: var(--fontSizeP);
                     height: fit-content;
                     @media (hover: hover) and (pointer: fine) {
@@ -118,15 +118,19 @@
                 border-radius: fluid(10, 15);
                 padding: fluid(10, 15);
                 font-weight: 600;
-                transition: all 0.5s ease;
+                transition: all $transition;
                 cursor: pointer;
                 z-index: 1;
                 background-color: var(--mainColor);
                 color: var(--secondTextColor);
+                border: 2px solid var(--mainColor);
                 font-size: var(--fontSizeP);
                 height: fit-content;
-                &:hover{
-                    background-color: var(--buttonHoverColor);
+                @media (hover: hover) and (pointer: fine) {
+                    &:hover {
+                        background-color: var(--mainBackgroundColor);
+                        color: var(--mainColor);
+                    }
                 }
             }
         }
@@ -147,7 +151,7 @@
                 background-color: var(--secondBackgroundColor);
                 border: none;
                 cursor: pointer;
-                transition: all 0.3s ease;
+                transition: all $transition;
                 padding: 0;
                 box-shadow: inset 0 0 3px rgba(var(--mainColorRgb), 0.3);
                 @media (hover: hover) and (pointer: fine) {
@@ -174,8 +178,8 @@
         align-items: center;
         justify-content: center;
         cursor: pointer;
-        transition: all 0.5s ease;
-        z-index: 10;
+        transition: all $transition;
+        z-index: 1;
         box-shadow: inset 0 0 5px rgba(var(--mainColorRgb), 0.3);
         @media (hover: hover) and (pointer: fine) {
             &:hover {

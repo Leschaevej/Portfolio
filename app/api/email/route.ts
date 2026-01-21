@@ -27,6 +27,14 @@ function isValidEmail(email: string): boolean {
 function sanitizeString(str: string, maxLength: number): string {
     return str.trim().slice(0, maxLength);
 }
+function escapeHtml(str: string): string {
+    return str
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
 export async function POST(req: Request) {
     try {
         const clientIP = getClientIP(req);
@@ -57,6 +65,7 @@ export async function POST(req: Request) {
             );
         }
         const sanitizedEmail = sanitizeString(email, 254);
+        const escapedEmail = escapeHtml(sanitizedEmail);
         const transporter = nodemailer.createTransport({
             service: 'gmail',
             auth: {
@@ -73,7 +82,7 @@ export async function POST(req: Request) {
             text: `${sanitizedEmail} veut te contacter !`,
             html: `
                 <h3>Nouveau contact depuis le portfolio</h3>
-                <p><strong>${sanitizedEmail}</strong> veut te contacter !</p>
+                <p><strong>${escapedEmail}</strong> veut te contacter !</p>
                 <p><em>Réponds directement à cet email pour le contacter.</em></p>
             `,
         });
