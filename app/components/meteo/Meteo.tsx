@@ -2,8 +2,15 @@
 import { useEffect, useState } from 'react';
 import useSWR from 'swr';
 import './Meteo.scss';
-import { WiDaySunny, WiCloudy, WiRain, WiSnow, WiThunderstorm, WiFog, WiStrongWind, WiHumidity } from 'react-icons/wi';
-import { FiMapPin } from 'react-icons/fi';
+import { WiDaySunny } from "@react-icons/all-files/wi/WiDaySunny";
+import { WiCloudy } from "@react-icons/all-files/wi/WiCloudy";
+import { WiRain } from "@react-icons/all-files/wi/WiRain";
+import { WiSnow } from "@react-icons/all-files/wi/WiSnow";
+import { WiThunderstorm } from "@react-icons/all-files/wi/WiThunderstorm";
+import { WiFog } from "@react-icons/all-files/wi/WiFog";
+import { WiStrongWind } from "@react-icons/all-files/wi/WiStrongWind";
+import { WiHumidity } from "@react-icons/all-files/wi/WiHumidity";
+import { FiMapPin } from "@react-icons/all-files/fi/FiMapPin";
 
 interface WeatherData {
     temperature: number;

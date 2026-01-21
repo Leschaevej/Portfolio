@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Image from "next/image";
-import { FaChevronLeft, FaChevronRight } from "react-icons/fa";
+import { FaChevronLeft } from "@react-icons/all-files/fa/FaChevronLeft";
+import { FaChevronRight } from "@react-icons/all-files/fa/FaChevronRight";
 import "./Carousel.scss";
 
 type Project = {
@@ -21,10 +22,13 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
     const [isAnimating, setIsAnimating] = useState(false);
     const [animationDirection, setAnimationDirection] = useState<"left" | "right" | null>(null);
     const [pendingIndex, setPendingIndex] = useState<number | null>(null);
-    const [touchStart, setTouchStart] = useState<number | null>(null);
-    const [touchEnd, setTouchEnd] = useState<number | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [dragOffset, setDragOffset] = useState(0);
+
+    // Utiliser des refs pour éviter les re-renders sur chaque mouvement
+    const touchStartRef = useRef<number | null>(null);
+    const touchEndRef = useRef<number | null>(null);
+    const lastMoveTime = useRef<number>(0);
     const minSwipeDistance = 50;
     const handleAnimationEnd = () => {
         if (pendingIndex !== null) {
@@ -53,26 +57,31 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
         setPendingIndex(index);
     };
     const onTouchStart = (e: React.TouchEvent) => {
-        setTouchEnd(null);
-        setTouchStart(e.targetTouches[0].clientX);
+        touchEndRef.current = null;
+        touchStartRef.current = e.targetTouches[0].clientX;
     };
     const onTouchMove = (e: React.TouchEvent) => {
         if (isAnimating) return;
-        setTouchEnd(e.targetTouches[0].clientX);
-        if (touchStart !== null) {
-            const diff = touchStart - e.targetTouches[0].clientX;
+        const now = Date.now();
+        if (now - lastMoveTime.current < 16) return;
+        lastMoveTime.current = now;
+        touchEndRef.current = e.targetTouches[0].clientX;
+        if (touchStartRef.current !== null) {
+            const diff = touchStartRef.current - e.targetTouches[0].clientX;
             setDragOffset(-diff);
         }
     };
     const onTouchEnd = () => {
-        if (!touchStart || !touchEnd || isAnimating) {
+        if (!touchStartRef.current || !touchEndRef.current || isAnimating) {
             setDragOffset(0);
             return;
         }
-        const distance = touchStart - touchEnd;
+        const distance = touchStartRef.current - touchEndRef.current;
         const isLeftSwipe = distance > minSwipeDistance;
         const isRightSwipe = distance < -minSwipeDistance;
         setDragOffset(0);
+        touchStartRef.current = null;
+        touchEndRef.current = null;
         if (isLeftSwipe) {
             handleNext();
         } else if (isRightSwipe) {
@@ -81,28 +90,34 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
     };
     const onMouseDown = (e: React.MouseEvent) => {
         setIsDragging(true);
-        setTouchEnd(null);
-        setTouchStart(e.clientX);
+        touchEndRef.current = null;
+        touchStartRef.current = e.clientX;
     };
     const onMouseMove = (e: React.MouseEvent) => {
         if (!isDragging || isAnimating) return;
-        setTouchEnd(e.clientX);
-        if (touchStart !== null) {
-            const diff = touchStart - e.clientX;
+        const now = Date.now();
+        if (now - lastMoveTime.current < 16) return;
+        lastMoveTime.current = now;
+
+        touchEndRef.current = e.clientX;
+        if (touchStartRef.current !== null) {
+            const diff = touchStartRef.current - e.clientX;
             setDragOffset(-diff);
         }
     };
     const onMouseUp = () => {
         if (!isDragging) return;
         setIsDragging(false);
-        if (!touchStart || !touchEnd || isAnimating) {
+        if (!touchStartRef.current || !touchEndRef.current || isAnimating) {
             setDragOffset(0);
             return;
         }
-        const distance = touchStart - touchEnd;
+        const distance = touchStartRef.current - touchEndRef.current;
         const isLeftSwipe = distance > minSwipeDistance;
         const isRightSwipe = distance < -minSwipeDistance;
         setDragOffset(0);
+        touchStartRef.current = null;
+        touchEndRef.current = null;
         if (isLeftSwipe) {
             handleNext();
         } else if (isRightSwipe) {

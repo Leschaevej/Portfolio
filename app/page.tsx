@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import './page.scss';
 import Carousel from '@/app/components/carousel/Carousel';
 import projets from '@/app/projects.json';
@@ -8,12 +7,11 @@ import Cloud2 from '@/app/assets/cloud2.svg';
 import RocketIcon from '@/app/assets/rocket.svg';
 import RocketFire from '@/app/assets/fire.svg';
 import Moon from '@/app/assets/moon.svg';
-
-const Contact = dynamic(() => import('@/app/components/contact/Contact'));
-const Contribution = dynamic(() => import('@/app/components/contribution/Contribution'));
-const Technology = dynamic(() => import('@/app/components/technology/Technology'));
-const Clock = dynamic(() => import('@/app/components/clock/Clock'));
-const Meteo = dynamic(() => import('@/app/components/meteo/Meteo'));
+import Contact from '@/app/components/contact/Contact';
+import Contribution from '@/app/components/contribution/Contribution';
+import Technology from '@/app/components/technology/Technology';
+import Clock from '@/app/components/clock/Clock';
+import Meteo from '@/app/components/meteo/Meteo';
 
 export default function Home() {
     return (

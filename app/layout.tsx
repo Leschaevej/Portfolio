@@ -181,7 +181,7 @@ export default function RootLayout({
                 {children}
                 <Footer />
                 <Cookies />
-                <SpeedInsights />
+                {/* <SpeedInsights /> */}
             </body>
         </html>
     );

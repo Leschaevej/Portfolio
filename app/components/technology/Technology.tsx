@@ -8,7 +8,7 @@ import Deployment from "@/app/assets/deployment.svg";
 import Design from "@/app/assets/design.svg";
 import Tools from "@/app/assets/tools.svg";
 import Ai from "@/app/assets/ai.svg";
-import { BREAKPOINTS, ANIMATION } from "@/app/constants";
+import { ANIMATION } from "@/app/constants";
 
 type TechId = "Frontend" | "Backend" | "Deployment" | "Design" | "Tools" | "Ai";
 const TECH_ITEMS: { title: TechId; Icon: React.FC<React.SVGProps<SVGSVGElement>> }[] = [
@@ -59,22 +59,14 @@ const TECH_IMAGES: Record<TechId, string[]> = {
         "/technology/ai/openai.webp",
     ],
 };
-const BOTTOM_ROW: TechId[] = ["Frontend", "Backend", "Deployment"];
 export default function Technology() {
     const [selected, setSelected] = useState<TechId | null>(null);
     const [closingId, setClosingId] = useState<TechId | null>(null);
     const [isClosingImages, setIsClosingImages] = useState(false);
     const [showImages, setShowImages] = useState(false);
     const [gridHeight, setGridHeight] = useState<number | null>(null);
-    const [isMobile, setIsMobile] = useState(false);
-    const [imagePosition, setImagePosition] = useState({ top: 0, left: 0 });
     const gridRef = useRef<HTMLDivElement | null>(null);
-    useEffect(() => {
-        const onResize = () => setIsMobile(window.innerWidth < BREAKPOINTS.DESKTOP);
-        onResize();
-        window.addEventListener("resize", onResize);
-        return () => window.removeEventListener("resize", onResize);
-    }, []);
+
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
@@ -85,14 +77,7 @@ export default function Technology() {
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
     }, [selected]);
-    const getImageListPositionClass = (): string => {
-        const id = selected ?? closingId;
-        if (!id) return "";
-        if (isMobile) {
-            return ["Backend", "Design", "Ai"].includes(id) ? "imageLeft" : "imageRight";
-        }
-        return BOTTOM_ROW.includes(id) ? "imageBottom" : "imageTop";
-    };
+
     const handleCardClose = (id: TechId) => {
         setClosingId(id);
         setIsClosingImages(true);
@@ -111,36 +96,7 @@ export default function Technology() {
             setIsClosingImages(false);
         }, delay);
     };
-    const calculateImagePosition = (title: TechId) => {
-        if (!gridRef.current) return;
-        const gridRect = gridRef.current.getBoundingClientRect();
-        const cards = Array.from(gridRef.current.querySelectorAll('.card'));
-        const clickedCardIndex = cards.findIndex(c => c.querySelector('h3')?.textContent === title);
 
-        if (isMobile) {
-            const clickedCol = clickedCardIndex % 2;
-            const targetCol = clickedCol === 0 ? 1 : 0;
-            const targetCards = cards.filter((_, idx) => idx % 2 === targetCol);
-            if (targetCards.length > 0) {
-                const firstCard = targetCards[0].getBoundingClientRect();
-                setImagePosition({
-                    top: gridRect.height / 2,
-                    left: firstCard.left - gridRect.left + firstCard.width / 2
-                });
-            }
-        } else {
-            const clickedRow = Math.floor(clickedCardIndex / 3);
-            const targetRow = clickedRow === 0 ? 1 : 0;
-            const targetCards = cards.filter((_, idx) => Math.floor(idx / 3) === targetRow);
-            if (targetCards.length > 0) {
-                const firstCard = targetCards[0].getBoundingClientRect();
-                setImagePosition({
-                    top: firstCard.top - gridRect.top + firstCard.height / 2,
-                    left: gridRect.width / 2
-                });
-            }
-        }
-    };
     const handleCardClick = (title: TechId) => {
         if (selected === title) {
             handleCardClose(title);
@@ -150,14 +106,18 @@ export default function Technology() {
         setClosingId(null);
         setIsClosingImages(false);
         setShowImages(false);
-        setTimeout(() => calculateImagePosition(title), 100);
         setTimeout(() => setShowImages(true), ANIMATION.DURATION);
         if (gridRef.current) {
             setGridHeight(gridRef.current.scrollHeight);
         }
     };
+
     const currentId = selected ?? closingId;
     const currentImageList = currentId ? TECH_IMAGES[currentId] : [];
+
+    // Index de la carte pour le positionnement CSS
+    const currentIndex = currentId ? TECH_ITEMS.findIndex(t => t.title === currentId) : -1;
+
     return (
         <div className="grid" ref={gridRef} style={gridHeight ? { minHeight: gridHeight } : undefined}>
             {TECH_ITEMS.map(({ title, Icon }) => {
@@ -183,8 +143,8 @@ export default function Technology() {
             })}
             {(showImages || isClosingImages) && currentId && (
                 <div
-                    className={`image-list ${getImageListPositionClass()} ${isClosingImages ? "closing" : ""}`}
-                    style={{ top: imagePosition.top, left: imagePosition.left, transform: 'translate(-50%, -50%)' }}
+                    className={`image-list ${isClosingImages ? "closing" : ""}`}
+                    data-index={currentIndex}
                 >
                     {currentImageList.map((src, i) => {
                         const techName = src.split('/').pop()?.replace('.webp', '') ?? '';
