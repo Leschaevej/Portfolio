@@ -1,17 +1,14 @@
 const LATITUDE = 43.53;
 const LONGITUDE = 5.45;
 export const revalidate = 600;
-
 const rateLimiter = new Map<string, number[]>();
 const MAX_REQUESTS_PER_HOUR = 60;
 const HOUR_IN_MS = 60 * 60 * 1000;
-
 function getClientIP(req: Request): string {
     const forwarded = req.headers.get('x-forwarded-for');
     const realIP = req.headers.get('x-real-ip');
     return forwarded?.split(',')[0].trim() || realIP || 'unknown';
 }
-
 interface WeatherData {
     temperature: number;
     windSpeed: number;
@@ -23,7 +20,6 @@ export async function GET(req: Request) {
     const now = Date.now();
     const timestamps = rateLimiter.get(clientIP) || [];
     const recentTimestamps = timestamps.filter(t => now - t < HOUR_IN_MS);
-
     if (recentTimestamps.length >= MAX_REQUESTS_PER_HOUR) {
         return new Response(
             JSON.stringify({ error: 'Trop de requêtes. Réessayez plus tard.' }),

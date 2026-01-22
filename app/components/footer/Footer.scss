@@ -2,11 +2,11 @@
 
 footer {
     width: 100%;
-    background-color: var(--footerBackgroundColor);
+    background-color: var(--secondBackgroundColor);
     color: var(--mainTextColor);
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
     padding: fluid(30, 50);
     .name {
         font-size: var(--fontSizeH1);
@@ -28,7 +28,7 @@ footer {
             }
         }
         .copyright {
-            color: var(--fourthTextColor);
+            color: var(--thirdTextColor);
             font-size: var(--fontSizeH3);
         }
     }

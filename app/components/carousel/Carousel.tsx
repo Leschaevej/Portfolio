@@ -24,8 +24,6 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
     const [pendingIndex, setPendingIndex] = useState<number | null>(null);
     const [isDragging, setIsDragging] = useState(false);
     const [dragOffset, setDragOffset] = useState(0);
-
-    // Utiliser des refs pour éviter les re-renders sur chaque mouvement
     const touchStartRef = useRef<number | null>(null);
     const touchEndRef = useRef<number | null>(null);
     const lastMoveTime = useRef<number>(0);
@@ -142,6 +140,8 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
         ? (currentIndex === projects.length - 1 ? 0 : currentIndex + 1)
         : (currentIndex === 0 ? projects.length - 1 : currentIndex - 1);
     const nextProject = isAnimating ? projects[nextIndex] : null;
+    const prevImageIndex = currentIndex === 0 ? projects.length - 1 : currentIndex - 1;
+    const nextImageIndex = currentIndex === projects.length - 1 ? 0 : currentIndex + 1;
     const renderProject = (project: Project, index: number, animClass: string, direction?: number, onAnimEnd?: () => void) => {
         const baseTransform = direction ? `translateX(${direction * 150}%)` : '';
         const dragTransform = dragOffset !== 0 && !direction ? `translateX(${dragOffset}px)` : '';
@@ -202,6 +202,22 @@ const Carousel: React.FC<CarouselProps> = ({ projects }) => {
     };
     return (
         <div className="carousel" tabIndex={0} onKeyDown={onKeyDown}>
+            <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden' }}>
+                <Image
+                    src={projects[prevImageIndex].imageSrc}
+                    alt=""
+                    width={1}
+                    height={1}
+                    priority
+                />
+                <Image
+                    src={projects[nextImageIndex].imageSrc}
+                    alt=""
+                    width={1}
+                    height={1}
+                    priority
+                />
+            </div>
             <div
                 className="wrapper"
                 onTouchStart={onTouchStart}

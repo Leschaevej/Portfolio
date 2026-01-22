@@ -1,44 +1,6 @@
 @use '@/app/Functions.scss' as *;
 
-.skeleton {
-    display: block;
-    background: linear-gradient(90deg, var(--secondBackgroundColor) 25%, var(--thirdBackgroundColor) 50%, var(--secondBackgroundColor) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 4px;
-}
-.skeleton-icon {
-    width: fluid(30, 50);
-    height: fluid(30, 50);
-    border-radius: 50%;
-}
-.skeleton-temp {
-    width: fluid(60, 100);
-    height: var(--fontSizeH2);
-    margin-left: 5px;
-}
-.skeleton-value {
-    width: fluid(40, 60);
-    height: var(--fontSizeWind);
-}
-@keyframes shimmer {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-.error {
-    color: var(--mainTextColor);
-    font-size: var(--fontSizeH3);
-}
-.status {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    font-family: 'Instrument Sans', sans-serif;
-    font-size: var(--fontSizeH3);
-    color: var(--mainTextColor);
-}
-.conteneur{
+.conteneur {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -46,10 +8,10 @@
     .location {
         display: flex;
         align-items: center;
-        color: var(--fourthTextColor);
+        color: var(--thirdTextColor);
         font-size: var(--fontSizeP);
         gap: 5px;
-        .logo{
+        .logo {
             font-size: var(--fontSizeP);
         }
     }
@@ -59,34 +21,57 @@
         justify-content: space-between;
         gap: fluid(30, 50);
         height: 100%;
-        .weather{
+        .weather {
             display: flex;
             align-items: center;
-            .temperature {
-                font-size: var(--fontSizeH2);
-                font-weight: 700;
-            }
-            .code{
+            .code {
                 height: fluid(30, 50);
-                .icone{
+                .icone {
                     height: fluid(30, 50);
                     width: fluid(30, 50);
                 }
             }
+            .temperature {
+                font-size: var(--fontSizeH2);
+                font-weight: 700;
+            }
+            .error {
+                color: var(--mainTextColor);
+                font-size: var(--fontSizeH3);
+            }
+            .skeleton {
+                display: block;
+                background-color: var(--secondBackgroundColor);
+                border-radius: 4px;
+                &.icone {
+                    width: fluid(30, 50);
+                    height: fluid(30, 50);
+                    border-radius: 50%;
+                }
+                &.temps {
+                    width: fluid(60, 100);
+                    height: var(--fontSizeH2);
+                    margin-left: 5px;
+                }
+                &.value {
+                    width: fluid(40, 60);
+                    height: var(--fontSizeWind);
+                }
+            }
         }
-        .condition{
+        .condition {
             display: flex;
             justify-content: space-between;
             background-color: var(--secondBackgroundColor);
             padding: 5px 10px;
             border-radius: 30px;
-            .wind{
+            .wind {
                 display: flex;
                 align-items: center;
                 color: var(--windColor);
                 font-size: var(--fontSizeWind);
                 gap: 3px;
-                .logo{
+                .logo {
                     font-size: var(--fontSizeWind);
                 }
             }
@@ -96,7 +81,7 @@
                 color: var(--humidityColor);
                 font-size: var(--fontSizeWind);
                 gap: 3px;
-                .logo{
+                .logo {
                     font-size: var(--fontSizeWind);
                 }
             }

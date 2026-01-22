@@ -6,12 +6,9 @@
     --mainBackgroundColor: #101010;
     --mainBackgroundColorRgb: 16, 16, 16;
     --secondBackgroundColor: #1E1E1E;
-    --thirdBackgroundColor: #2a2a2a;
-    --footerBackgroundColor: #141615;
     --mainTextColor: #d4d3d3;
     --secondTextColor: #101010;
-    --thirdTextColor: #DBDBDB;
-    --fourthTextColor:#6e6e6e;
+    --thirdTextColor: #6e6e6e;
     --inputColor: #DBDBDB;
     --errorColor: #c52724;
     --errorColorRgb: 197, 39, 36;
@@ -30,10 +27,22 @@
     --toolsColor: #f1502f;
     --aiColor: #a259ff;
     --fontSizeH1: #{fluidFont(2, 4)};
-    --fontSizeH2: #{fluidFont(1.375, 2.5)};
+    --fontSizeH2: #{fluidFont(1.5, 2.75)};
     --fontSizeH3: #{fluidFont(1.125, 2)};
     --fontSizeP: #{fluidFont(1, 1.75)};
     --fontSizeWind: #{fluidFont(1, 1.125)};
+}
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+    }
+}
+button, a, input, [tabindex], [role="button"] {
+    &:focus-visible {
+        outline: 2px solid var(--mainColor);
+        outline-offset: 2px;
+    }
 }
 * {
     margin: 0;
@@ -71,38 +80,16 @@ body::before {
     filter: blur(1px);
     mask-image: linear-gradient(to bottom, var(--mainBackgroundColor) 0%, transparent 80%);
 }
-body::after {
-    content: "";
-    position: absolute;
-    top: clamp(100px, 15vh, 200px);
-    left: 50%;
-    transform: translateX(clamp(200px, 30vw, 600px)) rotate(140deg);
-    width: clamp(400px, 50vw, 1000px);
-    height: clamp(50px, 8vh, 100px);
-    background-color: var(--mainColor);
-    opacity: 0.8;
-    pointer-events: none;
-    transform-origin: top left;
-    z-index: 0;
-    filter: blur(clamp(100px, 15vw, 200px));
-}
 main {
     color: var(--mainTextColor);
     width: 100%;
 }
 h2 {
-        background: linear-gradient(to bottom, #6d7173, #fcfcfc);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        color: transparent;
-        font-weight: bold;
-        font-size: var(--fontSizeH2);
-        text-align: center;
-        background-size: 100% 200%;
-        background-position: top;
-        margin: fluid(30, 50) 0 fluid(30, 50) 0;
-    }
+    color: var(--mainTextColor);
+    font-weight: bold;
+    font-size: var(--fontSizeH2);
+    text-align: center;
+}
 button {
     font-family: inherit;
 }

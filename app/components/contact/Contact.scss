@@ -11,7 +11,7 @@
         background-color: var(--inputColor);
         transition: box-shadow $transition;
         &:focus-within {
-            box-shadow: 0 0 0 2px var(--fourthTextColor);
+            box-shadow: 0 0 0 2px var(--thirdTextColor);
         }
         &.sending {
             box-shadow: 0 0 0 2px var(--successColor);
@@ -32,7 +32,7 @@
             color: var(--secondTextColor);
             font-size: var(--fontSizeH3);
             &::placeholder {
-                color: var(--fourthTextColor);
+                color: var(--thirdTextColor);
                 font-style: italic;
             }
             &:focus {
@@ -72,7 +72,7 @@
             background-color: transparent;
             cursor: pointer;
             padding: fluid(10, 30);
-            color: var(--fourthTextColor);
+            color: var(--thirdTextColor);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -81,7 +81,7 @@
                 height: fluid(20, 30);
                 display: block;
                 transition: transform $transition, fill $transition, color $transition;
-                color: var(--fourthTextColor);
+                color: var(--thirdTextColor);
             }
             @media (hover: hover) and (pointer: fine) {
                 &:hover:not(.sending):not(.success) svg {

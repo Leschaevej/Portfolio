@@ -18,14 +18,11 @@ interface WeatherData {
     humidity: number;
     weatherCode: number;
 }
-
 const CACHE_KEY = 'meteo-cache';
-
 const fetcher = (url: string) => fetch(url).then(res => {
     if (!res.ok) throw new Error('Erreur API météo');
     return res.json();
 });
-
 function getWeatherIcon(code: number) {
     if (code === 0) return <WiDaySunny className="icone" color="#f39c12" />;
     if ([1, 2, 3].includes(code)) return <WiCloudy className="icone" color="#95a5a6" />;
@@ -35,18 +32,15 @@ function getWeatherIcon(code: number) {
     if ([95, 96, 99].includes(code)) return <WiThunderstorm className="icone" color="#9b59b6" />;
     return <WiDaySunny className="icone" color="#f39c12" />;
 }
-
 export default function Meteo() {
     const [mounted, setMounted] = useState(false);
     const { data: weather, error } = useSWR<WeatherData>(mounted ? '/api/weather' : null, fetcher, {
         revalidateOnFocus: false,
         refreshInterval: 600000,
     });
-
     useEffect(() => {
         setMounted(true);
     }, []);
-
     useEffect(() => {
         if (weather) {
             try {
@@ -64,8 +58,8 @@ export default function Meteo() {
                         <p className="error">Erreur</p>
                     ) : isLoading ? (
                         <>
-                            <span className="skeleton skeleton-icon" />
-                            <span className="skeleton skeleton-temp" />
+                            <span className="skeleton icone" />
+                            <span className="skeleton temps" />
                         </>
                     ) : (
                         <>
@@ -80,7 +74,7 @@ export default function Meteo() {
                         {error ? (
                             <span>--</span>
                         ) : isLoading ? (
-                            <span className="skeleton skeleton-value" />
+                            <span className="skeleton value" />
                         ) : (
                             <span>{weather!.windSpeed} km/h</span>
                         )}
@@ -90,7 +84,7 @@ export default function Meteo() {
                         {error ? (
                             <span>--</span>
                         ) : isLoading ? (
-                            <span className="skeleton skeleton-value" />
+                            <span className="skeleton value" />
                         ) : (
                             <span>{weather!.humidity}%</span>
                         )}

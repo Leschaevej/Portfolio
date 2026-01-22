@@ -9,7 +9,6 @@ export default function Clock() {
     const containerRef = useRef<HTMLDivElement>(null);
     const logoRef = useRef<SVGSVGElement>(null);
     const modulRef = useRef<HTMLDivElement>(null);
-
     useEffect(() => {
         const update = () => {
             const now = new Date();
@@ -21,7 +20,6 @@ export default function Clock() {
         const interval = setInterval(update, 1000);
         return () => clearInterval(interval);
     }, []);
-
     useEffect(() => {
         const calculateOffset = () => {
             if (containerRef.current && logoRef.current && modulRef.current) {
@@ -36,7 +34,6 @@ export default function Clock() {
         window.addEventListener('resize', calculateOffset);
         return () => window.removeEventListener('resize', calculateOffset);
     }, []);
-
     return (
         <div className="clock" ref={containerRef}>
             <Portfolio className="logo" ref={logoRef} />

@@ -66,7 +66,6 @@ export default function Technology() {
     const [showImages, setShowImages] = useState(false);
     const [gridHeight, setGridHeight] = useState<number | null>(null);
     const gridRef = useRef<HTMLDivElement | null>(null);
-
     useEffect(() => {
         const handleClickOutside = (e: MouseEvent) => {
             const target = e.target as HTMLElement;
@@ -77,7 +76,6 @@ export default function Technology() {
         document.addEventListener("click", handleClickOutside);
         return () => document.removeEventListener("click", handleClickOutside);
     }, [selected]);
-
     const handleCardClose = (id: TechId) => {
         setClosingId(id);
         setIsClosingImages(true);
@@ -96,7 +94,6 @@ export default function Technology() {
             setIsClosingImages(false);
         }, delay);
     };
-
     const handleCardClick = (title: TechId) => {
         if (selected === title) {
             handleCardClose(title);
@@ -111,13 +108,9 @@ export default function Technology() {
             setGridHeight(gridRef.current.scrollHeight);
         }
     };
-
     const currentId = selected ?? closingId;
     const currentImageList = currentId ? TECH_IMAGES[currentId] : [];
-
-    // Index de la carte pour le positionnement CSS
     const currentIndex = currentId ? TECH_ITEMS.findIndex(t => t.title === currentId) : -1;
-
     return (
         <div className="grid" ref={gridRef} style={gridHeight ? { minHeight: gridHeight } : undefined}>
             {TECH_ITEMS.map(({ title, Icon }) => {
@@ -156,6 +149,7 @@ export default function Technology() {
                                 width={100}
                                 height={100}
                                 loading="lazy"
+                                unoptimized
                                 style={{ "--i": i } as React.CSSProperties}
                             />
                         );

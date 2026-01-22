@@ -65,7 +65,6 @@ export default function Contribution() {
             : cellSizeFromHeight;
         return { gapSize, cellWidth, cellHeight: cellSizeFromHeight, colCount: colCountEstimate };
     }, [containerWidth, containerHeight]);
-
     const cellsGrid = useMemo(() => {
         const maxCells = gridLayout.colCount * ROW_COUNT;
         const flatData = data ? data.flat() : [];
@@ -91,13 +90,10 @@ export default function Contribution() {
                 gap: `${gridLayout.gapSize}px`,
             }}
             >
-            {error ? (
-                <p className="status">Erreur</p>
-            ) : !data ? (
+            {(error || !data) ? (
                 Array.from({ length: maxCells }).map((_, index) => (
                     <div key={index} className="cell skeleton" />
-                ))
-            ) : (
+                )) ) : (
                 cellsGrid.map((value, index) => (
                 <div
                     key={index}

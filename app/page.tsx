@@ -41,9 +41,6 @@ export default function Home() {
                 <Carousel projects={projets} />
             </div>
             <div id="about" className="section">
-                <div className="haloWrapper">
-                    <div className="halo"></div>
-                </div>
                 <h2>À propos</h2>
                 <div className="content">
                     <div className="left">

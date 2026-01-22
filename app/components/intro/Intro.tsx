@@ -17,14 +17,12 @@ const Intro: React.FC = () => {
     const [hidden, setHidden] = useState(false);
     const [checked, setChecked] = useState(false);
     const pathsRef = useRef<(SVGPathElement | null)[]>([]);
-
     useEffect(() => {
         if (sessionStorage.getItem('introSeen') === 'true') {
             setHidden(true);
         }
         setChecked(true);
     }, []);
-
     useEffect(() => {
         if (!checked || hidden) return;
         const start = performance.now();
@@ -57,7 +55,6 @@ const Intro: React.FC = () => {
             clearTimeout(slideTimer);
         };
     }, [checked, hidden]);
-
     if (hidden) return null;
     return (
         <div className={`intro ${slideUp ? "slideUp" : ""}`}>

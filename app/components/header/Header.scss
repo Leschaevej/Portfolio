@@ -10,7 +10,9 @@ header {
     right: 0;
     z-index: 2;
     padding: fluid(30, 50);
+    pointer-events: none;
     .link {
+        pointer-events: auto;
         .logo {
             display: block;
             color: var(--mainColor);
@@ -31,6 +33,7 @@ header {
         }
     }
     .menu {
+        pointer-events: auto;
         z-index: 5;
         padding: fluid(5, 10) fluid(15, 30);
         background-color: var(--mainColor);
@@ -66,6 +69,7 @@ header {
         }
     }
     .backdrop {
+        pointer-events: auto;
         position: fixed;
         top: 0;
         left: 0;
