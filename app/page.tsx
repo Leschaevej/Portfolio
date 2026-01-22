@@ -46,7 +46,7 @@ export default function Home() {
                     <div className="left">
                         <div className="introduction">
                             <p>
-                                Loin des sentiers battus.<br/>Mon terrain de jeu, c'est le développement full-stack allié à la créativité du design.<br/>Plus qu'un simple codeur, je suis un véritable passionné de tech qui aime transformer les idées en interfaces élégantes et des systèmes ultra-fluides.<br/>Ma soif d'apprendre ne s'arrête jamais, et c'est elle qui nourrit  mon approche de l'innovation.
+                                Loin des sentiers battus.<br/>Mon terrain de jeu, c'est le développement full-stack allié à la créativité du design.<br/>Plus qu'un simple codeur, je suis un véritable passionné de tech qui aime transformer les idées en interfaces élégantes et en systèmes ultra-fluides.<br/>Ma soif d'apprendre ne s'arrête jamais, et c'est elle qui nourrit  mon approche de l'innovation.
                             </p>
                         </div>
                         <div className="link">
