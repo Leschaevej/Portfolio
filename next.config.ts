@@ -5,6 +5,7 @@ const nextConfig: NextConfig = {
   devIndicators: false,
   experimental: {
     scrollRestoration: true,
+    optimizePackageImports: ['@react-icons/all-files'],
   },
   turbopack: {
     rules: {
