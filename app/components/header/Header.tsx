@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Logo from "@/app/assets/logo.svg";
 import { ANIMATION } from "@/app/constants";
@@ -13,6 +13,7 @@ const NAV_LINKS = [
 ];
 export default function Header() {
     const pathname = usePathname();
+    const router = useRouter();
     const [isOpen, setIsOpen] = useState(false);
     const [logoTapped, setLogoTapped] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
@@ -48,6 +49,9 @@ export default function Header() {
         if (pathname === '/') {
             e.preventDefault();
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+            e.preventDefault();
+            router.push('/');
         }
     };
     return (
